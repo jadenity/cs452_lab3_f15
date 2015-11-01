@@ -1,0 +1,127 @@
+Personal Work Notes. Authored by Lucas Zutter
+
+
+
+10/30: (didn't start yesterday because I really needed a break)
+
+I'm looking at the instructions for the lab. I'll note things as I go and make a brief list and the end. I'll come up with a design after that, if I can right away.
+
+All three schedulers use Round Robin, so I'd better make sure I know what Round Robin is.
+	It's also fairly obvious that threading will be involved.
+
+
+
+All schedulers:
+
+"Running round robin in the third queue [in MFQS] means ignoring new arivals in the first queue while the third queue time quantum is not yet over."
+        That means, while one process is going, new processes are stuck waiting until the current process is done running.
+How can we do this...
+	I think I should have the ready/run/wait "ecosystem" in mind.
+		Note: If a process is in the running state, I/O puts it in the waiting state, clock interupts put it in the ready state.
+			clock interupt during "i++" is bad.
+
+Pseudocode (may or may not be complete):
+
+        Scheduler:
+
+		while(the program is still running){ //possibly an infinite loop, "while(1)"
+        	        while(there is a process that wants to get scheduled){
+				schedule it
+			}
+			//if we get here, the scheduler doesn't see any moe processes to schedule, yet
+			grab the highestpriority process and let it run it's time quantum.
+			if(the process completes within its time quantum){
+				we don't need it anymore, so eject it from the ecosystem (aka terminate/kill it). this may happen within the process
+			} else {
+				demote the process and reschedule it
+			}
+		}
+
+        New Process:
+
+                wait to be called by the scheduler
+		once put in a queue by the scheduler, wait there. Aging should occur while in the queue (unless this is the top queue of MFQS or something)
+		once called by the queue, run for the duration of your time quantum
+		if(done running before time quantum expires){
+			this process ends/dies/gets terminated
+		} else {
+			priority goes down
+		}
+		go back to waiting in the queue
+
+
+
+Multi-level Feedback Queue (instructions):
+
+Looks like a process has at least these variables for scheduling:
+	Time Quantum (int?)
+	Priority (int)
+
+To implement aging, each procress should probably have a timer that starts once it is sent to a queue.
+	We can have a while loop going while the process is still in the queue that checks if a certain amount of time has gone by.
+	*Pseudocode: 
+
+		While(process is still in queue){ //if the "process still in queue" part is something like a function call, that's all we'll need
+
+			//In the following check, the idea of having a spareTime variable is to prevent time from being lost while reseting the timer
+			//Example: we want to age every 0.5 seconds, but what if we actually age every 0.6 seconds from reseting the timer a bit late?
+			//Maybe this isn't so bad depending on how much time is lost. Worth thinking about...
+
+			if(waiting timer has counted that a certain amount of time has passed + spareTime){
+
+				//maybe we should stop the timer here (I'm thinking we probably shouldn't)
+				priority += priority increase allowed due to aging;
+				spareTime = timer - the amount of time that triggers this aging conditional;
+				reset the timer, "waitingTimer.reset()" or something;
+				//if we stop the timer above, we should start it again before exiting
+			}
+			//if the "process still in queue" thing isn't a function call, there should be something to check if we're in the queue or not around here
+			//however, it better not do any blocking. This while loop needs to keep checking for if we need to age process priority.
+		}
+
+	END PSEUDOCODE
+
+Need to consider tiebreakers: when two processes are entering a queue at the same time.
+
+1. When the time quantum of a process expires the exact same time a process ages up, the aged process goes first regardless of current priority.
+	If we do that, maybe we should set the aged process to have priority of at least 1 more than the time quantum demoted process.
+2. If the above isn't a factor, the highest priority process goes first.
+3. If priorities are equal, check pid. The lower pid should go first.
+4. I wonder if we'll still have a tie at this point. Perhaps the time quantum of the process can help here (lower one first).
+
+Partner just made a repository with code from the last time he took this course, so I'll look at what he has before developing more pseudocode.
+
+
+
+There's quite a bit of code to look at, so it'll probably be when we next meet at the earliest when I fully understand it. Still, I could ask things like how it works.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
