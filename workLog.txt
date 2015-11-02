@@ -230,3 +230,22 @@ if(there's a process that hasn't been loaded by the scheduler with arival time l
 if(all processes were sent to scheduler){
         Tell the scheduler that it doesn't need to bother asking if there's a process yet to be loaded
 }
+
+
+END PSEUDOCODE
+##############
+
+
+~MFQS works now, minus aging and arrival time, so here's what's left:
+	-add aging and arrival time handling to MFQS
+	-the whole of RTS
+	-the whole of WHS
+	-output:
+		-Gantt chart for each scheduling algorithm
+		-"the entiresimulation run of any particular algorithm. 
+		It is best to output all process characteristics in one clock tick intervals."
+		-"Statistics for the average waiting and average turnaround time."
+
+With MFQS just about complete, we started looking at RTS. We've decided we'll probably encapsulate the program in a while loop, then we were done for the day.
+
+--MEETING ENDED--		
