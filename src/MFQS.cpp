@@ -19,29 +19,32 @@ MFQS::~MFQS(){
 void MFQS::run() {
     int clock = 0;
     while (this->hasJobs()) {        
-        for (int i = 0; i < this->queues.size() - 1; i++) {
+        for (int i = 0; i < (int)this->queues.size() - 1; i++) {
             Time_Queue *queue = this->queues.at(i);
             while (!queue->empty()) {
                 Process p = queue->pop();
-#ifdef DEBUG
-                cout << p.toString() << endl;
-#endif
                 if (p.getState() == Process::READY_TO_RUN) {
+#ifdef DEBUG
+                cout << "Process " << p.getPID() << " running, time_remaining: " << p.getTimeRemaining() << endl;
+#endif
                     p.setState(Process::RUNNING);
                     if (p.getTimeRemaining() <= queue->getQuantum()) {
                         p.setState(Process::TERMINATED);
                         clock += p.getTimeRemaining();
 #ifdef DEBUG
+                        cout << "Process " << p.getPID() << " ran for " << p.getTimeRemaining() << " and terminated." << endl;
                         cout << "clock " << clock << endl;
 #endif
                         p.setTimeRemaining(0);
                     } else {
                         p.setState(Process::READY_TO_RUN);
                         clock += queue->getQuantum();
+                        p.setTimeRemaining(p.getTimeRemaining() - queue->getQuantum());
 #ifdef DEBUG
+                        cout << "Proccess " << p.getPID() << " ran for " << queue->getQuantum() 
+                                            << ", time_remaining: " << p.getTimeRemaining() << endl;
                         cout << "clock " << clock << endl;
 #endif                        
-                        p.setTimeRemaining(p.getTimeRemaining() - queue->getQuantum());
                         this->queues.at(i + 1)->push(&p);
                     }
                 }

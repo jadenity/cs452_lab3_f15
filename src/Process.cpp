@@ -59,3 +59,7 @@ int Process::getTimeRemaining() const {
 int Process::getPriority() const {
     return this->priority;
 }
+
+int Process::getPID() const {
+    return this->pid;
+}

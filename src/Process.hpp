@@ -24,6 +24,7 @@ public:
     void setTimeRemaining(int t);
     int getTimeRemaining() const;
     int getPriority() const;
+    int getPID() const;
     static bool compare(Process *p1, Process *p2);
 
 private:
