@@ -1,5 +1,7 @@
 Personal Work Notes. Authored by Lucas Zutter
 
+Caution: This file's text is formatted very strangely in normal Notepad. View this either in Notepad++ or Vim.
+
 
 
 10/30: (didn't start yesterday because I really needed a break)
@@ -64,7 +66,7 @@ To implement aging, each procress should probably have a timer that starts once 
 		While(process is still in queue){ //if the "process still in queue" part is something like a function call, that's all we'll need
 
 			//In the following check, the idea of having a spareTime variable is to prevent time from being lost while reseting the timer
-			//Example: we want to age every 0.5 seconds, but what if we actually age every 0.6 seconds from reseting the timer a bit late?
+			//Example: We want to age every 10 clock ticks, so after 12 clock ticks, spareTime = 2
 			//Maybe this isn't so bad depending on how much time is lost. Worth thinking about...
 
 			if(waiting timer has counted that a certain amount of time has passed + spareTime){
@@ -72,7 +74,7 @@ To implement aging, each procress should probably have a timer that starts once 
 				//maybe we should stop the timer here (I'm thinking we probably shouldn't)
 				priority += priority increase allowed due to aging;
 				spareTime = timer - the amount of time that triggers this aging conditional;
-				reset the timer, "waitingTimer.reset()" or something;
+				reset the timer, "waitingTimer.reset()" or something
 				//if we stop the timer above, we should start it again before exiting
 			}
 			//if the "process still in queue" thing isn't a function call, there should be something to check if we're in the queue or not around here
@@ -89,39 +91,142 @@ Need to consider tiebreakers: when two processes are entering a queue at the sam
 3. If priorities are equal, check pid. The lower pid should go first.
 4. I wonder if we'll still have a tie at this point. Perhaps the time quantum of the process can help here (lower one first).
 
-Partner just made a repository with code from the last time he took this course, so I'll look at what he has before developing more pseudocode.
+Partner just made a repository, so I'll look at what he has before developing more pseudocode.
 
 
+11/2:
 
-There's quite a bit of code to look at, so it'll probably be when we next meet at the earliest when I fully understand it. Still, I could ask things like how it works.
+--MEETING START--
 
+Tried compiling partner's old code. There was a warning for comparing a signed and unsigned integer, but adding a cast to int removed that quickly.
+	It compiles, but MFQS doesn't work. Partner did a bit more, but it's still off a ways.
 
+Looked at sample exam with partner to work through an MFQS example by hand. He quickly concluded that our current MFQS code doesn't work that way.
+	The sample exam MFQS problem has the second queue have double the time quantum of the queue above it. Perhaps we should do that?
+	Need to keep looking at our current code first.
 
+--MEETING ENDED-- (partner going to other classes)
 
+Looking at current MFQS code now. There isn't really that much in there (about 40 lines). I see these problems:
 
+1. It keeps going from the highest queue to the lowest queue in that order. I think this should be dynamic, not linear.
+2. Aging isn't implemented at all.
+3. Arival time appears to be ignored.
 
+And at least a few others, including having major errors past the first queue. We may want to start from scratch since there isn't much anyway.
 
+There are some things I can see though:
 
+-We may not need threads to implement aging. We could just sent info about the clock to all processes in the READY state each time a "process" is handled.
+	However, if we can send info from one thread to all other threads, that may be faster.
+	Reminder: aging is defined by the user. As a base case though, we should ignore aging (enter "0" to ignore aging).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+-We never have processes in the waiting state in MFQS. I guess it makes sense considering MFQS never does I/O. Not sure this means anything though...
 
 
+--MEETING START-- (partner back from classes)
 
+decided to look closer at the issues with current MFQS code
+
+Added "process added to next queue" output to the else of "if TQ > time remaining". It never shows on the second iteration.
+
+~Partner added output after when a process is added to the next queue to output the contents of the next queue.
+The next queue's data is altered in undesirable ways after the first push.
+
+While my patner's debugging his code, I'll think of how to implement aging and handle arrival time.
+
+
+*****************************************************
+Aging (reminder: only occurs in 3rd or later queues):
+
+Add "age" variable to processes;
+
+//when doing time quantum (TQ) check
+if(numQueues >= 3 && there are processes in the third queue){ //adding "or later" shouldn't be needed assuming a later queue is empty if an earlier queue is also empty
+
+	//we should probably make the following a function/method call, "Scheduler::Aging" perhaps.
+
+	//May need some booleans here to mark if we can't load a next process or go to a next queue because it's empty
+
+	Load a process from the third queue;
+
+	while(we're in a queue that has at least one process){
+
+		while(we're cycling through processes in this queue){ //so we have one process at a time in here
+	
+			if(timeRemaining < TQ){
+				process.age += timeRemaining (of last process);
+			} else {
+				process.age += TQ;
+			}
+	
+			if(age of this process is past the ageLimit set by the user){
+				process.age -= ageLimit;
+				//maybe age should be set to zero if moving to the top queue?
+				move process to the queue above its current queue;
+			}
+			(try to) Load the next process in this queue;
+		}
+		(try to) Go to the next queue;
+	}
+}
+
+
+************************************************
+Arival Time (this should be for all schedulers):
+
+//Most of what happens so far is fine. However, we shouldn't send all the processes to the scheduler yet, because they technically aren't there yet (when clock = 0).
+//I'll make two versions of this.
+
+########################################################################################
+Version 1: send all the processes to the scheduler right away regardless of arival time.
+
+In main.cpp: (change nothing)
+
+In scheduler program:
+
+Load in every process with an arrival time of 0 (ignore the rest for now); //can supposedly remove values from the master process list at the same time
+
+Whenever the clock changes (such as after everything else happens after either TQ for MFQS, or after a single clock tick for RTS):
+
+//using "[[]]" for the if statement parenthesis for clarity
+if[[FOR MFQS: clock > arival time of the first process in the master process list not loaded in yet
+		FOR RTS: if there's a process with arrival time equal to clock //--------------------------------Don't have to check for less than if it checks every clock tick
+		ALL SCHEDULERS: && we didn't load everything from the process masterlist yet (should probably have this first)]] {
+
+	MFQS: "pop" processes off the master process list and "push" them into the working process list.
+	RTS: Load all processes with arrival times equal to the current clock value somewhere. The process with the highest priority and lowest PID goes first.
+
+}
+
+//Might be simple as that, but I'm not quite sure...
+
+########################################################
+Version 2: don't send over all the processes right away.
+
+In main.cpp:
+
+Send all processes with arrival time equal to 0 to the scheduler;
+Store the rest of the data somewhere (maybe keeping it in main.cpp is fine?);
+
+if(all processes were sent to scheduler){ //in this case, all processes would have arrival time = 0
+	Tell the scheduler that it doesn't need to bother asking if there's a process yet to be loaded
+}
+
+In scheduler, at clock change:
+
+if(did not receive signal that all processes were loaded in){
+	Send clock data to wherever the rest of the processes are stored, getting ready to load more processes;
+}
+
+In the location where the processes are stored:
+
+if(there's a process that hasn't been loaded by the scheduler with arival time less than the clock value just sent by the scheduler){
+	while(there is a process with arrival time less than or equal to recieved clock time){
+		send this process to the scheduler
+	}
+}
+
+if(all processes were sent to scheduler){
+        Tell the scheduler that it doesn't need to bother asking if there's a process yet to be loaded
+}
