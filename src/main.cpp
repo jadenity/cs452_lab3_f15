@@ -51,7 +51,7 @@ int main(int argc, char** argv) {
     file.open("test.txt");
     string line;
     vector<string> fields;
-    vector<Process *> processes;
+    vector<Process*> processes;
     while (file.good()) {
         getline(file, line);
         split(fields, line, is_any_of("\t"));

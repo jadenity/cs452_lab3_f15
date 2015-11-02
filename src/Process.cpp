@@ -3,6 +3,8 @@
 
 using namespace std;
 
+Process::Process(){} 
+
 Process::Process(int pid, int burst, int arrival_time, int priority, int deadline, int io, State state) 
         : pid(pid),
           burst(burst),
@@ -13,6 +15,19 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           state(state),
           time_remaining(burst),
           time_waiting(0){
+}
+
+// Copy Constructor
+Process::Process(const Process &p) {
+  this->pid = p.getPID();
+  this->burst = p.getBurst();
+  this->arrival_time = p.getArrivalTime();
+  this->priority = p.getPriority();
+  this->deadline = p.getDeadline();
+  this->io = p.getIO();
+  this->state = p.getState();
+  this->time_remaining = p.getTimeRemaining();
+  this->time_waiting = p.getTimeWaiting();
 }
 
 Process::~Process() {
@@ -56,10 +71,22 @@ int Process::getTimeRemaining() const {
     return this->time_remaining;
 }
 
+int Process::getTimeWaiting() const {
+    return this->time_waiting;
+}
+
 int Process::getPriority() const {
     return this->priority;
 }
 
 int Process::getPID() const {
     return this->pid;
+}
+
+int Process::getDeadline() const {
+    return this->deadline;
+}
+
+int Process::getIO() const {
+    return this->io;
 }

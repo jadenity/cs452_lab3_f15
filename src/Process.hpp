@@ -14,7 +14,9 @@ public:
     	RUNNING,
     	TERMINATED
     };
+    Process();
     Process(int pid, int burst, int arrival_time, int priority, int deadline, int io, State state);
+    Process(const Process &p);
     virtual ~Process();
     string toString() const;
     void setState(State s);
@@ -25,6 +27,9 @@ public:
     int getTimeRemaining() const;
     int getPriority() const;
     int getPID() const;
+    int getDeadline() const;
+    int getIO() const;
+    int getTimeWaiting() const;
     static bool compare(Process *p1, Process *p2);
 
 private:
