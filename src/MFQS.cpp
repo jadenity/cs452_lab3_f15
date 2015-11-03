@@ -9,8 +9,9 @@
 
 using namespace std;
 
-MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues) 
-        : Scheduler(processes, quantum, numberOfQueues){    
+MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging)
+        : Scheduler(processes, quantum, numberOfQueues), 
+        aging(aging){
 }
 
 MFQS::~MFQS(){
@@ -20,7 +21,7 @@ void MFQS::run() {
     int clock = 0;
     while (this->hasJobs()) {
 #ifdef DEBUG
-                cout << "queues.size() = " << this->queues.size() << endl;
+        cout << "aging = " << this->aging << endl;
 #endif
         for (int i = 0; i <= (int)this->queues.size() - 1; i++) {
             Time_Queue *queue = this->queues.at(i);
@@ -34,7 +35,7 @@ void MFQS::run() {
 
                 if (p->getState() == Process::READY_TO_RUN) {
 #ifdef DEBUG
-                cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
+                    cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
 #endif
                     if (i == ((int)this->queues.size() - 1)) { // Last queue is FCFS
                         // Terminate process, advance clock remaining burst
@@ -61,13 +62,11 @@ void MFQS::run() {
                             p->setState(Process::READY_TO_RUN);
                             clock += queue->getQuantum();
                             p->setTimeRemaining(p->getTimeRemaining() - queue->getQuantum());
+                            this->queues.at(i + 1)->push(p);
 #ifdef DEBUG
                             cout << "Proccess " << p->getPID() << " ran for " << queue->getQuantum() 
                                             << ", time_remaining: " << p->getTimeRemaining() << endl;
                             cout << "clock " << clock << endl << endl;
-#endif
-                            this->queues.at(i + 1)->push(p);
-#ifdef DEBUG
                             cout << "Proccess " << p->getPID() << " added to Queue " << i+1 << ": " << queues.at(i + 1)->toString() << endl;
 #endif
                         }

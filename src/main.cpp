@@ -34,11 +34,16 @@ int main(int argc, char** argv) {
     }
     
     int numberOfQueues = 0;
+    int aging = 0;
     
-    // get the number of queues from the user 
     if (algorithm == "mfqs") {
+        // get the number of queues from the user 
         cout << "Enter how many queues: ";
         cin >> numberOfQueues;
+
+        // get the aging wait time
+        cout << "Enter wait time for aging: ";
+        cin >> aging;
     }
 
     // get time quantum from the user
@@ -71,7 +76,7 @@ int main(int argc, char** argv) {
     
     // Create the queues
     if (algorithm == "mfqs") {
-        MFQS *mfqs = new MFQS(processes, quantum, numberOfQueues);
+        MFQS *mfqs = new MFQS(processes, quantum, numberOfQueues, aging);
         mfqs->run();
     } else if (algorithm == "rts") {
         RTS *rts = new RTS(processes, quantum, numberOfQueues);

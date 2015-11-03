@@ -7,11 +7,11 @@
 class MFQS : public Scheduler {
     
 public:
-    MFQS(vector<Process *> &processes, int quantum, int numberOfQueues);
+    MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging);
     virtual ~MFQS();
     void run();
-protected:
-    void round_robin(int clock);
+private:
+	int aging;
 
 };
 
