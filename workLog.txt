@@ -239,13 +239,123 @@ END PSEUDOCODE
 ~MFQS works now, minus aging and arrival time, so here's what's left:
 	-add aging and arrival time handling to MFQS
 	-the whole of RTS
-	-the whole of WHS
+	-the whole of WHS (which will probably be a lot)
 	-output:
 		-Gantt chart for each scheduling algorithm
 		-"the entiresimulation run of any particular algorithm. 
 		It is best to output all process characteristics in one clock tick intervals."
-		-"Statistics for the average waiting and average turnaround time."
+		-"Statistics for the average waiting and average turnaround time." (so we'll need some class that does math)
 
 With MFQS just about complete, we started looking at RTS. We've decided we'll probably encapsulate the program in a while loop, then we were done for the day.
 
 --MEETING ENDED--		
+
+
+
+11/3:
+
+With RTS up next, it's time for some Pseudocode for it (note: RTS doesn't have aging):
+
+[the following may not be complete yet]
+
+save process list sent over by main function as a process masterlist;
+
+pop processes off the masterlist and add them to a sub list until we find a process with arival time > 0; //maybe this should be a function call
+
+int clock = 0;
+
+Process *p = highest priority process with lowest PID in the process sublist; 
+
+while(this->hasJobs()){ //make sure this doesn't end early if a process has a very late arrival time. In other words, this should keep going as long as the master and sub lists aren't empty
+
+	if(the sub list is not empty) { //if this isn't entered, we have to wait for more processes to arrive
+
+		//first step is to do a clock tick. this involves reducing the time remaining on the current process and increasing clock by 1. Not entirely sure what's next...
+		p->setTimeRemaining(p->getTimeRemaining - 1);
+		clock++;
+		
+		//I think the best next move is to see if there are new processes coming in
+		if(first process in the masterlist queue has arrival time <= clock){
+			pop processes off the masterlist and add them to the sub list until we find a process with arival time > clock; //same as the function call line above
+		}
+		
+		//next, see if the current process is over
+		if(p->getTimeRemaining() == 0){
+
+			load the highest priority process whose arrival time is <= clock (this isn't already sorted);
+			
+		} else if (p->getTimeRemaining() != 0 && we just loaded in a process with a higher priority) { //may not need the left side of the &&
+		
+			reorder processes so that the current process gets pushed back and the new, high priority process gets going;
+		
+		}
+		
+	} else { //if there's no process currently going, all we can do is increase the clock and check for something to load
+	
+		clock++;
+		if(first process in the masterlist queue has arrival time <= clock){
+			pop processes off the masterlist and add them to the sub list until we find a process with arival time > clock; //same as the function call line above
+			
+			p = first of the processes just loaded in;
+		}
+	
+	}
+}
+
+
+END PSEUDOCODE
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
