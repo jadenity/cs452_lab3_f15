@@ -254,25 +254,33 @@ With MFQS just about complete, we started looking at RTS. We've decided we'll pr
 
 11/3:
 
-With RTS up next, it's time for some Pseudocode for it (note: RTS doesn't have aging):
+With RTS up next, it's time for some Pseudocode for it (note: RTS doesn't have aging, nor does it bother with priority):
+
+Problems:
+1. Should we worry about priority for "critical processes" since we're doing soft real-time?
 
 [the following may not be complete yet]
 
-save process list sent over by main function as a process masterlist;
+save process list sent over by main function as a process masterlist; //I had the idea that we may not need a masterlist for a moment,
+																	  //but we'll need some way to override low priority processes being run
+																	  //Even with state setting, having a second list we for reordering can be good
 
 pop processes off the masterlist and add them to a sub list until we find a process with arival time > 0; //maybe this should be a function call
 
 int clock = 0;
 
-Process *p = highest priority process with lowest PID in the process sublist; 
+Process *p = lowest deadline process with lowest PID in the process sublist; 
 
-while(this->hasJobs()){ //make sure this doesn't end early if a process has a very late arrival time. In other words, this should keep going as long as the master and sub lists aren't empty
+//make sure this doesn't end early if a process has a very late arrival time. In other words, this should keep going as long as the master and sub lists aren't empty
+while(this->hasJobs()){ 
 
-	if(the sub list is not empty) { //if this isn't entered, we have to wait for more processes to arrive
+	if(the sub list is not empty) { //if this isn't entered, we have to wait for more processes to be ready (handled in else)
 
-		//first step is to do a clock tick. this involves reducing the time remaining on the current process and increasing clock by 1. Not entirely sure what's next...
+		//first step is to do a clock tick. this involves reducing the time remaining on the current process and increasing clock by 1.
 		p->setTimeRemaining(p->getTimeRemaining - 1);
 		clock++;
+		
+		//maybe the following belongs outside this if/else block...
 		
 		//I think the best next move is to see if there are new processes coming in
 		if(first process in the masterlist queue has arrival time <= clock){
@@ -282,15 +290,16 @@ while(this->hasJobs()){ //make sure this doesn't end early if a process has a ve
 		//next, see if the current process is over
 		if(p->getTimeRemaining() == 0){
 
-			load the highest priority process whose arrival time is <= clock (this isn't already sorted);
+			load the lowest deadline process whose arrival time is <= clock;
 			
 		} else if (p->getTimeRemaining() != 0 && we just loaded in a process with a higher priority) { //may not need the left side of the &&
 		
-			reorder processes so that the current process gets pushed back and the new, high priority process gets going;
+			//may need to check priority before doing the following if soft real-time computing requires it.
+			reorder processes so that the current process gets pushed back and the new, lower deadline process gets going;
 		
 		}
 		
-	} else { //if there's no process currently going, all we can do is increase the clock and check for something to load
+	} else { //if there's no process currently going, all we can do is increase the clock and check for something to load (although, the load may belong here)
 	
 		clock++;
 		if(first process in the masterlist queue has arrival time <= clock){
