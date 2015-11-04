@@ -20,24 +20,27 @@ MFQS::~MFQS(){
 void MFQS::run() {
     int clock = 0;
     while (this->hasJobs()) {
-#ifdef DEBUG
-        cout << "aging = " << this->aging << endl;
-#endif
-        for (int i = 0; i <= (int)this->queues.size() - 1; i++) {
+        int i = 0;
+        int lastQueue = (int)this->queues.size() - 1;
+        while (i <= lastQueue) {
             Time_Queue *queue = this->queues.at(i);
 #ifdef DEBUG
             cout << "**" << endl;
             cout << "Starting queue " << i << ": " << queue->toString();
             cout << "**" << endl << endl;
 #endif
-            while (!queue->empty()) {
+
+            // receivedNewProcess changes the state of all processes that
+            // have arrived <= clock to READY_TO_RUN and returns whether there
+            // were any such processes
+            while (!queue->empty() && !receivedNewProcess(clock)) {
                 Process *p =  new Process(queue->pop());
 
                 if (p->getState() == Process::READY_TO_RUN) {
 #ifdef DEBUG
                     cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
 #endif
-                    if (i == ((int)this->queues.size() - 1)) { // Last queue is FCFS
+                    if (i == lastQueue) { // Last queue is FCFS
                         // Terminate process, advance clock remaining burst
                         p->setState(Process::TERMINATED);
                         clock += p->getTimeRemaining();
@@ -50,7 +53,7 @@ void MFQS::run() {
                     } else {
                         p->setState(Process::RUNNING);
 
-                        if (p->getTimeRemaining() <= queue->getQuantum()) {
+                        if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
                             p->setState(Process::TERMINATED);
                             clock += p->getTimeRemaining();
 #ifdef DEBUG
@@ -58,7 +61,7 @@ void MFQS::run() {
                             cout << "clock " << clock << endl << endl;
 #endif
                             p->setTimeRemaining(0);
-                        } else {
+                        } else { // Process will not finish in this TQ
                             p->setState(Process::READY_TO_RUN);
                             clock += queue->getQuantum();
                             p->setTimeRemaining(p->getTimeRemaining() - queue->getQuantum());
@@ -73,15 +76,16 @@ void MFQS::run() {
                     }
                 }
             }
-        }
+            // Change i based on why the loop exited
+            if (queue->empty()) {
+                i++;
+            } else if (receivedNewProcess(clock)) {
+                i = 0;
+            } // else don't change i, continue on current queue
 
-        Time_Queue *last = this->queues.at(this->queues.size() - 1);
-        if (!last->empty()) {
-            BOOST_FOREACH (Process *p, last->getQueue()) {
-                clock += p->getTimeRemaining();
-                p->setState(Process::TERMINATED);
-                p->setTimeRemaining(0);
-            } 
         }
+        // Increase clock tick so later arrivals get their state switched
+        clock++;
+        cout << clock << endl;
     }
 }

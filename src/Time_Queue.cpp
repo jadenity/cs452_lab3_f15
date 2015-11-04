@@ -1,5 +1,6 @@
 #include "Time_Queue.hpp"
 #include "Scheduler.hpp"
+#include "Process.hpp"
 #include <boost/foreach.hpp>
 #include <sstream>
 
@@ -23,6 +24,10 @@ Process Time_Queue::pop() {
     return p;
 }
 
+Process Time_Queue::front() {
+    return *this->queue.front();
+}
+
 string Time_Queue::toString() const {
     stringstream s;
     s << "Time Quantum = " << this->quantum << endl;
@@ -35,6 +40,15 @@ string Time_Queue::toString() const {
         s << "Queue is empty" << endl;
     }
     return s.str();
+}
+
+bool Time_Queue::hasReadyProcess() const {
+    BOOST_FOREACH (Process *p, this->queue) {
+        if (p->getState() == Process::READY_TO_RUN) {
+            return true;
+        }
+    }
+    return false;
 }
 
 bool Time_Queue::empty() const {

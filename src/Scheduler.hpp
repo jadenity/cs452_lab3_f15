@@ -12,11 +12,13 @@ public:
     Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues);
     Scheduler(const Scheduler& orig);
     string toString() const;
+    bool receivedNewProcess(int clock) const;
     bool hasJobs() const;
     virtual void run();
     virtual ~Scheduler();
 protected:
     vector<Time_Queue *> queues;
+    vector<Process *> processes;
 };
 
 #endif
