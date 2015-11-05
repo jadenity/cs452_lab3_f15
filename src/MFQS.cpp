@@ -89,3 +89,17 @@ void MFQS::run() {
         cout << clock << endl;
     }
 }
+
+// p = process that just finished in CPU
+// After a process (p) runs for its time quantum, do this:
+// If p finished,
+//  Add time remaining to age of all procceses in current queue (q) and all queues beneath q.
+//  Set p's time remaining to 0
+//  Terminate p.
+//  Promote all processes in q and all queues beneath q whose age exceeded the age limit.
+//      Only promote processes not in the top two queues.
+// else
+//  Add time quantum of q to all processes in q and all queues beneath q.
+//  Promote all processes in q and all queues beneath q whose age exceeded the age limit.
+//      Only promote processes not in the top two queues.
+//  Demote p.
