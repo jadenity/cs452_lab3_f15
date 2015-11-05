@@ -144,7 +144,8 @@ Questions:
 2. Should we decrease age when a process gets promoted, or reset age? reset age
 
 //perhaps we could set a boolean to true when a process enters the third queue that activates aging checks
-//I wonder if there's an easy way to tell which process is the oldest...
+//I wonder if there's an easy way to tell which process is the oldest... May need to load processes into a list and sort them.
+	//worst case scenario: ignore age order, just promote old processes as we pop them off the queue for being old enough.
 
 Add "age" variable to processes; //can probably be done when loading in process data from file (in main)
 								 //or we can add the age variable to processes as they come into MFQS so it doesn't waste time in the other schedulers that don't use aging
@@ -328,6 +329,8 @@ Will likely keep editing the above for the next few days (starting Thursday; nee
 
 11/5:
 
+--MEETING START--
+
 ~Partner still working on how arrival time works with MFQS. Looks like he did a thing or two between when I left last time and now.
 
 
@@ -352,7 +355,11 @@ Note: bursts in the example file don't seem to exceed 100.
 
 We pretty much solved aging. Pseudocode for an aging function that was made earlier has been updated (line 139).
 
+Probably going to have MFQS done before getting into RTS, but I could still work on RTS pseudocode.
 
+~Partner is wondering about if we should output a gantt chart. Could be worthwhile, at least for figuring things out.
+
+--MEETING ENDED--
 
 
 
