@@ -139,38 +139,44 @@ While my patner's debugging his code, I'll think of how to implement aging and h
 *****************************************************
 Aging (reminder: only occurs in 3rd or later queues):
 
-Add "age" variable to processes;
+Questions:
+1. Does aging get reset once a process runs? yes
+2. Should we decrease age when a process gets promoted, or reset age? reset age
 
-//when doing time quantum (TQ) check
-if(numQueues >= 3 && there are processes in the third queue){ //adding "or later" shouldn't be needed assuming a later queue is empty if an earlier queue is also empty
+//perhaps we could set a boolean to true when a process enters the third queue that activates aging checks
+//I wonder if there's an easy way to tell which process is the oldest...
 
-	//we should probably make the following a function/method call, "Scheduler::Aging" perhaps.
+Add "age" variable to processes; //can probably be done when loading in process data from file (in main)
+								 //or we can add the age variable to processes as they come into MFQS so it doesn't waste time in the other schedulers that don't use aging
 
-	//May need some booleans here to mark if we can't load a next process or go to a next queue because it's empty
+//this belongs in the time quantum (TQ) check, before reducing time remaining for the current process
+if(numQueues >= 3 && there are processes in the third/forth/fifth queue){ //adding "or later" shouldn't be needed assuming a later queue is empty if an earlier queue is also empty
 
-	Load a process from the third queue;
+	//we should probably make the following a function/method call. Should do seperate versions in case MFQS aging isn't like WHS aging
 
-	while(we're in a queue that has at least one process){
+	//May need some booleans here to mark if we can't load a next process or go to a next queue because a queue is empty or doesn't exist
 
-		while(we're cycling through processes in this queue){ //so we have one process at a time in here
+	Load the oldest process from the highest queue with a process (up to third queue); //grabbing just any process isn't so good, we want older processes going before newer ones
+
+	while(we're in a queue that has at least one process whose age variable wasn't checked){ //meaning "loop until the last process in the last queue"
+
+		while(we're cycling through processes in this queue){ //we have one process at a time in here
 	
 			if(timeRemaining < TQ){
-				process.age += timeRemaining (of last process);
+				process.age += timeRemaining (of last process); //arrival time is also a factor
 			} else {
 				process.age += TQ;
 			}
-	
-			if(age of this process is past the ageLimit set by the user){
-				process.age -= ageLimit;
-				//maybe age should be set to zero if moving to the top queue?
-				move process to the queue above its current queue;
+
+			if(age of this process is past the ageLimit set by the user){ //this is a while loop in case the process has to move up multiple times, ex: a 100 burst process ran in the last queue
+				process.age = 0;
+				move process to the queue above its current queue; //up to the second queue
 			}
-			(try to) Load the next process in this queue;
+			(try to) Load the next oldest process in this queue (the one the outter while loop is going through);
 		}
 		(try to) Go to the next queue;
 	}
 }
-
 
 ************************************************
 Arival Time (this should be for all schedulers):
@@ -315,36 +321,36 @@ while(this->hasJobs()){
 END PSEUDOCODE
 
 
+Will likely keep editing the above for the next few days (starting Thursday; need to study for exam first).
+
+~Partner worked on implementing arrival time to MFQS based off of setting process state. Using that old code should help reduce the need to add new code.
 
 
+11/5:
+
+~Partner still working on how arrival time works with MFQS. Looks like he did a thing or two between when I left last time and now.
 
 
+I'm looking at the test file the professor sent via email recently, and remember we'll have to deal with negative numbers. Looks like there's negative:
+	Burst (2nd #) -> eliminate for all schedulers
+	Arrival Time (3rd #) -> either set add to it's wait time and set to zero or eliminate for all schedulers <- ask professor
+	Deadline (5th/2nd last #) -> eliminate for RTS. ignore otherwise
+	
+File number order: Pid	Bst	Arr	Pri	Dline	I/O
 
+These weren't negative in the example file, but are worth considering:
+	Priority -> WHS only (maybe RTS). schedule or eliminate <- ask
+	I/O -> WHS only. probably best to eliminate
+	PID -> eliminate/ignore (same with equal PID)
 
+Partner had a thought: what if a really long process goes, and 2+ processes age at once?
+	The obvious bit is that prcesses age up one queue when aged enough regardless of anything else (except when there's less than 3 queues).
+	What's more important is the order of the processes when multiple pracesses age... 
+		Might be a good idea to check the whole queue for aged processes, then order them based on arrival time/remaining age (older processes first)
 
+Note: bursts in the example file don't seem to exceed 100.
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+We pretty much solved aging. Pseudocode for an aging function that was made earlier has been updated (line 139).
 
 
 
