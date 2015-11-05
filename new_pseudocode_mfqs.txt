@@ -1,0 +1,11 @@
+MFQS
+
+while (this->hasJobs()) {
+
+	while (i <= lastQueue) {
+		current_queue = queues.at(i);
+		if (newJobsArrived()) {
+			i = 1;
+		} else {
+			if (i == lastQueue) {
+				clock += 
