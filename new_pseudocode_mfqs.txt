@@ -9,3 +9,7 @@ while (this->hasJobs()) {
 		} else {
 			if (i == lastQueue) {
 				clock += 
+				
+				
+				
+				
