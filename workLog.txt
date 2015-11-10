@@ -263,10 +263,12 @@ With MFQS just about complete, we started looking at RTS. We've decided we'll pr
 
 With RTS up next, it's time for some Pseudocode for it (note: RTS doesn't have aging, nor does it bother with priority):
 
-Problems:
-1. Should we worry about priority for "critical processes" since we're doing soft real-time?
+Questions:
+1. Should we worry about priority for "critical processes" since we're doing soft real-time,?
 
 [the following may not be complete yet]
+
+START PSEUDOCODE
 
 save process list sent over by main function as a process masterlist; //I had the idea that we may not need a masterlist for a moment,
 																	  //but we'll need some way to override low priority processes being run
@@ -363,14 +365,26 @@ Probably going to have MFQS done before getting into RTS, but I could still work
 
 
 
+11/10: (was busy with an Algorithms assignment on the weekend and my ethernet cable plug's tab broke off yesterday)
 
+I'm going to take a crack at implementing RTS based off the pseudocode I made a week ago (line 271).
 
+I can't seem to read my own pseudocode that well right now... so, here's a break down of how RTS works:
 
+Before main loop:
+1. Loads lowest deadline process currently available (with lowest PID as a tiebreaker).
+[loads other processes with arrival time == 0]
 
+During main loop:
+2. If the current process has a deadline greater than it's burst + the clock, it gets kicked out (and another is loaded).
+3. Clock tick occurs.
+4. Load in processes:
+	a. If the current process isn't done yet,
+		i. and another process comes in with an earlier deadline, the new process takes over.
+		ii. If no new processes get loaded with a deadline earlier than the current process, just store them, letting the current process continue.
+	b. If the current process is done, terminate it and replace it with the next earliest deadline process.
 
-
-
-
+Used the pseudocode and the breakdown to put skeleton code into RTS.cpp
 
 
 
