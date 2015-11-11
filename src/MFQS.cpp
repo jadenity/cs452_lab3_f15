@@ -11,7 +11,21 @@ using namespace std;
 
 MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging)
         : Scheduler(processes, quantum, numberOfQueues), 
-        aging(aging){
+        aging(aging) {
+    Time_Queue *readyToRunQ = new Time_Queue(quantum);
+    BOOST_FOREACH(Process *currentProcess, processes) {
+        // Add new incoming jobs to the ready to run queue and set their state
+        currentProcess->setState(Process::NEW);
+        readyToRunQ->push(currentProcess);
+    }
+
+    // Add the ready to run queue and then add the rest
+    this->queues.push_back(readyToRunQ);
+    for (int i = 0; i < numberOfQueues - 1; i++) {
+        quantum *= 2;
+        Time_Queue *currentQ = new Time_Queue(quantum);
+        this->queues.push_back(currentQ);
+    }
 }
 
 MFQS::~MFQS(){
@@ -19,7 +33,7 @@ MFQS::~MFQS(){
 
 void MFQS::run() {
     int clock = 0;
-    while (this->hasJobs()) {
+    while (this->hasUnfinishedJobs()) {
         int i = 0;
         int lastQueue = (int)this->queues.size() - 1;
         while (i <= lastQueue) {
@@ -34,7 +48,8 @@ void MFQS::run() {
             // have arrived <= clock to READY_TO_RUN and returns whether there
             // were any such processes
             while (!queue->empty() && !receivedNewProcess(clock)) {
-                Process *p =  new Process(queue->pop());
+//                Process *p = new Process(queue->pop());
+                Process *p = queue->pop();
 
                 if (p->getState() == Process::READY_TO_RUN) {
 #ifdef DEBUG
@@ -90,6 +105,20 @@ void MFQS::run() {
     }
 }
 
+bool MFQS::receivedNewProcess(int clock) {
+    bool foundNewProcess = false;
+    if (clock >= 0) {
+        BOOST_FOREACH(Process *currentProcess, processes) {
+            if ((currentProcess->getState() == Process::NEW) &&
+                        (currentProcess->getArrivalTime() <= clock)) {
+                std::cout << "Making PID " << currentProcess->getPID() << " ready to run" << endl;
+                currentProcess->setState(Process::READY_TO_RUN);
+                foundNewProcess = true;
+            }
+        }
+    }
+    return foundNewProcess;
+}
 // p = process that just finished in CPU
 // After a process (p) runs for its time quantum, do this:
 // If p finished,

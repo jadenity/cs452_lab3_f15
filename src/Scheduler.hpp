@@ -12,8 +12,8 @@ public:
     Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues);
     Scheduler(const Scheduler& orig);
     string toString() const;
-    bool receivedNewProcess(int clock) const;
-    bool hasJobs() const;
+    //bool receivedNewProcess(int clock) const;
+    bool hasUnfinishedJobs() const;
     virtual void run();
     virtual ~Scheduler();
 protected:

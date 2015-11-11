@@ -18,8 +18,8 @@ void Time_Queue::push(Process *p) {
     this->queue.push_back(p);
 }
 
-Process Time_Queue::pop() {
-    Process p = *this->queue.front();
+Process* Time_Queue::pop() {
+    Process *p = this->queue.front();
     this->queue.pop_front();
     return p;
 }

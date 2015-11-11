@@ -18,7 +18,7 @@ void RTS::run() {
   //TODO: rtsQueue = priority queue with process arival times equal to 0. 
   //Order processes by deadline/PID (new method?)
   //TODO: Process *p = new Process(rtsQueue->pop);
-  while(this->hasJobs()){ //may want to check if both the original queue sent in AND rtsQueue have jobs
+  while(this->hasUnfinishedJobs()){ //may want to check if both the original queue sent in AND rtsQueue have jobs
 
     //check if the process can't finish by the deadline (while loop dumps all following processes that can't finish)
     while(false){//"if p != null && p->getTimeRemaining + clock > p->getDeadline";

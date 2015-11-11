@@ -12,7 +12,7 @@ class Time_Queue {
 public:
     Time_Queue(int quantum);
     void push(Process *p);
-    Process pop();
+    Process* pop();
     Process front();
     string toString() const;
     bool empty() const;

@@ -67,9 +67,10 @@ int main(int argc, char** argv) {
     string line;
     vector<string> fields;
     vector<Process*> processes;
+    getline(file, line);
     while (file.good()) {
-        getline(file, line);
         split(fields, line, is_any_of("\t"));
+        cout << "before" << endl;
         Process *p = new Process(atoi(fields.at(0).c_str()),
                                  atoi(fields.at(1).c_str()), 
                                  atoi(fields.at(2).c_str()), 
@@ -77,7 +78,9 @@ int main(int argc, char** argv) {
                                  atoi(fields.at(4).c_str()), 
                                  atoi(fields.at(5).c_str()), 
                                  Process::NEW);
+        cout << "here" << p->toString() << endl;
         processes.push_back(p);
+        getline(file, line);
     }
     file.close();
     
