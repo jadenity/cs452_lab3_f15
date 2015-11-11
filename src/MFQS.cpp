@@ -14,9 +14,11 @@ MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ag
         aging(aging) {
     Time_Queue *readyToRunQ = new Time_Queue(quantum);
     BOOST_FOREACH(Process *currentProcess, processes) {
-        // Add new incoming jobs to the ready to run queue and set their state
-        currentProcess->setState(Process::NEW);
-        readyToRunQ->push(currentProcess);
+        // Add new jobs with arrival 0 to the ready to run queue
+        if (currentProcess->getArrivalTime() == 0) {
+            currentProcess->setState(Process::READY_TO_RUN);
+            readyToRunQ->push(currentProcess);
+        }
     }
 
     // Add the ready to run queue and then add the rest
@@ -33,7 +35,7 @@ MFQS::~MFQS(){
 
 void MFQS::run() {
     int clock = 0;
-    while (this->hasUnfinishedJobs()) {
+    while (this->hasUnfinishedJobs() && clock <= 56) {
         int i = 0;
         int lastQueue = (int)this->queues.size() - 1;
         while (i <= lastQueue) {
@@ -47,7 +49,8 @@ void MFQS::run() {
             // receivedNewProcess changes the state of all processes that
             // have arrived <= clock to READY_TO_RUN and returns whether there
             // were any such processes
-            while (!queue->empty() && !receivedNewProcess(clock)) {
+            bool newProcessesAdded = receivedNewProcess(clock);
+            while (!queue->empty() && !newProcessesAdded) {
 //                Process *p = new Process(queue->pop());
                 Process *p = queue->pop();
 
@@ -94,7 +97,7 @@ void MFQS::run() {
             // Change i based on why the loop exited
             if (queue->empty()) {
                 i++;
-            } else if (receivedNewProcess(clock)) {
+            } else if (newProcessesAdded) {
                 i = 0;
             } // else don't change i, continue on current queue
 
@@ -111,14 +114,17 @@ bool MFQS::receivedNewProcess(int clock) {
         BOOST_FOREACH(Process *currentProcess, processes) {
             if ((currentProcess->getState() == Process::NEW) &&
                         (currentProcess->getArrivalTime() <= clock)) {
-                std::cout << "Making PID " << currentProcess->getPID() << " ready to run" << endl;
+                std::cout << "Making PID " << currentProcess->getPID() << " ready to run and adding to first queue" << endl;
                 currentProcess->setState(Process::READY_TO_RUN);
+                this->queues.at(0)->push(currentProcess);
                 foundNewProcess = true;
             }
         }
     }
     return foundNewProcess;
 }
+
+
 // p = process that just finished in CPU
 // After a process (p) runs for its time quantum, do this:
 // If p finished,
