@@ -75,10 +75,21 @@ void MFQS::run() {
                             cout << "clock " << clock << endl << endl;
 #endif
                             p->setTimeRemaining(0);
+                            
+                            // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
+                            
+                            // TODO Add timeRmaining to timeWaiting of all processes
+                            //      Perhaps tell the process the beginning and end clock of its running period and have the process figure out
+                            //      how long it's been waiting (in case it arrived in the middle of p running)
                         } else { // Process will not finish in this TQ
                             p->setState(Process::READY_TO_RUN);
                             clock += queue->getQuantum();
                             p->setTimeRemaining(p->getTimeRemaining() - queue->getQuantum());
+
+                            // TODO Add quantum to age of all processes after p that are in the 3rd or lower queue
+
+                            // TODO Add quantum to age of all processes
+
                             this->queues.at(i + 1)->push(p);
 #ifdef DEBUG
                             cout << "Proccess " << p->getPID() << " ran for " << queue->getQuantum() 
