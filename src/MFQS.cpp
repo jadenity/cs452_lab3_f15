@@ -35,7 +35,7 @@ MFQS::~MFQS(){
 
 void MFQS::run() {
     int clock = 0;
-    while (this->hasUnfinishedJobs() && clock <= 56) {
+    while (this->hasUnfinishedJobs()) {
         int i = 0;
         int lastQueue = (int)this->queues.size() - 1;
         while (i <= lastQueue) {
