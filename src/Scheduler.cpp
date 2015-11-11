@@ -7,11 +7,11 @@
 Scheduler::Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues) 
                                     : processes(processes) {
     Time_Queue *readyToRunQ = new Time_Queue(quantum);
-    // BOOST_FOREACH(Process *currentProcess, processes) {
-    //     // Add new incoming jobs to the ready to run queue and set their state
-    //     currentProcess->setState(Process::NEW);
-    //     readyToRunQ->push(currentProcess);
-    // }
+     BOOST_FOREACH(Process *currentProcess, processes) {
+         // Add new incoming jobs to the ready to run queue and set their state
+         currentProcess->setState(Process::NEW);
+         readyToRunQ->push(currentProcess);
+     }
 
     // Add the ready to run queue and then add the rest
     this->queues.push_back(readyToRunQ);
@@ -50,7 +50,6 @@ bool Scheduler::hasJobs() const {
     bool hasJobs = false;
     int i = 0;
     
-    
     while (!hasJobs && i < (int)this->queues.size()) {
         cout << this->queues.at(i)->toString() << endl;
         if (!this->queues.at(i)->empty()) {
@@ -71,3 +70,4 @@ string Scheduler::toString() const {
 }
 
 void Scheduler::run(){}
+

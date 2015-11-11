@@ -20,21 +20,30 @@ int main(int argc, char** argv) {
     string algorithm = "";
     
     // makes sure the user entered just one argument
-    if (argc == 2) {
-        algorithm = string(argv[1]);
-        
-        // check if the value entered was 'mfqs', 'rts', or 'hs'
-        if (algorithm != "mfqs" && algorithm != "rts" && algorithm != "hs") {
-            cout << "Enter 'mfqs', 'rts' or 'hs'" << endl;
-            exit(1);
-        }
-    } else {
-        cout << "Enter an algorithm to use. (mfqs, rts, hs)" << endl;
-        exit(1);
+//    if (argc == 2) {
+//        algorithm = string(argv[1]);
+//        
+//        // check if the value entered was 'mfqs', 'rts', or 'hs'
+//        if (algorithm != "mfqs" && algorithm != "rts" && algorithm != "hs") {
+//            cout << "Enter 'mfqs', 'rts' or 'hs'" << endl;
+//            exit(1);
+//        }
+//    } else {
+//        cout << "Enter an algorithm to use. (mfqs, rts, hs)" << endl;
+//        exit(1);
+//    }
+    
+    cout << "Which algorithm would you like to use? (mfqs/rts/whs): ";
+    cin >> algorithm;
+    while (algorithm != "mfqs" && algorithm != "rts" && algorithm != "whs") {
+        cout << "Which algorithm would you like to use? (mfqs/rts/whs): ";
+        cin >> algorithm;
     }
+
     
     int numberOfQueues = 0;
     int aging = 0;
+    int quantum = 0;
     
     if (algorithm == "mfqs") {
         // get the number of queues from the user 
@@ -44,12 +53,13 @@ int main(int argc, char** argv) {
         // get the aging wait time
         cout << "Enter wait time for aging: ";
         cin >> aging;
+
+        // get time quantum from the user
+        quantum = 0;
+        cout << "Enter the time quantum for the ready-to-run queue: ";
+        cin >> quantum;
     }
 
-    // get time quantum from the user
-    int quantum = 0;
-    cout << "Enter the time quantum for the ready-to-run queue: ";
-    cin >> quantum;
 
     // Read in the test file
     ifstream file;
