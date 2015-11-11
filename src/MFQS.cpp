@@ -13,13 +13,6 @@ MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ag
         : Scheduler(processes, quantum, numberOfQueues), 
         aging(aging) {
     Time_Queue *readyToRunQ = new Time_Queue(quantum);
-    BOOST_FOREACH(Process *currentProcess, processes) {
-        // Add new jobs with arrival 0 to the ready to run queue
-        if (currentProcess->getArrivalTime() == 0) {
-            currentProcess->setState(Process::READY_TO_RUN);
-            readyToRunQ->push(currentProcess);
-        }
-    }
 
     // Add the ready to run queue and then add the rest
     this->queues.push_back(readyToRunQ);
@@ -28,6 +21,9 @@ MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ag
         Time_Queue *currentQ = new Time_Queue(quantum);
         this->queues.push_back(currentQ);
     }
+
+    // Add jobs with arrival 0 to first queue
+    receiveNewJobs(0);
 }
 
 MFQS::~MFQS(){
@@ -47,9 +43,9 @@ void MFQS::run() {
 #endif
 
             // receivedNewProcess changes the state of all processes that
-            // have arrived <= clock to READY_TO_RUN and returns whether there
-            // were any such processes
-            bool newProcessesAdded = receivedNewProcess(clock);
+            // have arrived <= clock to READY_TO_RUN, returns whether there
+            // were any such processes, and adds them to the first queue
+            bool newProcessesAdded = receiveNewJobs(clock);
             while (!queue->empty() && !newProcessesAdded) {
 //                Process *p = new Process(queue->pop());
                 Process *p = queue->pop();
@@ -108,7 +104,7 @@ void MFQS::run() {
     }
 }
 
-bool MFQS::receivedNewProcess(int clock) {
+bool MFQS::receiveNewJobs(int clock) {
     bool foundNewProcess = false;
     if (clock >= 0) {
         BOOST_FOREACH(Process *currentProcess, processes) {

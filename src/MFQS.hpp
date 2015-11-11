@@ -10,7 +10,7 @@ public:
     MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging);
     virtual ~MFQS();
     void run();
-    bool receivedNewProcess(int clock);
+    bool receiveNewJobs(int clock);
 private:
 	int aging;
 
