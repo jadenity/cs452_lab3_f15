@@ -36,7 +36,7 @@ void MFQS::run() {
     int clock = 0;
     while (this->hasUnfinishedJobs()) {
         int i = 0;
-        int lastQueue = (int)this->queues.size() - 1;
+        int lastQueue = numberOfQueues - 1;
         bool newProcessesAdded;
         while (i <= lastQueue) {
             Time_Queue *queue = this->queues.at(i);
@@ -87,6 +87,7 @@ void MFQS::run() {
                         clock += timeRan;
 
                         // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
+                        age(i, p, timeRan);
 
                         // Terminate the process
                         p->setTimeRemaining(0);
@@ -104,6 +105,7 @@ void MFQS::run() {
                         p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
                         // TODO Add quantum to age of all processes after p that are in the 3rd or lower queue
+                        age(i, p, timeRan);
 
                         // Set the stop clock tick to be the current clock. Next time the process runs,
                         // the difference between the current clock tick and then will be added to its wait time.
@@ -175,7 +177,7 @@ bool MFQS::receiveNewJobs(int clock) {
     return foundNewProcess;
 }
 
-bool MFQS::age(int curQ, Process* p, int lastQ, int timeRan) {
+bool MFQS::age(int curQ, Process* p, int timeRan) {
     bool jobAged = false;
     int j, startQ;
     // Only add age to queues >= 2 (3rd or lower queues)
@@ -185,10 +187,13 @@ bool MFQS::age(int curQ, Process* p, int lastQ, int timeRan) {
         startQ = curQ;
     }
 
-    for (int i = startQ; i <= lastQ; i++) {
+    for (int i = startQ; i <= numberOfQueues - 1; i++) {
         Time_Queue* q = queues.at(i);
+        // cout << "q[" << i << "]->size(): " << q->size() << endl;
         for (int j = 0; j < q->size(); j++) {
-
+            // Must pop proceses and replace them, or peek?
+            // Process* p = q.at(j);
+            // add age to p
         }
     }
 

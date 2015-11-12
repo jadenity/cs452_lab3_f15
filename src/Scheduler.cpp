@@ -25,7 +25,6 @@ bool Scheduler::hasUnfinishedJobs() const {
 
     while (!hasUnfinishedJobs && i < (int)this->processes.size()) {
         Process* p = this->processes.at(i);
-        cout << "Checking if finished: " << p->toString() << endl;
         if (p->getState() != Process::TERMINATED) {
             hasUnfinishedJobs = true;
         }
