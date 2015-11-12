@@ -9,18 +9,21 @@
 
 using namespace std;
 
-MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging)
+MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ageLimit)
         : Scheduler(processes, quantum, numberOfQueues), 
-        aging(aging) {
+        ageLimit(ageLimit) {
     Time_Queue *readyToRunQ = new Time_Queue(quantum);
 
-    // Add the ready to run queue and then add the rest
+    // Add the ready to run queue and then add the other RR,
+    // lastly add the FCFS queue to the end.
     this->queues.push_back(readyToRunQ);
-    for (int i = 0; i < numberOfQueues - 1; i++) {
+    for (int i = 0; i < numberOfQueues - 2; i++) {
         quantum *= 2;
         Time_Queue *currentQ = new Time_Queue(quantum);
         this->queues.push_back(currentQ);
     }
+    Time_Queue *fcfs = new Time_Queue();
+    this->queues.push_back(fcfs);
 
     // Add jobs with arrival 0 to first queue
     receiveNewJobs(0);
@@ -170,6 +173,10 @@ bool MFQS::receiveNewJobs(int clock) {
         }
     }
     return foundNewProcess;
+}
+
+bool MFQS::age() {
+    return false;
 }
 
 

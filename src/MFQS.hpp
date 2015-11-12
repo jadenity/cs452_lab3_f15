@@ -7,12 +7,13 @@
 class MFQS : public Scheduler {
     
 public:
-    MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int aging);
+    MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ageLimit);
     virtual ~MFQS();
     void run();
     bool receiveNewJobs(int clock);
+    bool age();
 private:
-	int aging;
+	int ageLimit;
 
 };
 

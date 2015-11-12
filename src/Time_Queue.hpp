@@ -11,6 +11,7 @@ class Time_Queue {
     
 public:
     Time_Queue(int quantum);
+    Time_Queue();
     void push(Process *p);
     Process* pop();
     Process front();
@@ -23,7 +24,8 @@ public:
     virtual ~Time_Queue();
 private:
     int quantum;
-    deque<Process *> queue;    
+    bool fcfs;
+    deque<Process *> queue;
 };
 
 #endif	/* MFQ_QUEUE_HPP */

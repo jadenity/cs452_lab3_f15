@@ -6,8 +6,16 @@
 
 using namespace std;
 
+// If a quantum is passed, it's RR, not FCFS
 Time_Queue::Time_Queue(int quantum) 
         : quantum(quantum),
+          fcfs(false),
+          queue(deque<Process *>()){
+}
+
+// If no quantum is passed, it's FCFS
+Time_Queue::Time_Queue() 
+        : fcfs(true),
           queue(deque<Process *>()){
 }
 
@@ -30,7 +38,12 @@ Process Time_Queue::front() {
 
 string Time_Queue::toString() const {
     stringstream s;
-    s << "Time Quantum = " << this->quantum << endl;
+    if (fcfs) {
+        s << "FCFS" << endl;
+    } else {
+        s << "Time Quantum = " << this->quantum << endl;
+    }
+    
     s << "Queue contents: " << endl;
     if (!this->empty()) {
         BOOST_FOREACH (Process *p, this->queue) {
