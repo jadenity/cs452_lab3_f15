@@ -11,9 +11,11 @@ public:
     virtual ~MFQS();
     void run();
     bool receiveNewJobs(int clock);
-    bool age();
+    bool age(int curQ, Process* p, int lastQ, int timeRan);
 private:
 	int ageLimit;
+	int quantum;
+	int numberOfQueues;
 
 };
 

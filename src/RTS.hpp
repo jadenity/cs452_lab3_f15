@@ -6,7 +6,7 @@
 class RTS : public Scheduler {
     
 public:
-    RTS(vector<Process *> &processes, int quantum, int numberOfQueues);
+    RTS(vector<Process *> &processes);
     void run();
     virtual ~RTS();
 private:

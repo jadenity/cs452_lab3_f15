@@ -10,8 +10,8 @@
 using namespace std;
 
 MFQS::MFQS(vector<Process *> &processes, int quantum, int numberOfQueues, int ageLimit)
-        : Scheduler(processes, quantum, numberOfQueues), 
-        ageLimit(ageLimit) {
+        : Scheduler(processes), 
+        ageLimit(ageLimit), quantum(quantum), numberOfQueues(numberOfQueues) {
     Time_Queue *readyToRunQ = new Time_Queue(quantum);
 
     // Add the ready to run queue and then add the other RR,
@@ -62,7 +62,7 @@ void MFQS::run() {
 
                     // The difference between this clock tick and the end of
                     // its last run session is its added to its wait time.
-                    p->addTimeWaiting(clock - p->getStopClockTick());
+                    p->addTimeWaiting(clock - p->getexitCPUTick());
 
                     clock += timeRan;
 
@@ -83,7 +83,7 @@ void MFQS::run() {
 
                     if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
                         timeRan = p->getTimeRemaining();
-                        p->addTimeWaiting(clock - p->getStopClockTick());
+                        p->addTimeWaiting(clock - p->getexitCPUTick());
                         clock += timeRan;
 
                         // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
@@ -99,7 +99,7 @@ void MFQS::run() {
 #endif
                     } else { // Process will not finish in this TQ
                         timeRan = queue->getQuantum();
-                        p->addTimeWaiting(clock - p->getStopClockTick());
+                        p->addTimeWaiting(clock - p->getexitCPUTick());
                         clock += timeRan;
                         p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
@@ -107,7 +107,7 @@ void MFQS::run() {
 
                         // Set the stop clock tick to be the current clock. Next time the process runs,
                         // the difference between the current clock tick and then will be added to its wait time.
-                        p->setStopClockTick(clock);
+                        p->setexitCPUTick(clock);
                         p->setState(Process::READY_TO_RUN);
 
                         // Demote the process
@@ -156,12 +156,12 @@ bool MFQS::receiveNewJobs(int clock) {
             if ((p->getState() == Process::NEW) &&
                         (p->getArrivalTime() <= clock)) {
                 // The process has been waiting since its arrival
-                // (stopClockTick is set to arrival_time upon creation)
-                p->addTimeWaiting(clock - p->getStopClockTick());
+                // (exitCPUTick is set to arrival_time upon creation)
+                p->addTimeWaiting(clock - p->getexitCPUTick());
 
-                // Reset the stopClockTick to the current clock,
+                // Reset the exitCPUTick to the current clock,
                 // otherwise the time since its arrival will be counted twice.
-                p->setStopClockTick(clock);
+                p->setexitCPUTick(clock);
                 p->setState(Process::READY_TO_RUN);
                 // Add the process to the first queue
                 this->queues.at(0)->push(p);
@@ -175,7 +175,23 @@ bool MFQS::receiveNewJobs(int clock) {
     return foundNewProcess;
 }
 
-bool MFQS::age() {
+bool MFQS::age(int curQ, Process* p, int lastQ, int timeRan) {
+    bool jobAged = false;
+    int j, startQ;
+    // Only add age to queues >= 2 (3rd or lower queues)
+    if (curQ < 2) {
+        startQ = 2;
+    } else {
+        startQ = curQ;
+    }
+
+    for (int i = startQ; i <= lastQ; i++) {
+        Time_Queue* q = queues.at(i);
+        for (int j = 0; j < q->size(); j++) {
+
+        }
+    }
+
     return false;
 }
 

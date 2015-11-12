@@ -4,8 +4,8 @@
 
 using namespace std;
 
-RTS::RTS(vector<Process *> &processes, int quantum, int numberOfQueues)
-        : Scheduler(processes, quantum, numberOfQueues){
+RTS::RTS(vector<Process *> &processes)
+        : Scheduler(processes){
 }
 
 RTS::~RTS() {

@@ -31,8 +31,8 @@ public:
     int getIO() const;
     int getTimeWaiting() const;
     void addTimeWaiting(int time);
-    int getStopClockTick() const;
-    void setStopClockTick(int clock);
+    int getexitCPUTick() const;
+    void setexitCPUTick(int clock);
     int getFinishTime() const;
     void setFinishTime(int clock);
     static bool compare(Process *p1, Process *p2);
@@ -47,7 +47,7 @@ private:
     State state;
     int time_remaining;
     int time_waiting;
-    int stopClockTick;
+    int exitCPUTick;
     int finishTime;
 };
 

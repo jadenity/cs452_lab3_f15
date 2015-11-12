@@ -9,7 +9,7 @@
 class Scheduler {
     
 public:
-    Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues);
+    Scheduler(vector<Process *> &processes);
     Scheduler(const Scheduler& orig);
     string toString() const;
     //bool receivedNewProcess(int clock) const;

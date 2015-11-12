@@ -6,7 +6,7 @@
 
 #define DEBUG
 
-Scheduler::Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues) 
+Scheduler::Scheduler(vector<Process *> &processes) 
     : processes(processes){
 }
 
@@ -25,6 +25,7 @@ bool Scheduler::hasUnfinishedJobs() const {
 
     while (!hasUnfinishedJobs && i < (int)this->processes.size()) {
         Process* p = this->processes.at(i);
+        cout << "Checking if finished: " << p->toString() << endl;
         if (p->getState() != Process::TERMINATED) {
             hasUnfinishedJobs = true;
         }

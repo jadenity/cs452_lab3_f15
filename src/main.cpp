@@ -68,6 +68,7 @@ int main(int argc, char** argv) {
     vector<string> fields;
     vector<Process*> processes;
     getline(file, line);
+    // The test file MUST have a newline at the end in order for this to work.
     while (file.good()) {
         split(fields, line, is_any_of("\t"));
         Process *p = new Process(atoi(fields.at(0).c_str()),
@@ -90,7 +91,7 @@ int main(int argc, char** argv) {
     if (algorithm == "mfqs") {
         sched = new MFQS(processes, quantum, numberOfQueues, aging);
     } else if (algorithm == "rts") {
-        sched = new RTS(processes, quantum, numberOfQueues);
+        sched = new RTS(processes);
     } 
     
     // Using polymorphism to call functions after "new"ing schedulers.
