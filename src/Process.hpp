@@ -19,17 +19,22 @@ public:
     Process(const Process &p);
     virtual ~Process();
     string toString() const;
+    State getState() const;
     void setState(State s);
     int getArrivalTime() const;
-    State getState() const;
     int getBurst() const;
-    void setTimeRemaining(int t);
     int getTimeRemaining() const;
+    void setTimeRemaining(int t);
     int getPriority() const;
     int getPID() const;
     int getDeadline() const;
     int getIO() const;
     int getTimeWaiting() const;
+    void addTimeWaiting(int time);
+    int getStopClockTick() const;
+    void setStopClockTick(int clock);
+    int getFinishTime() const;
+    void setFinishTime(int clock);
     static bool compare(Process *p1, Process *p2);
 
 private:
@@ -42,6 +47,8 @@ private:
     State state;
     int time_remaining;
     int time_waiting;
+    int stopClockTick;
+    int finishTime;
 };
 
 #endif

@@ -4,24 +4,11 @@
 #include "Time_Queue.hpp"
 #include <iostream>
 
+#define DEBUG
+
 Scheduler::Scheduler(vector<Process *> &processes, int quantum, int numberOfQueues) 
     : processes(processes){
 }
-
-//bool Scheduler::receivedNewProcess(int clock) {
-//    bool foundNewProcess = false;
-//    if (clock >= 0) {
-//        BOOST_FOREACH(Process *currentProcess, processes) {
-//            if ((currentProcess->getState() == Process::NEW) &&
-//                        (currentProcess->getArrivalTime() <= clock)) {
-//                std::cout << "Making PID " << currentProcess->getPID() << " ready to run" << endl;
-//                currentProcess->setState(Process::READY_TO_RUN);
-//                foundNewProcess = true;
-//            }
-//        }
-//    }
-//    return foundNewProcess;
-//}
 
 Scheduler::Scheduler(const Scheduler& orig) {
     this->queues = orig.queues;
@@ -30,27 +17,15 @@ Scheduler::Scheduler(const Scheduler& orig) {
 Scheduler::~Scheduler() {
 }
 
-// Needs to check not if queues are empty but if there are processes on the list
+// Checks if there are processes on the list
+// that are not terminated.
 bool Scheduler::hasUnfinishedJobs() const {
-//    bool hasJobs = false;
-//    int i = 0;
-//    
-//    while (!hasJobs && i < (int)this->queues.size()) {
-//        cout << this->queues.at(i)->toString() << endl;
-//        if (!this->queues.at(i)->empty()) {
-//            hasJobs = true;
-//        }
-//        i++;
-//    }
-//    
-//    return hasJobs;
     bool hasUnfinishedJobs = false;
     int i = 0;
 
     while (!hasUnfinishedJobs && i < (int)this->processes.size()) {
         Process* p = this->processes.at(i);
         if (p->getState() != Process::TERMINATED) {
-            cout << "NOT TERMINATED: " << p->toString() << endl;
             hasUnfinishedJobs = true;
         }
         i++;
@@ -68,4 +43,36 @@ string Scheduler::toString() const {
 }
 
 void Scheduler::run(){}
+
+double Scheduler::calcAvgWaitTime() {
+    double totalWait;
+    BOOST_FOREACH(Process *p, processes) {
+#ifdef DEBUG
+        cout << "Process " << p->getPID() << " wait time: " << p->getTimeWaiting() << endl;
+#endif
+        totalWait += p->getTimeWaiting();
+    }
+#ifdef DEBUG
+    cout << "Number of processes: " << processes.size() << endl << endl;
+#endif
+    double avg = totalWait / (double)processes.size();
+    return avg;
+}
+    
+double Scheduler::calcAvgTurnaroundTime() {
+    double totalTurnaround;
+    int curTurnaround;
+    BOOST_FOREACH(Process *p, processes) {
+        curTurnaround = p->getFinishTime() - p->getArrivalTime();
+#ifdef DEBUG
+        cout << "Process " << p->getPID() << " turnaround: " << curTurnaround << endl;
+#endif
+        totalTurnaround += curTurnaround;
+    }
+#ifdef DEBUG
+    cout << "Number of processes: " << processes.size() << endl << endl;
+#endif
+    double avg = totalTurnaround / (double)processes.size();
+    return avg;
+}
 

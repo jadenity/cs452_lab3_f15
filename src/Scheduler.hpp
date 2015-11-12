@@ -15,6 +15,8 @@ public:
     //bool receivedNewProcess(int clock) const;
     bool hasUnfinishedJobs() const;
     virtual void run();
+    double calcAvgWaitTime();
+    double calcAvgTurnaroundTime();
     virtual ~Scheduler();
 protected:
     vector<Time_Queue *> queues;

@@ -14,7 +14,9 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           io(io),
           state(state),
           time_remaining(burst),
-          time_waiting(0){
+          time_waiting(0),
+          // Set the stop tick to the arrival time for future calculation of wait time
+          stopClockTick(arrival_time){
 }
 
 // Copy Constructor
@@ -75,6 +77,10 @@ int Process::getTimeWaiting() const {
     return this->time_waiting;
 }
 
+void Process::addTimeWaiting(int time) {
+    this->time_waiting += time;
+}
+
 int Process::getPriority() const {
     return this->priority;
 }
@@ -90,3 +96,21 @@ int Process::getDeadline() const {
 int Process::getIO() const {
     return this->io;
 }
+
+int Process::getStopClockTick() const {
+    return this->stopClockTick;
+}
+
+void Process::setStopClockTick(int clock) {
+    this->stopClockTick = clock;
+}
+
+int Process::getFinishTime() const {
+    return this->finishTime;
+}
+
+void Process::setFinishTime(int clock) {
+    this->finishTime = clock;
+}
+
+

@@ -63,14 +63,13 @@ int main(int argc, char** argv) {
 
     // Read in the test file
     ifstream file;
-    file.open("test.txt");
+    file.open("test2.txt");
     string line;
     vector<string> fields;
     vector<Process*> processes;
     getline(file, line);
     while (file.good()) {
         split(fields, line, is_any_of("\t"));
-        cout << "before" << endl;
         Process *p = new Process(atoi(fields.at(0).c_str()),
                                  atoi(fields.at(1).c_str()), 
                                  atoi(fields.at(2).c_str()), 
@@ -78,7 +77,6 @@ int main(int argc, char** argv) {
                                  atoi(fields.at(4).c_str()), 
                                  atoi(fields.at(5).c_str()), 
                                  Process::NEW);
-        cout << "here" << p->toString() << endl;
         processes.push_back(p);
         getline(file, line);
     }
@@ -88,13 +86,20 @@ int main(int argc, char** argv) {
     sort(processes.begin(), processes.end(), Process::compare);
     
     // Create the queues
+    Scheduler* sched;
     if (algorithm == "mfqs") {
-        MFQS *mfqs = new MFQS(processes, quantum, numberOfQueues, aging);
-        mfqs->run();
+        sched = new MFQS(processes, quantum, numberOfQueues, aging);
     } else if (algorithm == "rts") {
-        RTS *rts = new RTS(processes, quantum, numberOfQueues);
-        rts->run();
+        sched = new RTS(processes, quantum, numberOfQueues);
     } 
+    
+    // Using polymorphism to call functions after "new"ing schedulers.
+    sched->run();
+    double avgWaitTime = sched->calcAvgWaitTime();
+    cout << "Average wait time: " << avgWaitTime << endl << endl;
+
+    double avgTurnaroundTime = sched->calcAvgTurnaroundTime();
+    cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
 
     return 0;
 }

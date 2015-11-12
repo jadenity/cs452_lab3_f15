@@ -34,97 +34,138 @@ void MFQS::run() {
     while (this->hasUnfinishedJobs()) {
         int i = 0;
         int lastQueue = (int)this->queues.size() - 1;
+        bool newProcessesAdded;
         while (i <= lastQueue) {
             Time_Queue *queue = this->queues.at(i);
-#ifdef DEBUG
-            cout << "**" << endl;
-            cout << "Starting queue " << i << ": " << queue->toString();
-            cout << "**" << endl << endl;
-#endif
+            bool queueIsEmpty = queue->empty();
 
-            // receivedNewProcess changes the state of all processes that
-            // have arrived <= clock to READY_TO_RUN, returns whether there
-            // were any such processes, and adds them to the first queue
-            bool newProcessesAdded = receiveNewJobs(clock);
-            while (!queue->empty() && !newProcessesAdded) {
-//                Process *p = new Process(queue->pop());
+#ifdef DEBUG
+            if (!queueIsEmpty) {
+                cout << "**" << endl;
+                cout << "Currently running in queue " << i << ": " << queue->toString();
+                cout << "**" << endl << endl;
+            }
+#endif
+            newProcessesAdded = receiveNewJobs(clock);
+            while (!queueIsEmpty && !newProcessesAdded) {
                 Process *p = queue->pop();
 
-                if (p->getState() == Process::READY_TO_RUN) {
+//#ifdef DEBUG
+//                cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
+//#endif
+                int timeRan;
+                if (i == lastQueue) { // Last queue is FCFS
+                    timeRan = p->getTimeRemaining();
+
+                    // The difference between this clock tick and the end of
+                    // its last run session is its added to its wait time.
+                    p->addTimeWaiting(clock - p->getStopClockTick());
+
+                    clock += timeRan;
+
+                    // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
+
+                    // Terminate the process
+                    p->setTimeRemaining(0);
+                    p->setFinishTime(clock);
+                    p->setState(Process::TERMINATED);
+
 #ifdef DEBUG
-                    cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
+                    cout << "****FCFS****" << endl;
+                    cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
+                    cout << "clock: " << clock << endl << endl;
 #endif
-                    if (i == lastQueue) { // Last queue is FCFS
-                        // Terminate process, advance clock remaining burst
-                        p->setState(Process::TERMINATED);
-                        clock += p->getTimeRemaining();
-#ifdef DEBUG
-                        cout << "**FCFS**" << endl;
-                        cout << "Process " << p->getPID() << " ran for " << p->getTimeRemaining() << " and terminated." << endl;
-                        cout << "clock " << clock << endl << endl;
-#endif
+                } else { // All queues before last are TQ
+                    p->setState(Process::RUNNING);
+
+                    if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
+                        timeRan = p->getTimeRemaining();
+                        p->addTimeWaiting(clock - p->getStopClockTick());
+                        clock += timeRan;
+
+                        // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
+
+                        // Terminate the process
                         p->setTimeRemaining(0);
-                    } else {
-                        p->setState(Process::RUNNING);
+                        p->setFinishTime(clock);
+                        p->setState(Process::TERMINATED);
 
-                        if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
-                            p->setState(Process::TERMINATED);
-                            clock += p->getTimeRemaining();
 #ifdef DEBUG
-                            cout << "Process " << p->getPID() << " ran for " << p->getTimeRemaining() << " and terminated." << endl;
-                            cout << "clock " << clock << endl << endl;
+                        cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
+                        cout << "clock: " << clock << endl << endl;
 #endif
-                            p->setTimeRemaining(0);
-                            
-                            // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
-                            
-                            // TODO Add timeRmaining to timeWaiting of all processes
-                            //      Perhaps tell the process the beginning and end clock of its running period and have the process figure out
-                            //      how long it's been waiting (in case it arrived in the middle of p running)
-                        } else { // Process will not finish in this TQ
-                            p->setState(Process::READY_TO_RUN);
-                            clock += queue->getQuantum();
-                            p->setTimeRemaining(p->getTimeRemaining() - queue->getQuantum());
+                    } else { // Process will not finish in this TQ
+                        timeRan = queue->getQuantum();
+                        p->addTimeWaiting(clock - p->getStopClockTick());
+                        clock += timeRan;
+                        p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
-                            // TODO Add quantum to age of all processes after p that are in the 3rd or lower queue
+                        // TODO Add quantum to age of all processes after p that are in the 3rd or lower queue
 
-                            // TODO Add quantum to age of all processes
+                        // Set the stop clock tick to be the current clock. Next time the process runs,
+                        // the difference between the current clock tick and then will be added to its wait time.
+                        p->setStopClockTick(clock);
+                        p->setState(Process::READY_TO_RUN);
 
-                            this->queues.at(i + 1)->push(p);
+                        // Demote the process
+                        this->queues.at(i + 1)->push(p);
+
 #ifdef DEBUG
-                            cout << "Proccess " << p->getPID() << " ran for " << queue->getQuantum() 
-                                            << ", time_remaining: " << p->getTimeRemaining() << endl;
-                            cout << "clock " << clock << endl << endl;
-                            cout << "Proccess " << p->getPID() << " added to Queue " << i+1 << ": " << queues.at(i + 1)->toString() << endl;
+                        cout << "Proccess " << p->getPID() << " ran for " << timeRan 
+                            << ", time_remaining: " << p->getTimeRemaining()
+                            << ", time_waiting: " << p->getTimeWaiting() << endl;
+                        cout << "clock: " << clock << endl << endl;
+                        cout << "Proccess " << p->getPID() << " added to Queue " << i+1 << ": " << queues.at(i + 1)->toString() << endl;
 #endif
-                        }
                     }
                 }
-            }
-            // Change i based on why the loop exited
-            if (queue->empty()) {
-                i++;
-            } else if (newProcessesAdded) {
-                i = 0;
-            } // else don't change i, continue on current queue
 
-        }
-        // Increase clock tick so later arrivals get their state switched
+                queueIsEmpty = queue->empty();
+                newProcessesAdded = receiveNewJobs(clock);
+            } // end while(!queueIsEmpty && !newProcessesAdded)
+
+            // Change i based on why the loop exited
+            if (newProcessesAdded) {
+                i = 0;
+            } else if (queueIsEmpty) { // only check if the queue is empty if there were no new processes
+                i++;
+            }
+
+        } // end while(i <= lastQueue)
+
+        
+#ifdef DEBUG
+        cout << "All arrived processes finished. Clock: " << clock << endl << endl;
+#endif
+        // Increase clock tick so later arrivals get to run 
         clock++;
-        cout << clock << endl;
-    }
+
+    } // end while(hasUnfinishedJobs()) 
 }
 
+// receiveNewJobs changes the state of all processes that
+// have arrived <= clock to READY_TO_RUN, returns whether there
+// were any such processes, and adds them to the first queue
 bool MFQS::receiveNewJobs(int clock) {
     bool foundNewProcess = false;
     if (clock >= 0) {
-        BOOST_FOREACH(Process *currentProcess, processes) {
-            if ((currentProcess->getState() == Process::NEW) &&
-                        (currentProcess->getArrivalTime() <= clock)) {
-                std::cout << "Making PID " << currentProcess->getPID() << " ready to run and adding to first queue" << endl;
-                currentProcess->setState(Process::READY_TO_RUN);
-                this->queues.at(0)->push(currentProcess);
+        BOOST_FOREACH(Process *p, processes) {
+            if ((p->getState() == Process::NEW) &&
+                        (p->getArrivalTime() <= clock)) {
+                // The process has been waiting since its arrival
+                // (stopClockTick is set to arrival_time upon creation)
+                p->addTimeWaiting(clock - p->getStopClockTick());
+
+                // Reset the stopClockTick to the current clock,
+                // otherwise the time since its arrival will be counted twice.
+                p->setStopClockTick(clock);
+                p->setState(Process::READY_TO_RUN);
+                // Add the process to the first queue
+                this->queues.at(0)->push(p);
                 foundNewProcess = true;
+#ifdef DEBUG
+                std::cout << "New arrival: adding process " << p->getPID() << " to first queue" << endl;
+#endif
             }
         }
     }
