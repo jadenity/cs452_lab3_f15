@@ -15,6 +15,7 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           state(state),
           time_remaining(burst),
           time_waiting(0),
+          age(0),
           // Set the stop tick to the arrival time for future calculation of wait time
           exitCPUTick(arrival_time){
 }
@@ -113,4 +114,14 @@ void Process::setFinishTime(int clock) {
     this->finishTime = clock;
 }
 
+int Process::getAge() const {
+    return this->age;
+}
 
+void Process::addAge(int age) { 
+    this->age += age;
+}
+
+void Process::setAge(int age) {
+    this->age = age;
+}

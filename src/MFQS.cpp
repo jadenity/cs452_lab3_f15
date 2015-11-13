@@ -1,5 +1,6 @@
 #include <iostream>
 #include <algorithm>
+#include <deque>
 #include <boost/foreach.hpp>
 #include "MFQS.hpp"
 #include "Scheduler.hpp"
@@ -169,7 +170,7 @@ bool MFQS::receiveNewJobs(int clock) {
                 this->queues.at(0)->push(p);
                 foundNewProcess = true;
 #ifdef DEBUG
-                std::cout << "New arrival: adding process " << p->getPID() << " to first queue" << endl;
+                cout << "New arrival: adding process " << p->getPID() << " to first queue" << endl;
 #endif
             }
         }
@@ -190,14 +191,24 @@ bool MFQS::age(int curQ, Process* p, int timeRan) {
     for (int i = startQ; i <= numberOfQueues - 1; i++) {
         Time_Queue* q = queues.at(i);
         // cout << "q[" << i << "]->size(): " << q->size() << endl;
-        for (int j = 0; j < q->size(); j++) {
-            // Must pop proceses and replace them, or peek?
-            // Process* p = q.at(j);
-            // add age to p
+        // Use an iterator to traverse the queue and add age to all processes.
+        deque<Process *> deq = q->getQueue();
+        std::deque<Process *>::iterator it = deq.begin();
+        Process* p;
+        while (it != deq.end()) {
+            p = *it;
+            p->addAge(timeRan);
+            cout << "age of process " << p->getPID() << ": " << p->getAge() << endl;
+            ++it;
         }
+
+        
+        //for (int j = 0; j < q->size(); j++) {
+        //    // add age to p
+        //}
     }
 
-    return false;
+    return jobAged;
 }
 
 

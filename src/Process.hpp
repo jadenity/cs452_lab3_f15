@@ -35,6 +35,9 @@ public:
     void setexitCPUTick(int clock);
     int getFinishTime() const;
     void setFinishTime(int clock);
+    int getAge() const;
+    void addAge(int age);
+    void setAge(int age);
     static bool compare(Process *p1, Process *p2);
 
 private:
@@ -47,6 +50,7 @@ private:
     State state;
     int time_remaining;
     int time_waiting;
+    int age;
     int exitCPUTick;
     int finishTime;
 };

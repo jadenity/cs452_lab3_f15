@@ -3,6 +3,7 @@
 
 #include <queue>
 #include <string>
+#include <deque>
 #include "Process.hpp"
 
 using namespace std;
@@ -22,6 +23,7 @@ public:
     int getQuantum() const;
     deque<Process *> getQueue() const;
     virtual ~Time_Queue();
+    
 private:
     int quantum;
     bool fcfs;
