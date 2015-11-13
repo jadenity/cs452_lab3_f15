@@ -388,8 +388,20 @@ Used the pseudocode and the breakdown to put skeleton code into RTS.cpp
 
 
 
+11/13: Both of us are working from home today. We're communicating through email.
 
+~Partner made a constructor for a queue data structure made for MFQS so that it doesn't need a time quantum.
+	I can probably use this to make a seperate queue for my idea to implement RTS. Howeverm it doesn't look like a priority queue...
 
+I found that C++ has a priority queue data structure built in. Perhaps I can put processes in there and sort by deadline.
+	Info from http://en.cppreference.com/w/cpp/container/priority_queue
+
+So right now, my objective is to see if a C++ priority queue can sort processes by deadline.
+	I may need my own test file and need to include <queue> for the queue, and <functional> and <vector> as well.
+
+I replicated the results I saw from example code for a C++ priority queue, now I need to try it with processes.
+	But I'm wondering how processes get loaded into a class...
+		Apparently, the processes are there by default since it's sent to the Scheduler interface, which becomes a certain scheduler.
 
 
 

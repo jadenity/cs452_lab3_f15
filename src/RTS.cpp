@@ -1,5 +1,9 @@
 #include <iostream>
+#include <queue>
+#include <vector>
+#include <functional>
 #include "RTS.hpp"
+#include "Time_Queue.hpp"
 #include "Scheduler.hpp"
 
 using namespace std;
@@ -13,12 +17,55 @@ RTS::~RTS() {
 
 //Note: the 100k processes test file doesn't seem to have any processes with a deadline of 10000 or more
 
+
+//TEMP CODE
+template<typename T> void print_queue(T& q) {
+    while(!q.empty()) {
+        std::cout << q.top() << " ";
+        q.pop();
+    }
+    std::cout << '\n';
+}
+//END TEMP CODE
+
 void RTS::run() {
   int clock = 0;
-  //TODO: rtsQueue = priority queue with process arival times equal to 0. 
+  //TODO: IN PROGRESS: make a priority queue of processes sorted by deadline
   //Order processes by deadline/PID (new method?)
   //TODO: Process *p = new Process(rtsQueue->pop);
-  while(this->hasUnfinishedJobs()){ //may want to check if both the original queue sent in AND rtsQueue have jobs
+
+  //TEMP CODE
+  std::priority_queue<int> q;
+int n[10] = {1,8,5,6,3,4,0,9,3,2};
+  for(int i = 0; i < 10; i++){
+      q.push(n[i]);
+  }
+
+  print_queue(q);
+
+  std::priority_queue<int, std::vector<int>, std::greater<int> > q2;
+
+  for(int i = 0; i < 10; i++){
+      q2.push(n[i]);
+  }
+
+  q2.push(5); //adding this shows that values added any time are sorted when pushed into the priority queue
+  print_queue(q2);
+  //END TEMP CODE
+
+  //TESTING: Do the above for processes, sorting them by deadline
+  if(this->hasUnfinishedJobs()){
+    int i = 0;
+    while(i < (int)this->processes.size()){
+      
+      i++;
+    }
+    
+  }
+  //END TEST CODE
+
+//this->hasUnfinishedJobs()
+  while(false){ //may want to check if both the original queue sent in AND rtsQueue have jobs
 
     //check if the process can't finish by the deadline (while loop dumps all following processes that can't finish)
     while(false){//"if p != null && p->getTimeRemaining + clock > p->getDeadline";
