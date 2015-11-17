@@ -39,10 +39,10 @@ void MFQS::run() {
         int i = 0;
         int lastQueue = numberOfQueues - 1;
         bool newProcessesAdded;
+        int jobAged;
         while (i <= lastQueue) {
             Time_Queue *queue = this->queues.at(i);
             bool queueIsEmpty = queue->empty();
-
 #ifdef DEBUG
             if (!queueIsEmpty) {
                 cout << "**" << endl;
@@ -51,12 +51,12 @@ void MFQS::run() {
             }
 #endif
             newProcessesAdded = receiveNewJobs(clock);
-            while (!queueIsEmpty && !newProcessesAdded) {
+            jobAged = -1;
+            while (!queueIsEmpty && !newProcessesAdded && (jobAged < 0)) {
+
+                jobAged = -1;
                 Process *p = queue->pop();
 
-//#ifdef DEBUG
-//                cout << "Process " << p->getPID() << " running, time_remaining: " << p->getTimeRemaining() << endl;
-//#endif
                 int timeRan;
                 if (i == lastQueue) { // Last queue is FCFS
                     timeRan = p->getTimeRemaining();
@@ -67,7 +67,7 @@ void MFQS::run() {
 
                     clock += timeRan;
 
-                    // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
+                    jobAged = age(i, p, timeRan);
 
                     // Terminate the process
                     p->setTimeRemaining(0);
@@ -87,26 +87,32 @@ void MFQS::run() {
                         p->addTimeWaiting(clock - p->getexitCPUTick());
                         clock += timeRan;
 
-                        // TODO Add timeRemaining to age of all processes after p that are in the 3rd or lower queue
-                        age(i, p, timeRan);
+#ifdef DEBUG
+                        cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
+                        cout << "clock: " << clock << endl << endl;
+#endif
+
+                        jobAged = age(i, p, timeRan);
 
                         // Terminate the process
                         p->setTimeRemaining(0);
                         p->setFinishTime(clock);
                         p->setState(Process::TERMINATED);
 
-#ifdef DEBUG
-                        cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
-                        cout << "clock: " << clock << endl << endl;
-#endif
                     } else { // Process will not finish in this TQ
                         timeRan = queue->getQuantum();
                         p->addTimeWaiting(clock - p->getexitCPUTick());
                         clock += timeRan;
                         p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
-                        // TODO Add quantum to age of all processes after p that are in the 3rd or lower queue
-                        age(i, p, timeRan);
+#ifdef DEBUG
+                        cout << "Proccess " << p->getPID() << " ran for " << timeRan 
+                            << ", time_remaining: " << p->getTimeRemaining()
+                            << ", time_waiting: " << p->getTimeWaiting() << endl;
+                        cout << "clock: " << clock << endl << endl;
+#endif
+
+                        jobAged = age(i, p, timeRan);
 
                         // Set the stop clock tick to be the current clock. Next time the process runs,
                         // the difference between the current clock tick and then will be added to its wait time.
@@ -117,12 +123,9 @@ void MFQS::run() {
                         this->queues.at(i + 1)->push(p);
 
 #ifdef DEBUG
-                        cout << "Proccess " << p->getPID() << " ran for " << timeRan 
-                            << ", time_remaining: " << p->getTimeRemaining()
-                            << ", time_waiting: " << p->getTimeWaiting() << endl;
-                        cout << "clock: " << clock << endl << endl;
                         cout << "Proccess " << p->getPID() << " added to Queue " << i+1 << ": " << queues.at(i + 1)->toString() << endl;
 #endif
+
                     }
                 }
 
@@ -135,13 +138,15 @@ void MFQS::run() {
                 i = 0;
             } else if (queueIsEmpty) { // only check if the queue is empty if there were no new processes
                 i++;
+            } else if (jobAged > -1) {
+                i = jobAged;
             }
 
         } // end while(i <= lastQueue)
 
         
 #ifdef DEBUG
-        cout << "All arrived processes finished. Clock: " << clock << endl << endl;
+        //cout << "All queues ran. Clock: " << clock << endl << endl;
 #endif
         // Increase clock tick so later arrivals get to run 
         clock++;
@@ -178,9 +183,10 @@ bool MFQS::receiveNewJobs(int clock) {
     return foundNewProcess;
 }
 
-bool MFQS::age(int curQ, Process* p, int timeRan) {
-    bool jobAged = false;
-    int j, startQ;
+int MFQS::age(int curQ, Process* p, int timeRan) {
+    //bool jobAged = false;
+    int jobAged = -1;
+    int startQ;
     // Only add age to queues >= 2 (3rd or lower queues)
     if (curQ < 2) {
         startQ = 2;
@@ -190,15 +196,31 @@ bool MFQS::age(int curQ, Process* p, int timeRan) {
 
     for (int i = startQ; i <= numberOfQueues - 1; i++) {
         Time_Queue* q = queues.at(i);
-        // cout << "q[" << i << "]->size(): " << q->size() << endl;
+#ifdef DEBUG
+        //cout << "q[" << i << "]->size(): " << q->size() << endl;
+#endif
         // Use an iterator to traverse the queue and add age to all processes.
         deque<Process *> deq = q->getQueue();
         std::deque<Process *>::iterator it = deq.begin();
         Process* p;
-        while (it != deq.end()) {
+        while (/*!jobAged &&*/ (it != deq.end())) {
             p = *it;
             p->addAge(timeRan);
-            cout << "age of process " << p->getPID() << ": " << p->getAge() << endl;
+#ifdef DEBUG
+            cout << "Added to age of process " << p->getPID() << ", now: " << p->getAge() << endl;
+#endif
+            if (p->getAge() > ageLimit) {
+                //jobAged = true;
+                if (jobAged == -1) {
+                    jobAged = i-1;
+                }
+                p->setAge(0);
+                q->pop();
+                queues.at(i-1)->push(p);
+#ifdef DEBUG
+                cout << "PROCESS " << p->getPID() << " AGED TO QUEUE " << i-1 << ": " << queues.at(i-1)->toString();
+#endif
+            }
             ++it;
         }
 

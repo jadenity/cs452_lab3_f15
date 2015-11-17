@@ -11,7 +11,7 @@ public:
     virtual ~MFQS();
     void run();
     bool receiveNewJobs(int clock);
-    bool age(int curQ, Process* p, int timeRan);
+    int age(int curQ, Process* p, int timeRan);
 private:
 	int ageLimit;
 	int quantum;
