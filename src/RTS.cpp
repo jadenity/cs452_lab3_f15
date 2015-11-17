@@ -57,7 +57,8 @@ int n[10] = {1,8,5,6,3,4,0,9,3,2};
   if(this->hasUnfinishedJobs()){
     int i = 0;
     while(i < (int)this->processes.size()){
-      
+      //"this->processes.at(i)" gets a process, then "." gets its deadline
+      cout << this->processes.at(i)->getDeadline() << endl;
       i++;
     }
     

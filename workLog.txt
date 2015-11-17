@@ -403,7 +403,7 @@ I replicated the results I saw from example code for a C++ priority queue, now I
 	But I'm wondering how processes get loaded into a class...
 		Apparently, the processes are there by default since it's sent to the Scheduler interface, which becomes a certain scheduler.
 
-
+Although I can confirm that the data is there, I don't quite know how to access the data in processes...
 
 
 
