@@ -63,7 +63,7 @@ int main(int argc, char** argv) {
 
     // Read in the test file
     ifstream file;
-    file.open("test2.txt");
+    file.open("10proc.txt");
     string line;
     vector<string> fields;
     vector<Process*> processes;
