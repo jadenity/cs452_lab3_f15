@@ -58,6 +58,19 @@ bool Process::compare(Process *p1, Process *p2) {
     }
 }
 
+// Compares priorities for use with RBTree
+int Process::compare_priority_tree(void* leftp, void* rightp) {
+    int left = (intptr_t)leftp;
+    int right = (intptr_t)rightp;
+    if (left > right) { // Higher priority = higher in tree
+        return -1;
+    } else if (left < right) {
+        return 1;
+    } else {
+        return 0;
+    }
+}
+
 Process::State Process::getState() const {
     return this->state;
 }

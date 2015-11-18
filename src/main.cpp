@@ -3,12 +3,14 @@
 #include <string>
 #include <fstream>
 #include <boost/algorithm/string.hpp>
+#include <boost/foreach.hpp>
 #include <vector>
 #include <algorithm>
 #include "Process.hpp"
 #include "Scheduler.hpp"
 #include "MFQS.hpp"
 #include "RTS.hpp"
+#include "WHS.hpp"
 
 #define DEBUG
 
@@ -63,22 +65,84 @@ int main(int argc, char** argv) {
 
     // Read in the test file
     ifstream file;
-    file.open("10proc.txt");
+    //file.open("100k_processes");
+    file.open("test2.txt");
     string line;
     vector<string> fields;
     vector<Process*> processes;
+    getline(file, line); // first line is column headers (ignore)
     getline(file, line);
     // The test file MUST have a newline at the end in order for this to work.
+    int pid, burst, arrival, priority, deadline, io;
+    bool ignore = false;
     while (file.good()) {
+        // Boost's split function, delimiter is tab character
         split(fields, line, is_any_of("\t"));
-        Process *p = new Process(atoi(fields.at(0).c_str()),
-                                 atoi(fields.at(1).c_str()), 
-                                 atoi(fields.at(2).c_str()), 
-                                 atoi(fields.at(3).c_str()), 
-                                 atoi(fields.at(4).c_str()), 
-                                 atoi(fields.at(5).c_str()), 
-                                 Process::NEW);
-        processes.push_back(p);
+
+        pid = atoi(fields.at(0).c_str());
+        burst = atoi(fields.at(1).c_str());
+        arrival = atoi(fields.at(2).c_str());
+        priority = atoi(fields.at(3).c_str());
+        deadline = atoi(fields.at(4).c_str());
+        io = atoi(fields.at(5).c_str());
+
+        // ** Sanitization**
+        ignore = false;
+
+        // Ignore burst <= 0 for all schedulers
+        if (burst <= 0) {
+            ignore = true;
+#ifdef DEBUG
+            cout << "Ignoring PID " << pid << ": burst <= 0." << endl;
+#endif
+        }
+
+        // Ignore arrival < 0 for all schedulers
+        if (arrival < 0) {
+            ignore = true;
+#ifdef DEBUG
+            cout << "Ignoring PID " << pid << ": arrival < 0." << endl;
+#endif
+        }
+
+        // Ignore negative or early deadline only for RTS
+        if ((algorithm == "rts") && ((deadline < 0) || (deadline < arrival))) {
+            ignore = true;
+#ifdef DEBUG
+            cout << "Ignoring PID " << pid << ": using RTS and either deadline < 0 or deadline < arrival." << endl;
+#endif
+        }
+
+        // Ignore negative I/O for WHS only
+        if ((algorithm == "whs") && (io < 0)) {
+            ignore = true;
+#ifdef DEBUG
+            cout << "Ignoring PID " << pid << ": using WHS and I/O < 0." << endl;
+#endif
+        }
+
+        // Ignore duplicate PIDs
+        if (!ignore) {
+//             BOOST_FOREACH(Process *p, processes) {
+//                 if (p->getPID() == pid) {
+//                     ignore = true;
+// #ifdef DEBUG
+//                 cout << "Ignoring PID " << pid << ": duplicate PID." << endl;
+// #endif
+//                 }
+//             }
+        }
+
+        if (!ignore) {
+            Process *p = new Process(pid,
+                                     burst, 
+                                     arrival, 
+                                     priority, 
+                                     deadline, 
+                                     io, 
+                                     Process::NEW);
+            processes.push_back(p);
+        }
         getline(file, line);
     }
     file.close();
@@ -92,7 +156,9 @@ int main(int argc, char** argv) {
         sched = new MFQS(processes, quantum, numberOfQueues, aging);
     } else if (algorithm == "rts") {
         sched = new RTS(processes);
-    } 
+    } else if (algorithm == "whs") {
+        sched = new WHS(processes);
+    }
     
     // Using polymorphism to call functions after "new"ing schedulers.
     sched->run();

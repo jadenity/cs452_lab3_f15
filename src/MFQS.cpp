@@ -40,6 +40,10 @@ void MFQS::run() {
         int lastQueue = numberOfQueues - 1;
         bool newProcessesAdded;
         int jobAged;
+
+        // !!TEMP!!
+        int iteration;
+
         while (i <= lastQueue) {
             Time_Queue *queue = this->queues.at(i);
             bool queueIsEmpty = queue->empty();
@@ -67,6 +71,9 @@ void MFQS::run() {
 
                     clock += timeRan;
 
+                    // !!TEMP!!
+                    iteration++;
+
                     jobAged = age(i, p, timeRan);
 
                     // Terminate the process
@@ -91,6 +98,8 @@ void MFQS::run() {
                         cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
                         cout << "clock: " << clock << endl << endl;
 #endif
+                        // !!TEMP!!
+                        iteration++;
 
                         jobAged = age(i, p, timeRan);
 
@@ -112,6 +121,9 @@ void MFQS::run() {
                         cout << "clock: " << clock << endl << endl;
 #endif
 
+                        // !!TEMP!!
+                        iteration++;
+
                         jobAged = age(i, p, timeRan);
 
                         // Set the stop clock tick to be the current clock. Next time the process runs,
@@ -131,7 +143,11 @@ void MFQS::run() {
 
                 queueIsEmpty = queue->empty();
                 newProcessesAdded = receiveNewJobs(clock);
-            } // end while(!queueIsEmpty && !newProcessesAdded)
+                // !!TEMP!!
+                if ((iteration % 1000) == 0)
+                    cout << "clock: " << clock << endl;
+
+            } // end while(!queueIsEmpty && !newProcessesAdded && (jobAged < 0))
 
             // Change i based on why the loop exited
             if (newProcessesAdded) {
@@ -148,6 +164,7 @@ void MFQS::run() {
 #ifdef DEBUG
         //cout << "All queues ran. Clock: " << clock << endl << endl;
 #endif
+
         // Increase clock tick so later arrivals get to run 
         clock++;
 
@@ -223,11 +240,6 @@ int MFQS::age(int curQ, Process* p, int timeRan) {
             }
             ++it;
         }
-
-        
-        //for (int j = 0; j < q->size(); j++) {
-        //    // add age to p
-        //}
     }
 
     return jobAged;
