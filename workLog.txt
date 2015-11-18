@@ -406,4 +406,48 @@ I replicated the results I saw from example code for a C++ priority queue, now I
 Although I can confirm that the data is there, I don't quite know how to access the data in processes...
 
 
+11/17: (was working on another assignment the last 2 or 3 days)
+
+--MEETING START--
+
+Accessing a process properly was an easy fix (needed "->" rather than ".").
+
+Trying to use C++ built in priority queue got too complicated (got a long error message complaining that Processor::allocator didn't exist).
+	Going to use the sort funtion to sort processes by deadline like it was used in main to sort by arrival time in the main.
+
+It took a bit of looking up how to use a vector properly, but I can take a vector, add values, sort them, and pop off values as I need them.
+
+Since the Process/Scheduler classes have no function to remove processes, loading all the data in a second vector is required.
+	I can use a process' PID to determine which process' state to change in the scheduler's own process list, but I still have bad feelings...
+
+If I use arrival time properly, I shouldn't need to load everything into a whole other vector. 
+	I'm stopping for now, in case too many things go wrong with going this "use more vectors than I might need to" route.
+
+--MEETING ENDED--
+
+11/18:
+
+--MEETING START--
+
+Switched RTS to change states in the main processes list rather than load them all into a whole new vector. So far so good.
+
+"Hint: use a red-black tree to represent all active priority run queues."? (part of WHS)
+
+Partner talked about slack and loading shortest burst processes first. I'm not even sure RTS should be able to do that...
+	Assuming it shouldn't and not programming slack for now.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

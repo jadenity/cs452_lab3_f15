@@ -71,6 +71,15 @@ int Process::compare_priority_tree(void* leftp, void* rightp) {
     }
 }
 
+//Deadline comparison for RTS
+bool Process::compareDeadline(Process *p1, Process *p2){
+  if (p1->getDeadline() == p2->getDeadline()) { //tiebreaker, lower PID number goes first
+      return p1->getPID() < p2->getPID();
+  } else {
+      return p1->getDeadline() < p2->getDeadline(); //lower deadline goes first
+  }
+}
+
 Process::State Process::getState() const {
     return this->state;
 }
