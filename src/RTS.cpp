@@ -1,7 +1,6 @@
 #include <iostream>
-#include <queue>
-#include <vector>
-#include <functional>
+#include <algorithm>
+#include "Process.hpp"
 #include "RTS.hpp"
 #include "Time_Queue.hpp"
 #include "Scheduler.hpp"
@@ -17,56 +16,41 @@ RTS::~RTS() {
 
 //Note: the 100k processes test file doesn't seem to have any processes with a deadline of 10000 or more
 
-
-//TEMP CODE
-template<typename T> void print_queue(T& q) {
-    while(!q.empty()) {
-        std::cout << q.top() << " ";
-        q.pop();
-    }
-    std::cout << '\n';
-}
-//END TEMP CODE
-
 void RTS::run() {
   int clock = 0;
-  //TODO: IN PROGRESS: make a priority queue of processes sorted by deadline
-  //Order processes by deadline/PID (new method?)
-  //TODO: Process *p = new Process(rtsQueue->pop);
+  int jobsLoaded = 0; //keeps track of how many processes have entered the process ecosystem
+  int expectedRunTime = 0; //keeps track of burst total of loaded processes, good for kicking out processes that won't finish
+  
+  //need to create some data structure to hold processes loaded in (priority queue proved too complex)
+  //a C++ vector seems to be the simplest to handle
+  vector<Process*> rtsQueue; //contains processes sorted by deadline
 
-  //TEMP CODE
-  std::priority_queue<int> q;
-int n[10] = {1,8,5,6,3,4,0,9,3,2};
-  for(int i = 0; i < 10; i++){
-      q.push(n[i]);
-  }
-
-  print_queue(q);
-
-  std::priority_queue<int, std::vector<int>, std::greater<int> > q2;
-
-  for(int i = 0; i < 10; i++){
-      q2.push(n[i]);
-  }
-
-  q2.push(5); //adding this shows that values added any time are sorted when pushed into the priority queue
-  print_queue(q2);
-  //END TEMP CODE
-
-  //TESTING: Do the above for processes, sorting them by deadline
+  //if there's nothing, don't bother trying to populate the vector
   if(this->hasUnfinishedJobs()){
-    int i = 0;
-    while(i < (int)this->processes.size()){
-      //"this->processes.at(i)" gets a process, then "." gets its deadline
-      cout << this->processes.at(i)->getDeadline() << endl;
-      i++;
-    }
     
-  }
-  //END TEST CODE
+    //"while there is a process to load and arrival time is equal to clock,
+    //"load them into the rtsQueue and set their state to READY"
+    while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
-//this->hasUnfinishedJobs()
-  while(false){ //may want to check if both the original queue sent in AND rtsQueue have jobs
+      //we should see if processes may be able to complete within the deadline
+      rtsQueue.push_back(this->processes.at(jobsLoaded));
+      this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
+      jobsLoaded++;
+    }
+
+    //sort rtsQueue by deadline (this'll be slow, but it's the best idea so far...)
+    sort(rtsQueue.begin(), rtsQueue.end(), Process::compareDeadline);
+
+    //TESTING: pop and output some info about processes loaded
+    /*for(int i = 0; i < jobsLoaded; i++){
+      Process *p = rtsQueue.front();
+      rtsQueue.erase(rtsQueue.begin());
+      cout << "PID:" << p->getPID() << " Arrival:" << p->getArrivalTime() << " Burst:" << p->getBurst() << " Deadline:" << p->getDeadline() << endl;
+    }*/
+  }
+
+  //we want to keep going until both data lists say everything is done
+  while(this->hasUnfinishedJobs() && rtsQueue.size() > 0){
 
     //check if the process can't finish by the deadline (while loop dumps all following processes that can't finish)
     while(false){//"if p != null && p->getTimeRemaining + clock > p->getDeadline";

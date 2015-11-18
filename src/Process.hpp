@@ -39,6 +39,7 @@ public:
     void addAge(int age);
     void setAge(int age);
     static bool compare(Process *p1, Process *p2);
+    static bool compareDeadline(Process *p1, Process *p2);
 
 private:
     int pid;
