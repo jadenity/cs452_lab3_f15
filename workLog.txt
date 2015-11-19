@@ -436,11 +436,13 @@ Switched RTS to change states in the main processes list rather than load them a
 Partner talked about slack and loading shortest burst processes first. I'm not even sure RTS should be able to do that...
 	Assuming it shouldn't and not programming slack for now.
 
+Switched from a vector to a deque (double ended queue) so I have pop/push_front. I'll need to change a fwe things.
 
+I think I have in RTS what I think belongs in RTS, but I'm getting looping problems (out of bounds of infinite loop)...
 
+I'll need to look at all RTS has carefully.
 
-
-
+--MEETING ENDED--
 
 
 
