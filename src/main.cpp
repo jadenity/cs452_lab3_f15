@@ -44,17 +44,19 @@ int main(int argc, char** argv) {
 
     
     int numberOfQueues = 0;
-    int aging = 0;
+    int ageLimit = 0;
     int quantum = 0;
     
     if (algorithm == "mfqs") {
         // get the number of queues from the user 
         cout << "Enter how many queues: ";
         cin >> numberOfQueues;
+    }
 
+    if (algorithm == "mfqs" || algorithm == "whs") {
         // get the aging wait time
         cout << "Enter wait time for aging: ";
-        cin >> aging;
+        cin >> ageLimit;
 
         // get time quantum from the user
         quantum = 0;
@@ -146,18 +148,18 @@ int main(int argc, char** argv) {
         getline(file, line);
     }
     file.close();
-    
+
     // sorts the processes by arrival time
     sort(processes.begin(), processes.end(), Process::compare);
     
     // Create the queues
     Scheduler* sched;
     if (algorithm == "mfqs") {
-        sched = new MFQS(processes, quantum, numberOfQueues, aging);
+        sched = new MFQS(processes, quantum, numberOfQueues, ageLimit);
     } else if (algorithm == "rts") {
         sched = new RTS(processes);
     } else if (algorithm == "whs") {
-        sched = new WHS(processes);
+        sched = new WHS(processes, quantum, ageLimit);
     }
     
     // Using polymorphism to call functions after "new"ing schedulers.

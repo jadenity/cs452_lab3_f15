@@ -39,8 +39,9 @@ public:
     void addAge(int age);
     void setAge(int age);
     static bool compare(Process *p1, Process *p2);
-    static int compare_priority_tree(void* p1, void* p2);
     static bool compareDeadline(Process *p1, Process *p2);
+    static bool comparePID(Process* p1, Process* p2);
+    static int compare_priority_tree(void* p1, void* p2);
 
 private:
     int pid;

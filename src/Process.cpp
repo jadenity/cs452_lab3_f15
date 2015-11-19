@@ -1,4 +1,5 @@
 #include <sstream>
+#include "WHS.hpp"
 #include "Process.hpp"
 
 using namespace std;
@@ -58,19 +59,6 @@ bool Process::compare(Process *p1, Process *p2) {
     }
 }
 
-// Compares priorities for use with RBTree
-int Process::compare_priority_tree(void* leftp, void* rightp) {
-    int left = (intptr_t)leftp;
-    int right = (intptr_t)rightp;
-    if (left > right) { // Higher priority = higher in tree
-        return -1;
-    } else if (left < right) {
-        return 1;
-    } else {
-        return 0;
-    }
-}
-
 //Deadline comparison for RTS
 bool Process::compareDeadline(Process *p1, Process *p2){
   if (p1->getDeadline() == p2->getDeadline()) { //tiebreaker, lower PID number goes first
@@ -78,6 +66,35 @@ bool Process::compareDeadline(Process *p1, Process *p2){
   } else {
       return p1->getDeadline() < p2->getDeadline(); //lower deadline goes first
   }
+}
+
+// PID comparison for finding key/value pairs
+// PID is unique, no second sort item needed.
+bool Process::comparePID(Process* p1, Process* p2) {
+  return p1->getPID() < p2->getPID(); // lower PID goes first
+}
+
+// Compares priorities for use with RBTree
+int Process::compare_priority_tree(void* leftp, void* rightp) {
+    Process* left = (Process*)leftp;
+    Process* right = (Process*)rightp;
+    if (left->getPriority() < right->getPriority()) { // Higher priority = higher in tree
+        return -1;
+    } else if (left->getPriority() > right->getPriority()) {
+        return 1;
+    } else {
+        // If priorities are the same, the smaller PID is higher
+        if (left->getPID() < right->getPID()) {
+          return -1;
+        } else if (left->getPID() > right->getPID()) {
+          return 1;
+        } else {
+          return 0;
+        }
+
+        // Since PIDs are unique, this will never happen.
+        return 0;
+    }
 }
 
 Process::State Process::getState() const {

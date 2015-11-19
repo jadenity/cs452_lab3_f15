@@ -11,6 +11,7 @@
 #include <cassert>
 #include <cstdint>
 #include "RBTree.hpp"
+#include "Process.hpp"
 #define INDENT_STEP  4
 using namespace std;
 
@@ -143,7 +144,7 @@ rbtree RBTree::rbtree_create()
 }
  
 /*
- * Creating New Node of Reb Black Tree
+ * Creating New Node of Red Black Tree
  */
 node RBTree::new_node(void* k, void* v, color n_color, node left, node right)
 {
@@ -540,9 +541,9 @@ void RBTree::print_tree_helper(node n, int indent)
     for(i = 0; i < indent; i++)
         fputs(" ", stdout);
     if (n->color == BLACK)
-        cout<<(intptr_t)n->key<<endl;
+        cout<<((Process*)(n->key))->getPriority()<<endl;
     else
-        cout<<"<"<<(intptr_t)n->key<<">"<<endl;
+        cout<<"<"<<((Process*)(n->key))->getPriority()<<">"<<endl;
     if (n->left != NULL)
     {
         print_tree_helper(n->left, indent + INDENT_STEP);
