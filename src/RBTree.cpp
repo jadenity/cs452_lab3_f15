@@ -540,10 +540,11 @@ void RBTree::print_tree_helper(node n, int indent)
     }
     for(i = 0; i < indent; i++)
         fputs(" ", stdout);
+    Process* p = (Process*)(n->key);
     if (n->color == BLACK)
-        cout<<((Process*)(n->key))->getPriority()<<endl;
+        cout<<p->getPriority()<<"("<<p->getPID()<<")"<<endl;
     else
-        cout<<"<"<<((Process*)(n->key))->getPriority()<<">"<<endl;
+        cout<<"<"<<p->getPriority()<<"("<<p->getPID()<<")"<<">"<<endl;
     if (n->left != NULL)
     {
         print_tree_helper(n->left, indent + INDENT_STEP);
