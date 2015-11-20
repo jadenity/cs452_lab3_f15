@@ -31,8 +31,8 @@ public:
     int getIO() const;
     int getTimeWaiting() const;
     void addTimeWaiting(int time);
-    int getexitCPUTick() const;
-    void setexitCPUTick(int clock);
+    int getExitCPUTick() const;
+    void setExitCPUTick(int clock);
     int getFinishTime() const;
     void setFinishTime(int clock);
     int getAge() const;

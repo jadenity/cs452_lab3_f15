@@ -4,6 +4,8 @@
 #include <boost/foreach.hpp>
 #include <sstream>
 
+//#define DEBUG
+
 using namespace std;
 
 // If a quantum is passed, it's RR, not FCFS
@@ -43,7 +45,7 @@ string Time_Queue::toString() const {
     } else {
         s << "Time Quantum = " << this->quantum << endl;
     }
-    
+#ifdef DEBUG
     s << "Queue contents: " << endl;
     if (!this->empty()) {
         BOOST_FOREACH (Process *p, this->queue) {
@@ -52,6 +54,7 @@ string Time_Queue::toString() const {
     } else {
         s << "Queue is empty" << endl;
     }
+#endif
     return s.str();
 }
 

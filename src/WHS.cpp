@@ -17,9 +17,9 @@ WHS::~WHS(){
 }
 
 void WHS::run() {
-	Process* p;
-	RBTree rbt;
-	rbtree t = rbt.rbtree_create();
+    Process* p;
+    RBTree rbt;
+    rbtree t = rbt.rbtree_create();
 
     rbt.print_tree(t);
 
@@ -41,10 +41,11 @@ void WHS::run() {
     p = new Process(11, 25, 0, 55, 50, 3, Process::NEW);
     cout << "Inserting process " << p->getPID() <<" with priority " << p->getPriority() << " -> "<< p->toString() << endl << endl;
     rbt.rbtree_insert(t, (void*)p, (void*)p, Process::compare_priority_tree);
+    p->setTimeRemaining(4);
 
     rbt.print_tree(t);
 
-    Process* lookup = new Process(0,0,0,55,0,0,Process::NEW);
+    Process* lookup = new Process(11,0,0,55,0,0,Process::NEW);
     
     Process* q;
     if ( (q = (Process*)(rbt.rbtree_lookup(t, (void*)lookup, Process::compare_priority_tree))) == NULL) {
@@ -52,5 +53,16 @@ void WHS::run() {
     } else {
         cout << "found: " << q->toString() << endl;
     }
+    delete lookup;
+
+    Process* lookup2 = new Process(11,0,0,55,0,0,Process::NEW);
+    
+    Process* q2;
+    if ( (q2 = (Process*)(rbt.rbtree_lookup(t, (void*)lookup2, Process::compare_priority_tree))) == NULL) {
+        cout << "No process with priority " << lookup2->getPriority() << " and PID " << lookup2->getPID() << " found." << endl;
+    } else {
+        cout << "found: " << q2->toString() << endl;
+    }
+    delete q2;
 
 }

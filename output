@@ -1,0 +1,5724 @@
+Which algorithm would you like to use? (mfqs/rts/whs): Enter how many queues: Enter wait time for aging: Enter the time quantum for the ready-to-run queue: Ignoring PID 8: burst <= 0.
+Ignoring PID 9: arrival < 0.
+New arrival: adding process 45 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 45 ran for 4 in queue 0, time_remaining: 2, time_waiting: 0
+clock: 25
+
+Proccess 45 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 45 ran for 2 in queue 1 and terminated.
+clock: 27
+
+New arrival: adding process 113 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 113 ran for 3 in queue 0 and terminated.
+clock: 30
+
+newProcessesAdded: 0
+New arrival: adding process 109 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 109 ran for 4 in queue 0, time_remaining: 12, time_waiting: 0
+clock: 60
+
+Proccess 109 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 109 ran for 8 in queue 1, time_remaining: 4, time_waiting: 0
+clock: 68
+
+Proccess 109 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 109 ran for 4 in queue 2 and terminated.
+clock: 72
+
+newProcessesAdded: 0
+New arrival: adding process 149 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 149 ran for 4 in queue 0, time_remaining: 74, time_waiting: 0
+clock: 99
+
+Proccess 149 added to Queue 1: Time Quantum = 8
+
+New arrival: adding process 44 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 44 ran for 4 in queue 0, time_remaining: 83, time_waiting: 1
+clock: 103
+
+Proccess 44 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 149 ran for 8 in queue 1, time_remaining: 66, time_waiting: 4
+clock: 111
+
+Proccess 149 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 44 ran for 8 in queue 1, time_remaining: 75, time_waiting: 9
+clock: 119
+
+Added to age of process 149, now: 8
+Proccess 44 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 149 ran for 16 in queue 2, time_remaining: 50, time_waiting: 12
+clock: 135
+
+Added to age of process 44, now: 16
+Proccess 149 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 44 ran for 16 in queue 2, time_remaining: 59, time_waiting: 25
+clock: 151
+
+Added to age of process 149, now: 24
+Proccess 44 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 44, now: 66
+****FCFS****
+Process 149 ran for 50 in queue 3 and terminated.
+clock: 201
+
+newProcessesAdded: 0
+****FCFS****
+Process 44 ran for 59 in queue 3 and terminated.
+clock: 260
+
+newProcessesAdded: 0
+New arrival: adding process 141 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 141 ran for 4 in queue 0, time_remaining: 95, time_waiting: 0
+clock: 324
+
+Proccess 141 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 141 ran for 8 in queue 1, time_remaining: 87, time_waiting: 0
+clock: 332
+
+Proccess 141 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 141 ran for 16 in queue 2, time_remaining: 71, time_waiting: 0
+clock: 348
+
+Proccess 141 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 141 ran for 71 in queue 3 and terminated.
+clock: 419
+
+New arrival: adding process 111 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 111 ran for 4 in queue 0, time_remaining: 59, time_waiting: 47
+clock: 423
+
+Proccess 111 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 111 ran for 8 in queue 1, time_remaining: 51, time_waiting: 47
+clock: 431
+
+Proccess 111 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 111 ran for 16 in queue 2, time_remaining: 35, time_waiting: 47
+clock: 447
+
+Proccess 111 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 111 ran for 35 in queue 3 and terminated.
+clock: 482
+
+newProcessesAdded: 0
+New arrival: adding process 2 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 2 ran for 4 in queue 0, time_remaining: 74, time_waiting: 0
+clock: 547
+
+Proccess 2 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 2 ran for 8 in queue 1, time_remaining: 66, time_waiting: 0
+clock: 555
+
+Proccess 2 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 2 ran for 16 in queue 2, time_remaining: 50, time_waiting: 0
+clock: 571
+
+Proccess 2 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 2 ran for 50 in queue 3 and terminated.
+clock: 621
+
+New arrival: adding process 92 to first queue
+New arrival: adding process 147 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 92 ran for 4 in queue 0, time_remaining: 59, time_waiting: 43
+clock: 625
+
+Proccess 92 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 147 ran for 4 in queue 0, time_remaining: 34, time_waiting: 45
+clock: 629
+
+Proccess 147 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 92 ran for 8 in queue 1, time_remaining: 51, time_waiting: 47
+clock: 637
+
+Proccess 92 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 147 ran for 8 in queue 1, time_remaining: 26, time_waiting: 53
+clock: 645
+
+Added to age of process 92, now: 8
+Proccess 147 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 92 ran for 16 in queue 2, time_remaining: 35, time_waiting: 55
+clock: 661
+
+Added to age of process 147, now: 16
+Proccess 92 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 147 ran for 16 in queue 2, time_remaining: 10, time_waiting: 69
+clock: 677
+
+Added to age of process 92, now: 24
+Proccess 147 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 147, now: 51
+****FCFS****
+Process 92 ran for 35 in queue 3 and terminated.
+clock: 712
+
+newProcessesAdded: 0
+****FCFS****
+Process 147 ran for 10 in queue 3 and terminated.
+clock: 722
+
+newProcessesAdded: 0
+New arrival: adding process 89 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 89 ran for 4 in queue 0, time_remaining: 69, time_waiting: 0
+clock: 889
+
+Proccess 89 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 89 ran for 8 in queue 1, time_remaining: 61, time_waiting: 0
+clock: 897
+
+Proccess 89 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 89 ran for 16 in queue 2, time_remaining: 45, time_waiting: 0
+clock: 913
+
+Proccess 89 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 89 ran for 45 in queue 3 and terminated.
+clock: 958
+
+newProcessesAdded: 0
+New arrival: adding process 20 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 20 ran for 4 in queue 0, time_remaining: 32, time_waiting: 0
+clock: 1072
+
+Proccess 20 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 20 ran for 8 in queue 1, time_remaining: 24, time_waiting: 0
+clock: 1080
+
+Proccess 20 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 20 ran for 16 in queue 2, time_remaining: 8, time_waiting: 0
+clock: 1096
+
+Proccess 20 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 20 ran for 8 in queue 3 and terminated.
+clock: 1104
+
+newProcessesAdded: 0
+New arrival: adding process 1 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 1 ran for 1 in queue 0 and terminated.
+clock: 1180
+
+newProcessesAdded: 0
+New arrival: adding process 49 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 49 ran for 4 in queue 0, time_remaining: 79, time_waiting: 0
+clock: 1207
+
+Proccess 49 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 49 ran for 8 in queue 1, time_remaining: 71, time_waiting: 0
+clock: 1215
+
+Proccess 49 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 49 ran for 16 in queue 2, time_remaining: 55, time_waiting: 0
+clock: 1231
+
+Proccess 49 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 49 ran for 55 in queue 3 and terminated.
+clock: 1286
+
+newProcessesAdded: 0
+New arrival: adding process 81 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 81 ran for 4 in queue 0, time_remaining: 19, time_waiting: 0
+clock: 1337
+
+Proccess 81 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 81 ran for 8 in queue 1, time_remaining: 11, time_waiting: 0
+clock: 1345
+
+Proccess 81 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 81 ran for 11 in queue 2 and terminated.
+clock: 1356
+
+newProcessesAdded: 0
+New arrival: adding process 134 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 134 ran for 4 in queue 0, time_remaining: 93, time_waiting: 0
+clock: 1370
+
+Proccess 134 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 134 ran for 8 in queue 1, time_remaining: 85, time_waiting: 0
+clock: 1378
+
+Proccess 134 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 134 ran for 16 in queue 2, time_remaining: 69, time_waiting: 0
+clock: 1394
+
+Proccess 134 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 134 ran for 69 in queue 3 and terminated.
+clock: 1463
+
+New arrival: adding process 144 to first queue
+New arrival: adding process 91 to first queue
+New arrival: adding process 108 to first queue
+New arrival: adding process 16 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 144 ran for 4 in queue 0, time_remaining: 23, time_waiting: 64
+clock: 1467
+
+Proccess 144 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 91 ran for 4 in queue 0, time_remaining: 39, time_waiting: 61
+clock: 1471
+
+Proccess 91 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 108 ran for 4 in queue 0, time_remaining: 25, time_waiting: 52
+clock: 1475
+
+Proccess 108 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 16 ran for 4 in queue 0, time_remaining: 81, time_waiting: 40
+clock: 1479
+
+Proccess 16 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 144 ran for 8 in queue 1, time_remaining: 15, time_waiting: 76
+clock: 1487
+
+Proccess 144 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 91 ran for 8 in queue 1, time_remaining: 31, time_waiting: 77
+clock: 1495
+
+Added to age of process 144, now: 8
+Proccess 91 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 108 ran for 8 in queue 1, time_remaining: 17, time_waiting: 72
+clock: 1503
+
+Added to age of process 144, now: 16
+Added to age of process 91, now: 8
+Proccess 108 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 16 ran for 8 in queue 1, time_remaining: 73, time_waiting: 64
+clock: 1511
+
+Added to age of process 144, now: 24
+Added to age of process 91, now: 16
+Added to age of process 108, now: 8
+Proccess 16 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 144 ran for 15 in queue 2 and terminated.
+clock: 1526
+
+Added to age of process 91, now: 31
+Added to age of process 108, now: 23
+Added to age of process 16, now: 15
+New arrival: adding process 26 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 26 ran for 4 in queue 0, time_remaining: 51, time_waiting: 10
+clock: 1530
+
+Added to age of process 91, now: 35
+Added to age of process 108, now: 27
+Added to age of process 16, now: 19
+Proccess 26 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 26 ran for 8 in queue 1, time_remaining: 43, time_waiting: 10
+clock: 1538
+
+Added to age of process 91, now: 43
+Added to age of process 108, now: 35
+Added to age of process 16, now: 27
+Proccess 26 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 91 ran for 16 in queue 2, time_remaining: 15, time_waiting: 120
+clock: 1554
+
+Added to age of process 108, now: 51
+Added to age of process 16, now: 43
+Added to age of process 26, now: 16
+Proccess 91 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 108 ran for 16 in queue 2, time_remaining: 1, time_waiting: 123
+clock: 1570
+
+Added to age of process 16, now: 59
+Added to age of process 26, now: 32
+Added to age of process 91, now: 59
+Proccess 108 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 16 ran for 16 in queue 2, time_remaining: 57, time_waiting: 123
+clock: 1586
+
+Added to age of process 26, now: 48
+Added to age of process 91, now: 75
+Added to age of process 108, now: 67
+Proccess 16 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 26 ran for 16 in queue 2, time_remaining: 27, time_waiting: 58
+clock: 1602
+
+Added to age of process 91, now: 91
+Added to age of process 108, now: 83
+Added to age of process 16, now: 75
+Proccess 26 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 108, now: 98
+Added to age of process 16, now: 90
+Added to age of process 26, now: 63
+****FCFS****
+Process 91 ran for 15 in queue 3 and terminated.
+clock: 1617
+
+newProcessesAdded: 0
+Added to age of process 16, now: 91
+Added to age of process 26, now: 64
+****FCFS****
+Process 108 ran for 1 in queue 3 and terminated.
+clock: 1618
+
+newProcessesAdded: 0
+Added to age of process 26, now: 121
+PROCESS 26 AGED TO QUEUE 2: Time Quantum = 16
+****FCFS****
+Process 16 ran for 57 in queue 3 and terminated.
+clock: 1675
+
+New arrival: adding process 52 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 52 ran for 4 in queue 0, time_remaining: 79, time_waiting: 36
+clock: 1679
+
+Added to age of process 26, now: 4
+Proccess 52 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 52 ran for 8 in queue 1, time_remaining: 71, time_waiting: 36
+clock: 1687
+
+Added to age of process 26, now: 12
+Proccess 52 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 26 ran for 16 in queue 2, time_remaining: 11, time_waiting: 143
+clock: 1703
+
+Added to age of process 52, now: 16
+Proccess 26 added to Queue 3: FCFS
+
+New arrival: adding process 82 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 82 ran for 4 in queue 0, time_remaining: 48, time_waiting: 1
+clock: 1707
+
+Added to age of process 52, now: 20
+Added to age of process 26, now: 16
+Proccess 82 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 82 ran for 8 in queue 1, time_remaining: 40, time_waiting: 1
+clock: 1715
+
+Added to age of process 52, now: 28
+Added to age of process 26, now: 24
+Proccess 82 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 52 ran for 16 in queue 2, time_remaining: 55, time_waiting: 64
+clock: 1731
+
+Added to age of process 82, now: 16
+Added to age of process 26, now: 40
+Proccess 52 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 82 ran for 16 in queue 2, time_remaining: 24, time_waiting: 17
+clock: 1747
+
+Added to age of process 26, now: 56
+Added to age of process 52, now: 44
+Proccess 82 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 52, now: 55
+Added to age of process 82, now: 27
+****FCFS****
+Process 26 ran for 11 in queue 3 and terminated.
+clock: 1758
+
+newProcessesAdded: 0
+Added to age of process 82, now: 82
+****FCFS****
+Process 52 ran for 55 in queue 3 and terminated.
+clock: 1813
+
+newProcessesAdded: 0
+****FCFS****
+Process 82 ran for 24 in queue 3 and terminated.
+clock: 1837
+
+New arrival: adding process 47 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 47 ran for 4 in queue 0, time_remaining: 77, time_waiting: 14
+clock: 1841
+
+Proccess 47 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 47 ran for 8 in queue 1, time_remaining: 69, time_waiting: 14
+clock: 1849
+
+Proccess 47 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 47 ran for 16 in queue 2, time_remaining: 53, time_waiting: 14
+clock: 1865
+
+Proccess 47 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 47 ran for 53 in queue 3 and terminated.
+clock: 1918
+
+New arrival: adding process 58 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 58 ran for 4 in queue 0, time_remaining: 30, time_waiting: 6
+clock: 1922
+
+Proccess 58 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 58 ran for 8 in queue 1, time_remaining: 22, time_waiting: 6
+clock: 1930
+
+Proccess 58 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 58 ran for 16 in queue 2, time_remaining: 6, time_waiting: 6
+clock: 1946
+
+Proccess 58 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 58 ran for 6 in queue 3 and terminated.
+clock: 1952
+
+newProcessesAdded: 0
+New arrival: adding process 37 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 37 ran for 4 in queue 0, time_remaining: 91, time_waiting: 0
+clock: 2158
+
+Proccess 37 added to Queue 1: Time Quantum = 8
+
+New arrival: adding process 3 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 3 ran for 3 in queue 0 and terminated.
+clock: 2161
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 37 ran for 8 in queue 1, time_remaining: 83, time_waiting: 3
+clock: 2169
+
+Proccess 37 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 37 ran for 16 in queue 2, time_remaining: 67, time_waiting: 3
+clock: 2185
+
+Proccess 37 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 37 ran for 67 in queue 3 and terminated.
+clock: 2252
+
+New arrival: adding process 77 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 77 ran for 4 in queue 0, time_remaining: 52, time_waiting: 34
+clock: 2256
+
+Proccess 77 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 77 ran for 8 in queue 1, time_remaining: 44, time_waiting: 34
+clock: 2264
+
+Proccess 77 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 77 ran for 16 in queue 2, time_remaining: 28, time_waiting: 34
+clock: 2280
+
+Proccess 77 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 77 ran for 28 in queue 3 and terminated.
+clock: 2308
+
+newProcessesAdded: 0
+New arrival: adding process 90 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 90 ran for 4 in queue 0, time_remaining: 20, time_waiting: 0
+clock: 2490
+
+Proccess 90 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 90 ran for 8 in queue 1, time_remaining: 12, time_waiting: 0
+clock: 2498
+
+Proccess 90 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 90 ran for 12 in queue 2 and terminated.
+clock: 2510
+
+newProcessesAdded: 0
+New arrival: adding process 139 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 139 ran for 4 in queue 0, time_remaining: 9, time_waiting: 0
+clock: 2542
+
+Proccess 139 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 139 ran for 8 in queue 1, time_remaining: 1, time_waiting: 0
+clock: 2550
+
+Proccess 139 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 139 ran for 1 in queue 2 and terminated.
+clock: 2551
+
+newProcessesAdded: 0
+New arrival: adding process 138 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 138 ran for 4 in queue 0, time_remaining: 80, time_waiting: 0
+clock: 2594
+
+Proccess 138 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 138 ran for 8 in queue 1, time_remaining: 72, time_waiting: 0
+clock: 2602
+
+Proccess 138 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 138 ran for 16 in queue 2, time_remaining: 56, time_waiting: 0
+clock: 2618
+
+Proccess 138 added to Queue 3: FCFS
+
+New arrival: adding process 140 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 140 ran for 4 in queue 0, time_remaining: 8, time_waiting: 13
+clock: 2622
+
+Added to age of process 138, now: 4
+Proccess 140 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 140 ran for 8 in queue 1 and terminated.
+clock: 2630
+
+Added to age of process 138, now: 12
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 138 ran for 56 in queue 3 and terminated.
+clock: 2686
+
+newProcessesAdded: 0
+New arrival: adding process 132 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 132 ran for 4 in queue 0, time_remaining: 26, time_waiting: 0
+clock: 2816
+
+Proccess 132 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 132 ran for 8 in queue 1, time_remaining: 18, time_waiting: 0
+clock: 2824
+
+Proccess 132 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 132 ran for 16 in queue 2, time_remaining: 2, time_waiting: 0
+clock: 2840
+
+Proccess 132 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 132 ran for 2 in queue 3 and terminated.
+clock: 2842
+
+newProcessesAdded: 0
+New arrival: adding process 13 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 13 ran for 4 in queue 0, time_remaining: 47, time_waiting: 0
+clock: 2858
+
+Proccess 13 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 13 ran for 8 in queue 1, time_remaining: 39, time_waiting: 0
+clock: 2866
+
+Proccess 13 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 13 ran for 16 in queue 2, time_remaining: 23, time_waiting: 0
+clock: 2882
+
+Proccess 13 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 13 ran for 23 in queue 3 and terminated.
+clock: 2905
+
+New arrival: adding process 31 to first queue
+New arrival: adding process 94 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 31 ran for 4 in queue 0, time_remaining: 41, time_waiting: 12
+clock: 2909
+
+Proccess 31 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 94 ran for 4 in queue 0, time_remaining: 42, time_waiting: 16
+clock: 2913
+
+Proccess 94 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 31 ran for 8 in queue 1, time_remaining: 33, time_waiting: 16
+clock: 2921
+
+Proccess 31 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 94 ran for 8 in queue 1, time_remaining: 34, time_waiting: 24
+clock: 2929
+
+Added to age of process 31, now: 8
+Proccess 94 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 31 ran for 16 in queue 2, time_remaining: 17, time_waiting: 24
+clock: 2945
+
+Added to age of process 94, now: 16
+Proccess 31 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 94 ran for 16 in queue 2, time_remaining: 18, time_waiting: 40
+clock: 2961
+
+Added to age of process 31, now: 24
+Proccess 94 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 94, now: 33
+****FCFS****
+Process 31 ran for 17 in queue 3 and terminated.
+clock: 2978
+
+New arrival: adding process 131 to first queue
+New arrival: adding process 56 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 131 ran for 4 in queue 0, time_remaining: 55, time_waiting: 15
+clock: 2982
+
+Added to age of process 94, now: 37
+Proccess 131 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 56 ran for 4 in queue 0, time_remaining: 31, time_waiting: 5
+clock: 2986
+
+Added to age of process 94, now: 41
+Proccess 56 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 131 ran for 8 in queue 1, time_remaining: 47, time_waiting: 19
+clock: 2994
+
+Added to age of process 94, now: 49
+Proccess 131 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 56 ran for 8 in queue 1, time_remaining: 23, time_waiting: 13
+clock: 3002
+
+Added to age of process 131, now: 8
+Added to age of process 94, now: 57
+Proccess 56 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 131 ran for 16 in queue 2, time_remaining: 31, time_waiting: 27
+clock: 3018
+
+Added to age of process 56, now: 16
+Added to age of process 94, now: 73
+Proccess 131 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 56 ran for 16 in queue 2, time_remaining: 7, time_waiting: 29
+clock: 3034
+
+Added to age of process 94, now: 89
+Added to age of process 131, now: 24
+Proccess 56 added to Queue 3: FCFS
+
+New arrival: adding process 65 to first queue
+New arrival: adding process 122 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 65 ran for 4 in queue 0, time_remaining: 32, time_waiting: 11
+clock: 3038
+
+Added to age of process 94, now: 93
+Added to age of process 131, now: 28
+Added to age of process 56, now: 20
+Proccess 65 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 122 ran for 4 in queue 0, time_remaining: 89, time_waiting: 10
+clock: 3042
+
+Added to age of process 94, now: 97
+Added to age of process 131, now: 32
+Added to age of process 56, now: 24
+Proccess 122 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 65 ran for 8 in queue 1, time_remaining: 24, time_waiting: 15
+clock: 3050
+
+Added to age of process 94, now: 105
+PROCESS 94 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 131, now: 40
+Added to age of process 56, now: 32
+Proccess 65 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 122 ran for 8 in queue 1, time_remaining: 81, time_waiting: 18
+clock: 3058
+
+Added to age of process 94, now: 8
+Added to age of process 65, now: 8
+Added to age of process 131, now: 48
+Added to age of process 56, now: 40
+Proccess 122 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 94 ran for 16 in queue 2, time_remaining: 2, time_waiting: 137
+clock: 3074
+
+Added to age of process 65, now: 24
+Added to age of process 122, now: 16
+Added to age of process 131, now: 64
+Added to age of process 56, now: 56
+Proccess 94 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 65 ran for 16 in queue 2, time_remaining: 8, time_waiting: 39
+clock: 3090
+
+Added to age of process 122, now: 32
+Added to age of process 131, now: 80
+Added to age of process 56, now: 72
+Added to age of process 94, now: 24
+Proccess 65 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 122 ran for 16 in queue 2, time_remaining: 65, time_waiting: 50
+clock: 3106
+
+Added to age of process 131, now: 96
+Added to age of process 56, now: 88
+Added to age of process 94, now: 40
+Added to age of process 65, now: 40
+Proccess 122 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 56, now: 119
+PROCESS 56 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 94, now: 71
+Added to age of process 65, now: 71
+Added to age of process 122, now: 63
+****FCFS****
+Process 131 ran for 31 in queue 3 and terminated.
+clock: 3137
+
+New arrival: adding process 121 to first queue
+New arrival: adding process 33 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 121 ran for 4 in queue 0, time_remaining: 64, time_waiting: 19
+clock: 3141
+
+Added to age of process 56, now: 4
+Added to age of process 94, now: 75
+Added to age of process 65, now: 75
+Added to age of process 122, now: 67
+Proccess 121 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 33 ran for 4 in queue 0, time_remaining: 4, time_waiting: 10
+clock: 3145
+
+Added to age of process 56, now: 8
+Added to age of process 94, now: 79
+Added to age of process 65, now: 79
+Added to age of process 122, now: 71
+Proccess 33 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 121 ran for 8 in queue 1, time_remaining: 56, time_waiting: 23
+clock: 3153
+
+Added to age of process 56, now: 16
+Added to age of process 94, now: 87
+Added to age of process 65, now: 87
+Added to age of process 122, now: 79
+Proccess 121 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Process 33 ran for 4 in queue 1 and terminated.
+clock: 3157
+
+Added to age of process 56, now: 20
+Added to age of process 121, now: 4
+Added to age of process 94, now: 91
+Added to age of process 65, now: 91
+Added to age of process 122, now: 83
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 56 ran for 7 in queue 2 and terminated.
+clock: 3164
+
+Added to age of process 121, now: 11
+Added to age of process 94, now: 98
+Added to age of process 65, now: 98
+Added to age of process 122, now: 90
+newProcessesAdded: 0
+Proccess 121 ran for 16 in queue 2, time_remaining: 40, time_waiting: 34
+clock: 3180
+
+Added to age of process 94, now: 114
+PROCESS 94 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 65, now: 114
+PROCESS 65 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 122, now: 106
+PROCESS 122 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 121 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 94 ran for 2 in queue 2 and terminated.
+clock: 3182
+
+Added to age of process 65, now: 2
+Added to age of process 122, now: 2
+Added to age of process 121, now: 13
+newProcessesAdded: 0
+Process 65 ran for 8 in queue 2 and terminated.
+clock: 3190
+
+Added to age of process 122, now: 10
+Added to age of process 121, now: 21
+New arrival: adding process 54 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 54 ran for 4 in queue 0, time_remaining: 41, time_waiting: 0
+clock: 3194
+
+Added to age of process 122, now: 14
+Added to age of process 121, now: 25
+Proccess 54 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 54 ran for 8 in queue 1, time_remaining: 33, time_waiting: 0
+clock: 3202
+
+Added to age of process 122, now: 22
+Added to age of process 121, now: 33
+Proccess 54 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 122 ran for 16 in queue 2, time_remaining: 49, time_waiting: 146
+clock: 3218
+
+Added to age of process 54, now: 16
+Added to age of process 121, now: 49
+Proccess 122 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 54 ran for 16 in queue 2, time_remaining: 17, time_waiting: 16
+clock: 3234
+
+Added to age of process 121, now: 65
+Added to age of process 122, now: 38
+Proccess 54 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 122, now: 78
+Added to age of process 54, now: 56
+****FCFS****
+Process 121 ran for 40 in queue 3 and terminated.
+clock: 3274
+
+newProcessesAdded: 0
+Added to age of process 54, now: 105
+PROCESS 54 AGED TO QUEUE 2: Time Quantum = 16
+****FCFS****
+Process 122 ran for 49 in queue 3 and terminated.
+clock: 3323
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 54 ran for 16 in queue 2, time_remaining: 1, time_waiting: 106
+clock: 3340
+
+Proccess 54 added to Queue 3: FCFS
+
+New arrival: adding process 75 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 75 ran for 1 in queue 0 and terminated.
+clock: 3341
+
+Added to age of process 54, now: 1
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 54 ran for 1 in queue 3 and terminated.
+clock: 3342
+
+newProcessesAdded: 0
+New arrival: adding process 14 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 14 ran for 4 in queue 0, time_remaining: 67, time_waiting: 0
+clock: 3457
+
+Proccess 14 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 14 ran for 8 in queue 1, time_remaining: 59, time_waiting: 0
+clock: 3465
+
+Proccess 14 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 14 ran for 16 in queue 2, time_remaining: 43, time_waiting: 0
+clock: 3481
+
+Proccess 14 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 14 ran for 43 in queue 3 and terminated.
+clock: 3524
+
+newProcessesAdded: 0
+New arrival: adding process 7 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 7 ran for 4 in queue 0, time_remaining: 38, time_waiting: 0
+clock: 3593
+
+Proccess 7 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 7 ran for 8 in queue 1, time_remaining: 30, time_waiting: 0
+clock: 3601
+
+Proccess 7 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 7 ran for 16 in queue 2, time_remaining: 14, time_waiting: 0
+clock: 3617
+
+Proccess 7 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 7 ran for 14 in queue 3 and terminated.
+clock: 3631
+
+newProcessesAdded: 0
+New arrival: adding process 22 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 22 ran for 4 in queue 0, time_remaining: 51, time_waiting: 0
+clock: 3701
+
+Proccess 22 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 22 ran for 8 in queue 1, time_remaining: 43, time_waiting: 0
+clock: 3709
+
+Proccess 22 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 22 ran for 16 in queue 2, time_remaining: 27, time_waiting: 0
+clock: 3725
+
+Proccess 22 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 22 ran for 27 in queue 3 and terminated.
+clock: 3752
+
+New arrival: adding process 148 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 148 ran for 4 in queue 0, time_remaining: 64, time_waiting: 19
+clock: 3756
+
+Proccess 148 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 148 ran for 8 in queue 1, time_remaining: 56, time_waiting: 19
+clock: 3764
+
+Proccess 148 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 148 ran for 16 in queue 2, time_remaining: 40, time_waiting: 19
+clock: 3780
+
+Proccess 148 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 148 ran for 40 in queue 3 and terminated.
+clock: 3820
+
+New arrival: adding process 62 to first queue
+New arrival: adding process 105 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 62 ran for 4 in queue 0, time_remaining: 53, time_waiting: 35
+clock: 3824
+
+Proccess 62 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 105 ran for 4 in queue 0, time_remaining: 30, time_waiting: 13
+clock: 3828
+
+Proccess 105 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 62 ran for 8 in queue 1, time_remaining: 45, time_waiting: 39
+clock: 3836
+
+Proccess 62 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 105 ran for 8 in queue 1, time_remaining: 22, time_waiting: 21
+clock: 3844
+
+Added to age of process 62, now: 8
+Proccess 105 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 62 ran for 16 in queue 2, time_remaining: 29, time_waiting: 47
+clock: 3860
+
+Added to age of process 105, now: 16
+Proccess 62 added to Queue 3: FCFS
+
+New arrival: adding process 42 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 42 ran for 4 in queue 0, time_remaining: 89, time_waiting: 14
+clock: 3864
+
+Added to age of process 105, now: 20
+Added to age of process 62, now: 12
+Proccess 42 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 42 ran for 8 in queue 1, time_remaining: 81, time_waiting: 14
+clock: 3872
+
+Added to age of process 105, now: 28
+Added to age of process 62, now: 20
+Proccess 42 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 105 ran for 16 in queue 2, time_remaining: 6, time_waiting: 49
+clock: 3888
+
+Added to age of process 42, now: 16
+Added to age of process 62, now: 36
+Proccess 105 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 42 ran for 16 in queue 2, time_remaining: 65, time_waiting: 30
+clock: 3904
+
+Added to age of process 62, now: 52
+Added to age of process 105, now: 44
+Proccess 42 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 105, now: 73
+Added to age of process 42, now: 45
+****FCFS****
+Process 62 ran for 29 in queue 3 and terminated.
+clock: 3933
+
+newProcessesAdded: 0
+Added to age of process 42, now: 51
+****FCFS****
+Process 105 ran for 6 in queue 3 and terminated.
+clock: 3939
+
+newProcessesAdded: 0
+****FCFS****
+Process 42 ran for 65 in queue 3 and terminated.
+clock: 4004
+
+newProcessesAdded: 0
+New arrival: adding process 97 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 97 ran for 4 in queue 0, time_remaining: 8, time_waiting: 0
+clock: 4012
+
+Proccess 97 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 97 ran for 8 in queue 1 and terminated.
+clock: 4020
+
+newProcessesAdded: 0
+New arrival: adding process 119 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 119 ran for 4 in queue 0, time_remaining: 87, time_waiting: 0
+clock: 4040
+
+Proccess 119 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 119 ran for 8 in queue 1, time_remaining: 79, time_waiting: 0
+clock: 4048
+
+Proccess 119 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 119 ran for 16 in queue 2, time_remaining: 63, time_waiting: 0
+clock: 4064
+
+Proccess 119 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 119 ran for 63 in queue 3 and terminated.
+clock: 4127
+
+newProcessesAdded: 0
+New arrival: adding process 127 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 127 ran for 4 in queue 0, time_remaining: 89, time_waiting: 0
+clock: 4229
+
+Proccess 127 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 127 ran for 8 in queue 1, time_remaining: 81, time_waiting: 0
+clock: 4237
+
+Proccess 127 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 127 ran for 16 in queue 2, time_remaining: 65, time_waiting: 0
+clock: 4253
+
+Proccess 127 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 127 ran for 65 in queue 3 and terminated.
+clock: 4318
+
+New arrival: adding process 96 to first queue
+New arrival: adding process 41 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 96 ran for 4 in queue 0, time_remaining: 7, time_waiting: 60
+clock: 4322
+
+Proccess 96 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 41 ran for 4 in queue 0, time_remaining: 24, time_waiting: 40
+clock: 4326
+
+Proccess 41 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 96 ran for 7 in queue 1 and terminated.
+clock: 4333
+
+New arrival: adding process 125 to first queue
+New arrival: adding process 24 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 125 ran for 4 in queue 0, time_remaining: 72, time_waiting: 3
+clock: 4337
+
+Proccess 125 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 24 ran for 4 in queue 0, time_remaining: 76, time_waiting: 4
+clock: 4341
+
+Proccess 24 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 41 ran for 8 in queue 1, time_remaining: 16, time_waiting: 55
+clock: 4349
+
+Proccess 41 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 125 ran for 8 in queue 1, time_remaining: 64, time_waiting: 15
+clock: 4357
+
+Added to age of process 41, now: 8
+Proccess 125 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 24 ran for 8 in queue 1, time_remaining: 68, time_waiting: 20
+clock: 4365
+
+Added to age of process 41, now: 16
+Added to age of process 125, now: 8
+Proccess 24 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 41 ran for 16 in queue 2 and terminated.
+clock: 4381
+
+Added to age of process 125, now: 24
+Added to age of process 24, now: 16
+newProcessesAdded: 0
+Proccess 125 ran for 16 in queue 2, time_remaining: 48, time_waiting: 39
+clock: 4397
+
+Added to age of process 24, now: 32
+Proccess 125 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 24 ran for 16 in queue 2, time_remaining: 52, time_waiting: 52
+clock: 4413
+
+Added to age of process 125, now: 40
+Proccess 24 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 24, now: 80
+****FCFS****
+Process 125 ran for 48 in queue 3 and terminated.
+clock: 4461
+
+New arrival: adding process 68 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 68 ran for 4 in queue 0, time_remaining: 77, time_waiting: 34
+clock: 4465
+
+Added to age of process 24, now: 84
+Proccess 68 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 68 ran for 8 in queue 1, time_remaining: 69, time_waiting: 34
+clock: 4473
+
+Added to age of process 24, now: 92
+Proccess 68 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 68 ran for 16 in queue 2, time_remaining: 53, time_waiting: 34
+clock: 4489
+
+Added to age of process 24, now: 108
+PROCESS 24 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 68 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 24 ran for 16 in queue 2, time_remaining: 36, time_waiting: 128
+clock: 4505
+
+Added to age of process 68, now: 16
+Proccess 24 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 24, now: 53
+****FCFS****
+Process 68 ran for 53 in queue 3 and terminated.
+clock: 4558
+
+New arrival: adding process 69 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 69 ran for 4 in queue 0, time_remaining: 80, time_waiting: 50
+clock: 4562
+
+Added to age of process 24, now: 57
+Proccess 69 added to Queue 1: Time Quantum = 8
+
+New arrival: adding process 130 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 130 ran for 4 in queue 0, time_remaining: 39, time_waiting: 2
+clock: 4566
+
+Added to age of process 24, now: 61
+Proccess 130 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 69 ran for 8 in queue 1, time_remaining: 72, time_waiting: 54
+clock: 4574
+
+Added to age of process 24, now: 69
+Proccess 69 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 130 ran for 8 in queue 1, time_remaining: 31, time_waiting: 10
+clock: 4582
+
+Added to age of process 69, now: 8
+Added to age of process 24, now: 77
+Proccess 130 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 69 ran for 16 in queue 2, time_remaining: 56, time_waiting: 62
+clock: 4598
+
+Added to age of process 130, now: 16
+Added to age of process 24, now: 93
+Proccess 69 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 130 ran for 16 in queue 2, time_remaining: 15, time_waiting: 26
+clock: 4614
+
+Added to age of process 24, now: 109
+PROCESS 24 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 69, now: 24
+Proccess 130 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 24 ran for 16 in queue 2, time_remaining: 20, time_waiting: 237
+clock: 4630
+
+Added to age of process 69, now: 40
+Added to age of process 130, now: 32
+Proccess 24 added to Queue 3: FCFS
+
+New arrival: adding process 28 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 28 ran for 4 in queue 0, time_remaining: 73, time_waiting: 2
+clock: 4634
+
+Added to age of process 69, now: 44
+Added to age of process 130, now: 36
+Added to age of process 24, now: 4
+Proccess 28 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 28 ran for 8 in queue 1, time_remaining: 65, time_waiting: 2
+clock: 4642
+
+Added to age of process 69, now: 52
+Added to age of process 130, now: 44
+Added to age of process 24, now: 12
+Proccess 28 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 28 ran for 16 in queue 2, time_remaining: 49, time_waiting: 2
+clock: 4658
+
+Added to age of process 69, now: 68
+Added to age of process 130, now: 60
+Added to age of process 24, now: 28
+Proccess 28 added to Queue 3: FCFS
+
+New arrival: adding process 72 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 72 ran for 4 in queue 0, time_remaining: 48, time_waiting: 9
+clock: 4662
+
+Added to age of process 69, now: 72
+Added to age of process 130, now: 64
+Added to age of process 24, now: 32
+Added to age of process 28, now: 4
+Proccess 72 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 72 ran for 8 in queue 1, time_remaining: 40, time_waiting: 9
+clock: 4670
+
+Added to age of process 69, now: 80
+Added to age of process 130, now: 72
+Added to age of process 24, now: 40
+Added to age of process 28, now: 12
+Proccess 72 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 74 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 74 ran for 4 in queue 0, time_remaining: 39, time_waiting: 1
+clock: 4674
+
+Added to age of process 72, now: 4
+Added to age of process 69, now: 84
+Added to age of process 130, now: 76
+Added to age of process 24, now: 44
+Added to age of process 28, now: 16
+Proccess 74 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 74 ran for 8 in queue 1, time_remaining: 31, time_waiting: 1
+clock: 4682
+
+Added to age of process 72, now: 12
+Added to age of process 69, now: 92
+Added to age of process 130, now: 84
+Added to age of process 24, now: 52
+Added to age of process 28, now: 24
+Proccess 74 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 72 ran for 16 in queue 2, time_remaining: 24, time_waiting: 21
+clock: 4698
+
+Added to age of process 74, now: 16
+Added to age of process 69, now: 108
+PROCESS 69 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 130, now: 100
+Added to age of process 24, now: 68
+Added to age of process 28, now: 40
+Proccess 72 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 74 ran for 16 in queue 2, time_remaining: 15, time_waiting: 17
+clock: 4714
+
+Added to age of process 69, now: 16
+Added to age of process 130, now: 116
+PROCESS 130 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 24, now: 84
+Added to age of process 28, now: 56
+Added to age of process 72, now: 28
+Proccess 74 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 69 ran for 16 in queue 2, time_remaining: 40, time_waiting: 178
+clock: 4730
+
+Added to age of process 130, now: 16
+Added to age of process 24, now: 100
+Added to age of process 28, now: 72
+Added to age of process 72, now: 44
+Added to age of process 74, now: 32
+Proccess 69 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 130 ran for 15 in queue 2 and terminated.
+clock: 4745
+
+Added to age of process 24, now: 115
+PROCESS 24 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 28, now: 87
+Added to age of process 72, now: 59
+Added to age of process 74, now: 47
+Added to age of process 69, now: 31
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 24 ran for 16 in queue 2, time_remaining: 4, time_waiting: 352
+clock: 4761
+
+Added to age of process 28, now: 103
+PROCESS 28 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 72, now: 75
+Added to age of process 74, now: 63
+Added to age of process 69, now: 47
+Proccess 24 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 28 ran for 16 in queue 2, time_remaining: 33, time_waiting: 105
+clock: 4777
+
+Added to age of process 72, now: 91
+Added to age of process 74, now: 79
+Added to age of process 69, now: 63
+Added to age of process 24, now: 16
+Proccess 28 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 74, now: 103
+PROCESS 74 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 69, now: 87
+Added to age of process 24, now: 40
+Added to age of process 28, now: 24
+****FCFS****
+Process 72 ran for 24 in queue 3 and terminated.
+clock: 4801
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 24, now: 80
+Added to age of process 28, now: 64
+****FCFS****
+Process 69 ran for 40 in queue 3 and terminated.
+clock: 4841
+
+newProcessesAdded: 0
+Added to age of process 28, now: 68
+****FCFS****
+Process 24 ran for 4 in queue 3 and terminated.
+clock: 4845
+
+newProcessesAdded: 0
+****FCFS****
+Process 28 ran for 33 in queue 3 and terminated.
+clock: 4878
+
+New arrival: adding process 40 to first queue
+New arrival: adding process 143 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 40 ran for 4 in queue 0, time_remaining: 44, time_waiting: 20
+clock: 4882
+
+Added to age of process 74, now: 4
+Proccess 40 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 143 ran for 4 in queue 0, time_remaining: 13, time_waiting: 15
+clock: 4886
+
+Added to age of process 74, now: 8
+Proccess 143 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 40 ran for 8 in queue 1, time_remaining: 36, time_waiting: 24
+clock: 4894
+
+Added to age of process 74, now: 16
+Proccess 40 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 143 ran for 8 in queue 1, time_remaining: 5, time_waiting: 23
+clock: 4902
+
+Added to age of process 74, now: 24
+Added to age of process 40, now: 8
+Proccess 143 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 98 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 98 ran for 4 in queue 0, time_remaining: 64, time_waiting: 5
+clock: 4906
+
+Added to age of process 74, now: 28
+Added to age of process 40, now: 12
+Added to age of process 143, now: 4
+Proccess 98 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 98 ran for 8 in queue 1, time_remaining: 56, time_waiting: 5
+clock: 4914
+
+Added to age of process 74, now: 36
+Added to age of process 40, now: 20
+Added to age of process 143, now: 12
+Proccess 98 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 74 ran for 15 in queue 2 and terminated.
+clock: 4929
+
+Added to age of process 40, now: 35
+Added to age of process 143, now: 27
+Added to age of process 98, now: 15
+newProcessesAdded: 0
+Proccess 40 ran for 16 in queue 2, time_remaining: 20, time_waiting: 59
+clock: 4945
+
+Added to age of process 143, now: 43
+Added to age of process 98, now: 31
+Proccess 40 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 143 ran for 5 in queue 2 and terminated.
+clock: 4950
+
+Added to age of process 98, now: 36
+Added to age of process 40, now: 40
+newProcessesAdded: 0
+Proccess 98 ran for 16 in queue 2, time_remaining: 40, time_waiting: 41
+clock: 4966
+
+Added to age of process 40, now: 56
+Proccess 98 added to Queue 3: FCFS
+
+New arrival: adding process 112 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 112 ran for 4 in queue 0, time_remaining: 52, time_waiting: 8
+clock: 4970
+
+Added to age of process 40, now: 60
+Added to age of process 98, now: 40
+Proccess 112 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 112 ran for 8 in queue 1, time_remaining: 44, time_waiting: 8
+clock: 4978
+
+Added to age of process 40, now: 68
+Added to age of process 98, now: 48
+Proccess 112 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 112 ran for 16 in queue 2, time_remaining: 28, time_waiting: 8
+clock: 4994
+
+Added to age of process 40, now: 84
+Added to age of process 98, now: 64
+Proccess 112 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 98, now: 84
+Added to age of process 112, now: 20
+****FCFS****
+Process 40 ran for 20 in queue 3 and terminated.
+clock: 5014
+
+New arrival: adding process 124 to first queue
+New arrival: adding process 87 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 124 ran for 4 in queue 0, time_remaining: 28, time_waiting: 13
+clock: 5018
+
+Added to age of process 98, now: 88
+Added to age of process 112, now: 24
+Proccess 124 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 87 ran for 4 in queue 0, time_remaining: 37, time_waiting: 16
+clock: 5022
+
+Added to age of process 98, now: 92
+Added to age of process 112, now: 28
+Proccess 87 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 124 ran for 8 in queue 1, time_remaining: 20, time_waiting: 17
+clock: 5030
+
+Added to age of process 98, now: 100
+Added to age of process 112, now: 36
+Proccess 124 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 87 ran for 8 in queue 1, time_remaining: 29, time_waiting: 24
+clock: 5038
+
+Added to age of process 124, now: 8
+Added to age of process 98, now: 108
+PROCESS 98 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 112, now: 44
+Proccess 87 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 124 ran for 16 in queue 2, time_remaining: 4, time_waiting: 25
+clock: 5054
+
+Added to age of process 98, now: 16
+Added to age of process 87, now: 16
+Added to age of process 112, now: 60
+Proccess 124 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 98 ran for 16 in queue 2, time_remaining: 24, time_waiting: 129
+clock: 5070
+
+Added to age of process 87, now: 32
+Added to age of process 112, now: 76
+Added to age of process 124, now: 24
+Proccess 98 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 87 ran for 16 in queue 2, time_remaining: 13, time_waiting: 56
+clock: 5086
+
+Added to age of process 112, now: 92
+Added to age of process 124, now: 40
+Added to age of process 98, now: 32
+Proccess 87 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 124, now: 68
+Added to age of process 98, now: 60
+Added to age of process 87, now: 60
+****FCFS****
+Process 112 ran for 28 in queue 3 and terminated.
+clock: 5114
+
+New arrival: adding process 110 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 110 ran for 4 in queue 0, time_remaining: 40, time_waiting: 17
+clock: 5118
+
+Added to age of process 124, now: 72
+Added to age of process 98, now: 64
+Added to age of process 87, now: 64
+Proccess 110 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 110 ran for 8 in queue 1, time_remaining: 32, time_waiting: 17
+clock: 5126
+
+Added to age of process 124, now: 80
+Added to age of process 98, now: 72
+Added to age of process 87, now: 72
+Proccess 110 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 64 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 64 ran for 4 in queue 0 and terminated.
+clock: 5130
+
+Added to age of process 110, now: 4
+Added to age of process 124, now: 84
+Added to age of process 98, now: 76
+Added to age of process 87, now: 76
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 110 ran for 16 in queue 2, time_remaining: 16, time_waiting: 21
+clock: 5146
+
+Added to age of process 124, now: 100
+Added to age of process 98, now: 92
+Added to age of process 87, now: 92
+Proccess 110 added to Queue 3: FCFS
+
+New arrival: adding process 100 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 100 ran for 4 in queue 0, time_remaining: 95, time_waiting: 7
+clock: 5150
+
+Added to age of process 124, now: 104
+PROCESS 124 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 98, now: 96
+Added to age of process 87, now: 96
+Added to age of process 110, now: 8
+Proccess 100 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 100 ran for 8 in queue 1, time_remaining: 87, time_waiting: 7
+clock: 5158
+
+Added to age of process 124, now: 8
+Added to age of process 98, now: 104
+PROCESS 98 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 87, now: 104
+PROCESS 87 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 110, now: 16
+Proccess 100 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 124 ran for 4 in queue 2 and terminated.
+clock: 5162
+
+Added to age of process 98, now: 4
+Added to age of process 87, now: 4
+Added to age of process 100, now: 4
+Added to age of process 110, now: 20
+newProcessesAdded: 0
+Proccess 98 ran for 16 in queue 2, time_remaining: 8, time_waiting: 221
+clock: 5178
+
+Added to age of process 87, now: 20
+Added to age of process 100, now: 20
+Added to age of process 110, now: 36
+Proccess 98 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 87 ran for 13 in queue 2 and terminated.
+clock: 5191
+
+Added to age of process 100, now: 33
+Added to age of process 110, now: 49
+Added to age of process 98, now: 17
+newProcessesAdded: 0
+Proccess 100 ran for 16 in queue 2, time_remaining: 71, time_waiting: 40
+clock: 5207
+
+Added to age of process 110, now: 65
+Added to age of process 98, now: 33
+Proccess 100 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 98, now: 49
+Added to age of process 100, now: 49
+****FCFS****
+Process 110 ran for 16 in queue 3 and terminated.
+clock: 5223
+
+newProcessesAdded: 0
+Added to age of process 100, now: 57
+****FCFS****
+Process 98 ran for 8 in queue 3 and terminated.
+clock: 5231
+
+newProcessesAdded: 0
+****FCFS****
+Process 100 ran for 71 in queue 3 and terminated.
+clock: 5302
+
+New arrival: adding process 76 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 76 ran for 4 in queue 0, time_remaining: 15, time_waiting: 53
+clock: 5306
+
+Proccess 76 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 76 ran for 8 in queue 1, time_remaining: 7, time_waiting: 53
+clock: 5314
+
+Proccess 76 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 76 ran for 7 in queue 2 and terminated.
+clock: 5321
+
+newProcessesAdded: 0
+New arrival: adding process 93 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 93 ran for 4 in queue 0, time_remaining: 49, time_waiting: 0
+clock: 5328
+
+Proccess 93 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 93 ran for 8 in queue 1, time_remaining: 41, time_waiting: 0
+clock: 5336
+
+Proccess 93 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 129 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 129 ran for 4 in queue 0, time_remaining: 26, time_waiting: 7
+clock: 5340
+
+Added to age of process 93, now: 4
+Proccess 129 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 129 ran for 8 in queue 1, time_remaining: 18, time_waiting: 7
+clock: 5348
+
+Added to age of process 93, now: 12
+Proccess 129 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 93 ran for 16 in queue 2, time_remaining: 25, time_waiting: 12
+clock: 5364
+
+Added to age of process 129, now: 16
+Proccess 93 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 129 ran for 16 in queue 2, time_remaining: 2, time_waiting: 23
+clock: 5380
+
+Added to age of process 93, now: 28
+Proccess 129 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 129, now: 41
+****FCFS****
+Process 93 ran for 25 in queue 3 and terminated.
+clock: 5405
+
+New arrival: adding process 103 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 103 ran for 4 in queue 0, time_remaining: 92, time_waiting: 24
+clock: 5409
+
+Added to age of process 129, now: 45
+Proccess 103 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 103 ran for 8 in queue 1, time_remaining: 84, time_waiting: 24
+clock: 5417
+
+Added to age of process 129, now: 53
+Proccess 103 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 103 ran for 16 in queue 2, time_remaining: 68, time_waiting: 24
+clock: 5433
+
+Added to age of process 129, now: 69
+Proccess 103 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 103, now: 2
+****FCFS****
+Process 129 ran for 2 in queue 3 and terminated.
+clock: 5435
+
+newProcessesAdded: 0
+****FCFS****
+Process 103 ran for 68 in queue 3 and terminated.
+clock: 5503
+
+New arrival: adding process 50 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 50 ran for 4 in queue 0, time_remaining: 10, time_waiting: 56
+clock: 5507
+
+Proccess 50 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 50 ran for 8 in queue 1, time_remaining: 2, time_waiting: 56
+clock: 5515
+
+Proccess 50 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 50 ran for 2 in queue 2 and terminated.
+clock: 5517
+
+newProcessesAdded: 0
+New arrival: adding process 55 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 55 ran for 4 in queue 0, time_remaining: 5, time_waiting: 0
+clock: 5604
+
+Proccess 55 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 55 ran for 5 in queue 1 and terminated.
+clock: 5609
+
+newProcessesAdded: 0
+New arrival: adding process 116 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 116 ran for 4 in queue 0, time_remaining: 23, time_waiting: 0
+clock: 5614
+
+Proccess 116 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 116 ran for 8 in queue 1, time_remaining: 15, time_waiting: 0
+clock: 5622
+
+Proccess 116 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 116 ran for 15 in queue 2 and terminated.
+clock: 5637
+
+newProcessesAdded: 0
+New arrival: adding process 21 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 21 ran for 4 in queue 0, time_remaining: 39, time_waiting: 0
+clock: 5838
+
+Proccess 21 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 21 ran for 8 in queue 1, time_remaining: 31, time_waiting: 0
+clock: 5846
+
+Proccess 21 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 21 ran for 16 in queue 2, time_remaining: 15, time_waiting: 0
+clock: 5862
+
+Proccess 21 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 21 ran for 15 in queue 3 and terminated.
+clock: 5877
+
+newProcessesAdded: 0
+New arrival: adding process 133 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 133 ran for 4 in queue 0, time_remaining: 86, time_waiting: 0
+clock: 5942
+
+Proccess 133 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 133 ran for 8 in queue 1, time_remaining: 78, time_waiting: 0
+clock: 5950
+
+Proccess 133 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 133 ran for 16 in queue 2, time_remaining: 62, time_waiting: 0
+clock: 5966
+
+Proccess 133 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 133 ran for 62 in queue 3 and terminated.
+clock: 6028
+
+newProcessesAdded: 0
+New arrival: adding process 71 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 71 ran for 4 in queue 0, time_remaining: 55, time_waiting: 0
+clock: 6043
+
+Proccess 71 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 71 ran for 8 in queue 1, time_remaining: 47, time_waiting: 0
+clock: 6051
+
+Proccess 71 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 71 ran for 16 in queue 2, time_remaining: 31, time_waiting: 0
+clock: 6067
+
+Proccess 71 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 71 ran for 31 in queue 3 and terminated.
+clock: 6098
+
+newProcessesAdded: 0
+New arrival: adding process 135 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 135 ran for 4 in queue 0, time_remaining: 2, time_waiting: 0
+clock: 6121
+
+Proccess 135 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 135 ran for 2 in queue 1 and terminated.
+clock: 6123
+
+newProcessesAdded: 0
+New arrival: adding process 79 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 79 ran for 4 in queue 0, time_remaining: 58, time_waiting: 0
+clock: 6137
+
+Proccess 79 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 79 ran for 8 in queue 1, time_remaining: 50, time_waiting: 0
+clock: 6145
+
+Proccess 79 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 79 ran for 16 in queue 2, time_remaining: 34, time_waiting: 0
+clock: 6161
+
+Proccess 79 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 79 ran for 34 in queue 3 and terminated.
+clock: 6195
+
+New arrival: adding process 83 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 83 ran for 4 in queue 0, time_remaining: 26, time_waiting: 21
+clock: 6199
+
+Proccess 83 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 83 ran for 8 in queue 1, time_remaining: 18, time_waiting: 21
+clock: 6207
+
+Proccess 83 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 83 ran for 16 in queue 2, time_remaining: 2, time_waiting: 21
+clock: 6223
+
+Proccess 83 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 83 ran for 2 in queue 3 and terminated.
+clock: 6225
+
+newProcessesAdded: 0
+New arrival: adding process 11 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 11 ran for 4 in queue 0, time_remaining: 78, time_waiting: 0
+clock: 6249
+
+Proccess 11 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 11 ran for 8 in queue 1, time_remaining: 70, time_waiting: 0
+clock: 6257
+
+Proccess 11 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 126 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 126 ran for 4 in queue 0, time_remaining: 69, time_waiting: 2
+clock: 6261
+
+Added to age of process 11, now: 4
+Proccess 126 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 126 ran for 8 in queue 1, time_remaining: 61, time_waiting: 2
+clock: 6269
+
+Added to age of process 11, now: 12
+Proccess 126 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 11 ran for 16 in queue 2, time_remaining: 54, time_waiting: 12
+clock: 6285
+
+Added to age of process 126, now: 16
+Proccess 11 added to Queue 3: FCFS
+
+New arrival: adding process 4 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 4 ran for 4 in queue 0, time_remaining: 26, time_waiting: 15
+clock: 6289
+
+Added to age of process 126, now: 20
+Added to age of process 11, now: 16
+Proccess 4 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 4 ran for 8 in queue 1, time_remaining: 18, time_waiting: 15
+clock: 6297
+
+Added to age of process 126, now: 28
+Added to age of process 11, now: 24
+Proccess 4 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 29 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 29 ran for 4 in queue 0, time_remaining: 73, time_waiting: 4
+clock: 6301
+
+Added to age of process 126, now: 32
+Added to age of process 4, now: 4
+Added to age of process 11, now: 28
+Proccess 29 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 29 ran for 8 in queue 1, time_remaining: 65, time_waiting: 4
+clock: 6309
+
+Added to age of process 126, now: 40
+Added to age of process 4, now: 12
+Added to age of process 11, now: 36
+Proccess 29 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 126 ran for 16 in queue 2, time_remaining: 45, time_waiting: 42
+clock: 6325
+
+Added to age of process 4, now: 28
+Added to age of process 29, now: 16
+Added to age of process 11, now: 52
+Proccess 126 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 4 ran for 16 in queue 2, time_remaining: 2, time_waiting: 43
+clock: 6341
+
+Added to age of process 29, now: 32
+Added to age of process 11, now: 68
+Added to age of process 126, now: 56
+Proccess 4 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 29 ran for 16 in queue 2, time_remaining: 49, time_waiting: 36
+clock: 6357
+
+Added to age of process 11, now: 84
+Added to age of process 126, now: 72
+Added to age of process 4, now: 44
+Proccess 29 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 126, now: 126
+PROCESS 126 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 4, now: 98
+Added to age of process 29, now: 86
+****FCFS****
+Process 11 ran for 54 in queue 3 and terminated.
+clock: 6411
+
+New arrival: adding process 43 to first queue
+New arrival: adding process 32 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 43 ran for 4 in queue 0, time_remaining: 57, time_waiting: 6
+clock: 6415
+
+Added to age of process 126, now: 4
+Added to age of process 4, now: 102
+PROCESS 4 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 29, now: 90
+Proccess 43 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 32 ran for 4 in queue 0, time_remaining: 15, time_waiting: 9
+clock: 6419
+
+Added to age of process 126, now: 8
+Added to age of process 4, now: 4
+Added to age of process 29, now: 94
+Proccess 32 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 43 ran for 8 in queue 1, time_remaining: 49, time_waiting: 10
+clock: 6427
+
+Added to age of process 126, now: 16
+Added to age of process 4, now: 12
+Added to age of process 29, now: 102
+PROCESS 29 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 43 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 32 ran for 8 in queue 1, time_remaining: 7, time_waiting: 17
+clock: 6435
+
+Added to age of process 126, now: 24
+Added to age of process 4, now: 20
+Added to age of process 29, now: 8
+Added to age of process 43, now: 8
+Proccess 32 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 15 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 15 ran for 4 in queue 0, time_remaining: 7, time_waiting: 6
+clock: 6439
+
+Added to age of process 126, now: 28
+Added to age of process 4, now: 24
+Added to age of process 29, now: 12
+Added to age of process 43, now: 12
+Added to age of process 32, now: 4
+Proccess 15 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 15 ran for 7 in queue 1 and terminated.
+clock: 6446
+
+Added to age of process 126, now: 35
+Added to age of process 4, now: 31
+Added to age of process 29, now: 19
+Added to age of process 43, now: 19
+Added to age of process 32, now: 11
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 126 ran for 16 in queue 2, time_remaining: 29, time_waiting: 163
+clock: 6462
+
+Added to age of process 4, now: 47
+Added to age of process 29, now: 35
+Added to age of process 43, now: 35
+Added to age of process 32, now: 27
+Proccess 126 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 4 ran for 2 in queue 2 and terminated.
+clock: 6464
+
+Added to age of process 29, now: 37
+Added to age of process 43, now: 37
+Added to age of process 32, now: 29
+Added to age of process 126, now: 37
+newProcessesAdded: 0
+Proccess 29 ran for 16 in queue 2, time_remaining: 33, time_waiting: 143
+clock: 6480
+
+Added to age of process 43, now: 53
+Added to age of process 32, now: 45
+Added to age of process 126, now: 53
+Proccess 29 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 43 ran for 16 in queue 2, time_remaining: 33, time_waiting: 63
+clock: 6496
+
+Added to age of process 32, now: 61
+Added to age of process 126, now: 69
+Added to age of process 29, now: 53
+Proccess 43 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 32 ran for 7 in queue 2 and terminated.
+clock: 6503
+
+Added to age of process 126, now: 76
+Added to age of process 29, now: 60
+Added to age of process 43, now: 60
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 29, now: 89
+Added to age of process 43, now: 89
+****FCFS****
+Process 126 ran for 29 in queue 3 and terminated.
+clock: 6532
+
+newProcessesAdded: 0
+Added to age of process 43, now: 122
+PROCESS 43 AGED TO QUEUE 2: Time Quantum = 16
+****FCFS****
+Process 29 ran for 33 in queue 3 and terminated.
+clock: 6565
+
+New arrival: adding process 107 to first queue
+New arrival: adding process 146 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 107 ran for 4 in queue 0, time_remaining: 57, time_waiting: 30
+clock: 6569
+
+Added to age of process 43, now: 4
+Proccess 107 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 146 ran for 4 in queue 0, time_remaining: 89, time_waiting: 21
+clock: 6573
+
+Added to age of process 43, now: 8
+Proccess 146 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 107 ran for 8 in queue 1, time_remaining: 49, time_waiting: 34
+clock: 6581
+
+Added to age of process 43, now: 16
+Proccess 107 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 146 ran for 8 in queue 1, time_remaining: 81, time_waiting: 29
+clock: 6589
+
+Added to age of process 43, now: 24
+Added to age of process 107, now: 8
+Proccess 146 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 43 ran for 16 in queue 2, time_remaining: 17, time_waiting: 156
+clock: 6605
+
+Added to age of process 107, now: 24
+Added to age of process 146, now: 16
+Proccess 43 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 107 ran for 16 in queue 2, time_remaining: 33, time_waiting: 58
+clock: 6621
+
+Added to age of process 146, now: 32
+Added to age of process 43, now: 40
+Proccess 107 added to Queue 3: FCFS
+
+New arrival: adding process 142 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 142 ran for 4 in queue 0, time_remaining: 5, time_waiting: 4
+clock: 6625
+
+Added to age of process 146, now: 36
+Added to age of process 43, now: 44
+Added to age of process 107, now: 28
+Proccess 142 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 142 ran for 5 in queue 1 and terminated.
+clock: 6630
+
+Added to age of process 146, now: 41
+Added to age of process 43, now: 49
+Added to age of process 107, now: 33
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 146 ran for 16 in queue 2, time_remaining: 65, time_waiting: 70
+clock: 6646
+
+Added to age of process 43, now: 65
+Added to age of process 107, now: 49
+Proccess 146 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 107, now: 66
+Added to age of process 146, now: 58
+****FCFS****
+Process 43 ran for 17 in queue 3 and terminated.
+clock: 6663
+
+New arrival: adding process 120 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 120 ran for 4 in queue 0, time_remaining: 14, time_waiting: 1
+clock: 6667
+
+Added to age of process 107, now: 70
+Added to age of process 146, now: 62
+Proccess 120 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 120 ran for 8 in queue 1, time_remaining: 6, time_waiting: 1
+clock: 6675
+
+Added to age of process 107, now: 78
+Added to age of process 146, now: 70
+Proccess 120 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 120 ran for 6 in queue 2 and terminated.
+clock: 6681
+
+Added to age of process 107, now: 84
+Added to age of process 146, now: 76
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 146, now: 109
+PROCESS 146 AGED TO QUEUE 2: Time Quantum = 16
+****FCFS****
+Process 107 ran for 33 in queue 3 and terminated.
+clock: 6714
+
+New arrival: adding process 46 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 46 ran for 4 in queue 0, time_remaining: 89, time_waiting: 5
+clock: 6718
+
+Added to age of process 146, now: 4
+Proccess 46 added to Queue 1: Time Quantum = 8
+
+New arrival: adding process 27 to first queue
+New arrival: adding process 78 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 27 ran for 4 in queue 0, time_remaining: 65, time_waiting: 0
+clock: 6722
+
+Added to age of process 146, now: 8
+Proccess 27 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 78 ran for 4 in queue 0, time_remaining: 78, time_waiting: 4
+clock: 6726
+
+Added to age of process 146, now: 12
+Proccess 78 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 46 ran for 8 in queue 1, time_remaining: 81, time_waiting: 13
+clock: 6734
+
+Added to age of process 146, now: 20
+Proccess 46 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 27 ran for 8 in queue 1, time_remaining: 57, time_waiting: 12
+clock: 6742
+
+Added to age of process 146, now: 28
+Added to age of process 46, now: 8
+Proccess 27 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 78 ran for 8 in queue 1, time_remaining: 70, time_waiting: 20
+clock: 6750
+
+Added to age of process 146, now: 36
+Added to age of process 46, now: 16
+Added to age of process 27, now: 8
+Proccess 78 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 146 ran for 16 in queue 2, time_remaining: 49, time_waiting: 174
+clock: 6766
+
+Added to age of process 46, now: 32
+Added to age of process 27, now: 24
+Added to age of process 78, now: 16
+Proccess 146 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 46 ran for 16 in queue 2, time_remaining: 65, time_waiting: 45
+clock: 6782
+
+Added to age of process 27, now: 40
+Added to age of process 78, now: 32
+Added to age of process 146, now: 52
+Proccess 46 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 27 ran for 16 in queue 2, time_remaining: 41, time_waiting: 52
+clock: 6798
+
+Added to age of process 78, now: 48
+Added to age of process 146, now: 68
+Added to age of process 46, now: 48
+Proccess 27 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 78 ran for 16 in queue 2, time_remaining: 54, time_waiting: 68
+clock: 6814
+
+Added to age of process 146, now: 84
+Added to age of process 46, now: 64
+Added to age of process 27, now: 56
+Proccess 78 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 46, now: 113
+PROCESS 46 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 27, now: 105
+PROCESS 27 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 78, now: 97
+****FCFS****
+Process 146 ran for 49 in queue 3 and terminated.
+clock: 6863
+
+New arrival: adding process 117 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 117 ran for 4 in queue 0, time_remaining: 14, time_waiting: 16
+clock: 6867
+
+Added to age of process 46, now: 4
+Added to age of process 27, now: 4
+Added to age of process 78, now: 101
+PROCESS 78 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 117 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 117 ran for 8 in queue 1, time_remaining: 6, time_waiting: 16
+clock: 6875
+
+Added to age of process 46, now: 12
+Added to age of process 27, now: 12
+Added to age of process 78, now: 8
+Proccess 117 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 46 ran for 16 in queue 2, time_remaining: 49, time_waiting: 138
+clock: 6891
+
+Added to age of process 27, now: 28
+Added to age of process 78, now: 24
+Added to age of process 117, now: 16
+Proccess 46 added to Queue 3: FCFS
+
+New arrival: adding process 66 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 66 ran for 4 in queue 0, time_remaining: 22, time_waiting: 8
+clock: 6895
+
+Added to age of process 27, now: 32
+Added to age of process 78, now: 28
+Added to age of process 117, now: 20
+Added to age of process 46, now: 16
+Proccess 66 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 66 ran for 8 in queue 1, time_remaining: 14, time_waiting: 8
+clock: 6903
+
+Added to age of process 27, now: 40
+Added to age of process 78, now: 36
+Added to age of process 117, now: 28
+Added to age of process 46, now: 24
+Proccess 66 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 27 ran for 16 in queue 2, time_remaining: 25, time_waiting: 157
+clock: 6919
+
+Added to age of process 78, now: 52
+Added to age of process 117, now: 44
+Added to age of process 66, now: 16
+Added to age of process 46, now: 40
+Proccess 27 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 78 ran for 16 in queue 2, time_remaining: 38, time_waiting: 173
+clock: 6935
+
+Added to age of process 117, now: 60
+Added to age of process 66, now: 32
+Added to age of process 46, now: 56
+Added to age of process 27, now: 56
+Proccess 78 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 117 ran for 6 in queue 2 and terminated.
+clock: 6941
+
+Added to age of process 66, now: 38
+Added to age of process 46, now: 62
+Added to age of process 27, now: 62
+Added to age of process 78, now: 58
+newProcessesAdded: 0
+Process 66 ran for 14 in queue 2 and terminated.
+clock: 6955
+
+Added to age of process 46, now: 76
+Added to age of process 27, now: 76
+Added to age of process 78, now: 72
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 27, now: 125
+PROCESS 27 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 78, now: 121
+PROCESS 78 AGED TO QUEUE 2: Time Quantum = 16
+****FCFS****
+Process 46 ran for 49 in queue 3 and terminated.
+clock: 7004
+
+New arrival: adding process 61 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 61 ran for 4 in queue 0, time_remaining: 42, time_waiting: 43
+clock: 7008
+
+Added to age of process 27, now: 4
+Added to age of process 78, now: 4
+Proccess 61 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 61 ran for 8 in queue 1, time_remaining: 34, time_waiting: 43
+clock: 7016
+
+Added to age of process 27, now: 12
+Added to age of process 78, now: 12
+Proccess 61 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 27 ran for 16 in queue 2, time_remaining: 9, time_waiting: 254
+clock: 7032
+
+Added to age of process 78, now: 28
+Added to age of process 61, now: 16
+Proccess 27 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 78 ran for 16 in queue 2, time_remaining: 22, time_waiting: 270
+clock: 7048
+
+Added to age of process 61, now: 32
+Added to age of process 27, now: 28
+Proccess 78 added to Queue 3: FCFS
+
+New arrival: adding process 19 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 19 ran for 4 in queue 0, time_remaining: 42, time_waiting: 5
+clock: 7052
+
+Added to age of process 61, now: 36
+Added to age of process 27, now: 32
+Added to age of process 78, now: 32
+Proccess 19 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 19 ran for 8 in queue 1, time_remaining: 34, time_waiting: 5
+clock: 7060
+
+Added to age of process 61, now: 44
+Added to age of process 27, now: 40
+Added to age of process 78, now: 40
+Proccess 19 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 61 ran for 16 in queue 2, time_remaining: 18, time_waiting: 87
+clock: 7076
+
+Added to age of process 19, now: 16
+Added to age of process 27, now: 56
+Added to age of process 78, now: 56
+Proccess 61 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 19 ran for 16 in queue 2, time_remaining: 18, time_waiting: 21
+clock: 7092
+
+Added to age of process 27, now: 72
+Added to age of process 78, now: 72
+Added to age of process 61, now: 60
+Proccess 19 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 78, now: 81
+Added to age of process 61, now: 69
+Added to age of process 19, now: 25
+****FCFS****
+Process 27 ran for 9 in queue 3 and terminated.
+clock: 7101
+
+newProcessesAdded: 0
+Added to age of process 61, now: 91
+Added to age of process 19, now: 47
+****FCFS****
+Process 78 ran for 22 in queue 3 and terminated.
+clock: 7123
+
+newProcessesAdded: 0
+Added to age of process 19, now: 65
+****FCFS****
+Process 61 ran for 18 in queue 3 and terminated.
+clock: 7141
+
+newProcessesAdded: 0
+****FCFS****
+Process 19 ran for 18 in queue 3 and terminated.
+clock: 7159
+
+New arrival: adding process 57 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 57 ran for 4 in queue 0, time_remaining: 59, time_waiting: 11
+clock: 7163
+
+Proccess 57 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 57 ran for 8 in queue 1, time_remaining: 51, time_waiting: 11
+clock: 7171
+
+Proccess 57 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 57 ran for 16 in queue 2, time_remaining: 35, time_waiting: 11
+clock: 7187
+
+Proccess 57 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 57 ran for 35 in queue 3 and terminated.
+clock: 7222
+
+newProcessesAdded: 0
+New arrival: adding process 84 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 84 ran for 4 in queue 0, time_remaining: 69, time_waiting: 0
+clock: 7233
+
+Proccess 84 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 84 ran for 8 in queue 1, time_remaining: 61, time_waiting: 0
+clock: 7241
+
+Proccess 84 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 128 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 128 ran for 4 in queue 0, time_remaining: 81, time_waiting: 0
+clock: 7245
+
+Added to age of process 84, now: 4
+Proccess 128 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 128 ran for 8 in queue 1, time_remaining: 73, time_waiting: 0
+clock: 7253
+
+Added to age of process 84, now: 12
+Proccess 128 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 84 ran for 16 in queue 2, time_remaining: 45, time_waiting: 12
+clock: 7269
+
+Added to age of process 128, now: 16
+Proccess 84 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 128 ran for 16 in queue 2, time_remaining: 57, time_waiting: 16
+clock: 7285
+
+Added to age of process 84, now: 28
+Proccess 128 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 128, now: 61
+****FCFS****
+Process 84 ran for 45 in queue 3 and terminated.
+clock: 7330
+
+New arrival: adding process 106 to first queue
+New arrival: adding process 25 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 106 ran for 4 in queue 0, time_remaining: 35, time_waiting: 36
+clock: 7334
+
+Added to age of process 128, now: 65
+Proccess 106 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 25 ran for 4 in queue 0, time_remaining: 71, time_waiting: 7
+clock: 7338
+
+Added to age of process 128, now: 69
+Proccess 25 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 106 ran for 8 in queue 1, time_remaining: 27, time_waiting: 40
+clock: 7346
+
+Added to age of process 128, now: 77
+Proccess 106 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 25 ran for 8 in queue 1, time_remaining: 63, time_waiting: 15
+clock: 7354
+
+Added to age of process 106, now: 8
+Added to age of process 128, now: 85
+Proccess 25 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 106 ran for 16 in queue 2, time_remaining: 11, time_waiting: 48
+clock: 7370
+
+Added to age of process 25, now: 16
+Added to age of process 128, now: 101
+PROCESS 128 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 106 added to Queue 3: FCFS
+
+New arrival: adding process 5 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 5 ran for 3 in queue 0 and terminated.
+clock: 7373
+
+Added to age of process 25, now: 19
+Added to age of process 128, now: 3
+Added to age of process 106, now: 11
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 25 ran for 16 in queue 2, time_remaining: 47, time_waiting: 34
+clock: 7389
+
+Added to age of process 128, now: 19
+Added to age of process 106, now: 27
+Proccess 25 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 128 ran for 16 in queue 2, time_remaining: 41, time_waiting: 120
+clock: 7405
+
+Added to age of process 106, now: 43
+Added to age of process 25, now: 35
+Proccess 128 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 25, now: 46
+Added to age of process 128, now: 30
+****FCFS****
+Process 106 ran for 11 in queue 3 and terminated.
+clock: 7416
+
+newProcessesAdded: 0
+Added to age of process 128, now: 77
+****FCFS****
+Process 25 ran for 47 in queue 3 and terminated.
+clock: 7463
+
+New arrival: adding process 67 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 67 ran for 4 in queue 0, time_remaining: 21, time_waiting: 41
+clock: 7467
+
+Added to age of process 128, now: 81
+Proccess 67 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 67 ran for 8 in queue 1, time_remaining: 13, time_waiting: 41
+clock: 7475
+
+Added to age of process 128, now: 89
+Proccess 67 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 67 ran for 13 in queue 2 and terminated.
+clock: 7488
+
+Added to age of process 128, now: 102
+PROCESS 128 AGED TO QUEUE 2: Time Quantum = 16
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 128 ran for 16 in queue 2, time_remaining: 25, time_waiting: 203
+clock: 7504
+
+Proccess 128 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 128 ran for 25 in queue 3 and terminated.
+clock: 7529
+
+newProcessesAdded: 0
+New arrival: adding process 150 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 150 ran for 4 in queue 0, time_remaining: 57, time_waiting: 0
+clock: 7556
+
+Proccess 150 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 150 ran for 8 in queue 1, time_remaining: 49, time_waiting: 0
+clock: 7564
+
+Proccess 150 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 150 ran for 16 in queue 2, time_remaining: 33, time_waiting: 0
+clock: 7580
+
+Proccess 150 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 150 ran for 33 in queue 3 and terminated.
+clock: 7613
+
+newProcessesAdded: 0
+New arrival: adding process 35 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 35 ran for 4 in queue 0, time_remaining: 13, time_waiting: 0
+clock: 7785
+
+Proccess 35 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 35 ran for 8 in queue 1, time_remaining: 5, time_waiting: 0
+clock: 7793
+
+Proccess 35 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 35 ran for 5 in queue 2 and terminated.
+clock: 7798
+
+newProcessesAdded: 0
+New arrival: adding process 6 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 6 ran for 4 in queue 0, time_remaining: 16, time_waiting: 0
+clock: 7811
+
+Proccess 6 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 6 ran for 8 in queue 1, time_remaining: 8, time_waiting: 0
+clock: 7819
+
+Proccess 6 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 6 ran for 8 in queue 2 and terminated.
+clock: 7827
+
+newProcessesAdded: 0
+New arrival: adding process 60 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 60 ran for 4 in queue 0, time_remaining: 27, time_waiting: 0
+clock: 8027
+
+Proccess 60 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 60 ran for 8 in queue 1, time_remaining: 19, time_waiting: 0
+clock: 8035
+
+Proccess 60 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 101 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 101 ran for 4 in queue 0, time_remaining: 17, time_waiting: 4
+clock: 8039
+
+Added to age of process 60, now: 4
+Proccess 101 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 101 ran for 8 in queue 1, time_remaining: 9, time_waiting: 4
+clock: 8047
+
+Added to age of process 60, now: 12
+Proccess 101 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 53 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 53 ran for 4 in queue 0, time_remaining: 17, time_waiting: 4
+clock: 8051
+
+Added to age of process 60, now: 16
+Added to age of process 101, now: 4
+Proccess 53 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 53 ran for 8 in queue 1, time_remaining: 9, time_waiting: 4
+clock: 8059
+
+Added to age of process 60, now: 24
+Added to age of process 101, now: 12
+Proccess 53 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 60 ran for 16 in queue 2, time_remaining: 3, time_waiting: 24
+clock: 8075
+
+Added to age of process 101, now: 28
+Added to age of process 53, now: 16
+Proccess 60 added to Queue 3: FCFS
+
+New arrival: adding process 10 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 10 ran for 4 in queue 0, time_remaining: 13, time_waiting: 12
+clock: 8079
+
+Added to age of process 101, now: 32
+Added to age of process 53, now: 20
+Added to age of process 60, now: 28
+Proccess 10 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 10 ran for 8 in queue 1, time_remaining: 5, time_waiting: 12
+clock: 8087
+
+Added to age of process 101, now: 40
+Added to age of process 53, now: 28
+Added to age of process 60, now: 36
+Proccess 10 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 101 ran for 9 in queue 2 and terminated.
+clock: 8096
+
+Added to age of process 53, now: 37
+Added to age of process 10, now: 9
+Added to age of process 60, now: 45
+newProcessesAdded: 0
+Process 53 ran for 9 in queue 2 and terminated.
+clock: 8105
+
+Added to age of process 10, now: 18
+Added to age of process 60, now: 54
+newProcessesAdded: 0
+Process 10 ran for 5 in queue 2 and terminated.
+clock: 8110
+
+Added to age of process 60, now: 59
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 60 ran for 3 in queue 3 and terminated.
+clock: 8113
+
+newProcessesAdded: 0
+New arrival: adding process 80 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 80 ran for 4 in queue 0, time_remaining: 45, time_waiting: 0
+clock: 8147
+
+Proccess 80 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 80 ran for 8 in queue 1, time_remaining: 37, time_waiting: 0
+clock: 8155
+
+Proccess 80 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 80 ran for 16 in queue 2, time_remaining: 21, time_waiting: 0
+clock: 8171
+
+Proccess 80 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 80 ran for 21 in queue 3 and terminated.
+clock: 8192
+
+newProcessesAdded: 0
+New arrival: adding process 63 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 63 ran for 4 in queue 0, time_remaining: 68, time_waiting: 0
+clock: 8303
+
+Proccess 63 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 63 ran for 8 in queue 1, time_remaining: 60, time_waiting: 0
+clock: 8311
+
+Proccess 63 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 63 ran for 16 in queue 2, time_remaining: 44, time_waiting: 0
+clock: 8327
+
+Proccess 63 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 63 ran for 44 in queue 3 and terminated.
+clock: 8371
+
+newProcessesAdded: 0
+New arrival: adding process 88 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 88 ran for 4 in queue 0, time_remaining: 45, time_waiting: 0
+clock: 8394
+
+Proccess 88 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 88 ran for 8 in queue 1, time_remaining: 37, time_waiting: 0
+clock: 8402
+
+Proccess 88 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 88 ran for 16 in queue 2, time_remaining: 21, time_waiting: 0
+clock: 8418
+
+Proccess 88 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 88 ran for 21 in queue 3 and terminated.
+clock: 8439
+
+newProcessesAdded: 0
+New arrival: adding process 137 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 137 ran for 4 in queue 0, time_remaining: 6, time_waiting: 0
+clock: 8452
+
+Proccess 137 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Process 137 ran for 6 in queue 1 and terminated.
+clock: 8458
+
+newProcessesAdded: 0
+New arrival: adding process 86 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 86 ran for 4 in queue 0, time_remaining: 90, time_waiting: 0
+clock: 8478
+
+Proccess 86 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 86 ran for 8 in queue 1, time_remaining: 82, time_waiting: 0
+clock: 8486
+
+Proccess 86 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 86 ran for 16 in queue 2, time_remaining: 66, time_waiting: 0
+clock: 8502
+
+Proccess 86 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 86 ran for 66 in queue 3 and terminated.
+clock: 8568
+
+New arrival: adding process 34 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 34 ran for 4 in queue 0, time_remaining: 9, time_waiting: 63
+clock: 8572
+
+Proccess 34 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 34 ran for 8 in queue 1, time_remaining: 1, time_waiting: 63
+clock: 8580
+
+Proccess 34 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 34 ran for 1 in queue 2 and terminated.
+clock: 8581
+
+newProcessesAdded: 0
+New arrival: adding process 39 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 39 ran for 4 in queue 0, time_remaining: 89, time_waiting: 0
+clock: 8676
+
+Proccess 39 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 39 ran for 8 in queue 1, time_remaining: 81, time_waiting: 0
+clock: 8684
+
+Proccess 39 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 39 ran for 16 in queue 2, time_remaining: 65, time_waiting: 0
+clock: 8700
+
+Proccess 39 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 39 ran for 65 in queue 3 and terminated.
+clock: 8765
+
+New arrival: adding process 99 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 99 ran for 4 in queue 0, time_remaining: 60, time_waiting: 50
+clock: 8769
+
+Proccess 99 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 99 ran for 8 in queue 1, time_remaining: 52, time_waiting: 50
+clock: 8777
+
+Proccess 99 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 99 ran for 16 in queue 2, time_remaining: 36, time_waiting: 50
+clock: 8793
+
+Proccess 99 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 99 ran for 36 in queue 3 and terminated.
+clock: 8829
+
+New arrival: adding process 114 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 114 ran for 4 in queue 0, time_remaining: 92, time_waiting: 24
+clock: 8833
+
+Proccess 114 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 114 ran for 8 in queue 1, time_remaining: 84, time_waiting: 24
+clock: 8841
+
+Proccess 114 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 114 ran for 16 in queue 2, time_remaining: 68, time_waiting: 24
+clock: 8857
+
+Proccess 114 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 114 ran for 68 in queue 3 and terminated.
+clock: 8925
+
+newProcessesAdded: 0
+New arrival: adding process 104 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 104 ran for 4 in queue 0, time_remaining: 10, time_waiting: 0
+clock: 8952
+
+Proccess 104 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 104 ran for 8 in queue 1, time_remaining: 2, time_waiting: 0
+clock: 8960
+
+Proccess 104 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 104 ran for 2 in queue 2 and terminated.
+clock: 8962
+
+newProcessesAdded: 0
+New arrival: adding process 23 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 23 ran for 4 in queue 0, time_remaining: 69, time_waiting: 0
+clock: 9021
+
+Proccess 23 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 23 ran for 8 in queue 1, time_remaining: 61, time_waiting: 0
+clock: 9029
+
+Proccess 23 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 23 ran for 16 in queue 2, time_remaining: 45, time_waiting: 0
+clock: 9045
+
+Proccess 23 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 23 ran for 45 in queue 3 and terminated.
+clock: 9090
+
+newProcessesAdded: 0
+New arrival: adding process 38 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 38 ran for 4 in queue 0, time_remaining: 81, time_waiting: 0
+clock: 9188
+
+Proccess 38 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 38 ran for 8 in queue 1, time_remaining: 73, time_waiting: 0
+clock: 9196
+
+Proccess 38 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 38 ran for 16 in queue 2, time_remaining: 57, time_waiting: 0
+clock: 9212
+
+Proccess 38 added to Queue 3: FCFS
+
+New arrival: adding process 73 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 73 ran for 4 in queue 0, time_remaining: 29, time_waiting: 15
+clock: 9216
+
+Added to age of process 38, now: 4
+Proccess 73 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 73 ran for 8 in queue 1, time_remaining: 21, time_waiting: 15
+clock: 9224
+
+Added to age of process 38, now: 12
+Proccess 73 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 118 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 118 ran for 4 in queue 0, time_remaining: 17, time_waiting: 5
+clock: 9228
+
+Added to age of process 73, now: 4
+Added to age of process 38, now: 16
+Proccess 118 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 118 ran for 8 in queue 1, time_remaining: 9, time_waiting: 5
+clock: 9236
+
+Added to age of process 73, now: 12
+Added to age of process 38, now: 24
+Proccess 118 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 73 ran for 16 in queue 2, time_remaining: 5, time_waiting: 27
+clock: 9252
+
+Added to age of process 118, now: 16
+Added to age of process 38, now: 40
+Proccess 73 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 118 ran for 9 in queue 2 and terminated.
+clock: 9261
+
+Added to age of process 38, now: 49
+Added to age of process 73, now: 21
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 73, now: 78
+****FCFS****
+Process 38 ran for 57 in queue 3 and terminated.
+clock: 9318
+
+New arrival: adding process 17 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 17 ran for 4 in queue 0, time_remaining: 96, time_waiting: 6
+clock: 9322
+
+Added to age of process 73, now: 82
+Proccess 17 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 17 ran for 8 in queue 1, time_remaining: 88, time_waiting: 6
+clock: 9330
+
+Added to age of process 73, now: 90
+Proccess 17 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 17 ran for 16 in queue 2, time_remaining: 72, time_waiting: 6
+clock: 9346
+
+Added to age of process 73, now: 106
+PROCESS 73 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 17 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 73 ran for 5 in queue 2 and terminated.
+clock: 9351
+
+Added to age of process 17, now: 5
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 17 ran for 72 in queue 3 and terminated.
+clock: 9423
+
+newProcessesAdded: 0
+New arrival: adding process 95 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 95 ran for 4 in queue 0, time_remaining: 9, time_waiting: 0
+clock: 9446
+
+Proccess 95 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 95 ran for 8 in queue 1, time_remaining: 1, time_waiting: 0
+clock: 9454
+
+Proccess 95 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 95 ran for 1 in queue 2 and terminated.
+clock: 9455
+
+newProcessesAdded: 0
+New arrival: adding process 145 to first queue
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 145 ran for 4 in queue 0, time_remaining: 78, time_waiting: 0
+clock: 9523
+
+Proccess 145 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 145 ran for 8 in queue 1, time_remaining: 70, time_waiting: 0
+clock: 9531
+
+Proccess 145 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 115 to first queue
+New arrival: adding process 51 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 115 ran for 4 in queue 0, time_remaining: 11, time_waiting: 7
+clock: 9535
+
+Added to age of process 145, now: 4
+Proccess 115 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Process 51 ran for 2 in queue 0 and terminated.
+clock: 9537
+
+Added to age of process 145, now: 6
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 115 ran for 8 in queue 1, time_remaining: 3, time_waiting: 9
+clock: 9545
+
+Added to age of process 145, now: 14
+Proccess 115 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 145 ran for 16 in queue 2, time_remaining: 54, time_waiting: 14
+clock: 9561
+
+Added to age of process 115, now: 16
+Proccess 145 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Process 115 ran for 3 in queue 2 and terminated.
+clock: 9564
+
+Added to age of process 145, now: 17
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+****FCFS****
+Process 145 ran for 54 in queue 3 and terminated.
+clock: 9618
+
+New arrival: adding process 30 to first queue
+New arrival: adding process 102 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 30 ran for 4 in queue 0, time_remaining: 22, time_waiting: 53
+clock: 9622
+
+Proccess 30 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+Proccess 102 ran for 4 in queue 0, time_remaining: 65, time_waiting: 14
+clock: 9626
+
+Proccess 102 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 30 ran for 8 in queue 1, time_remaining: 14, time_waiting: 57
+clock: 9634
+
+Proccess 30 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 48 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 48 ran for 4 in queue 0, time_remaining: 40, time_waiting: 4
+clock: 9638
+
+Added to age of process 30, now: 4
+Proccess 48 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 102 ran for 8 in queue 1, time_remaining: 57, time_waiting: 26
+clock: 9646
+
+Added to age of process 30, now: 12
+Proccess 102 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+Proccess 48 ran for 8 in queue 1, time_remaining: 32, time_waiting: 12
+clock: 9654
+
+Added to age of process 30, now: 20
+Added to age of process 102, now: 8
+Proccess 48 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 30 ran for 14 in queue 2 and terminated.
+clock: 9668
+
+Added to age of process 102, now: 22
+Added to age of process 48, now: 14
+newProcessesAdded: 0
+Proccess 102 ran for 16 in queue 2, time_remaining: 41, time_waiting: 48
+clock: 9684
+
+Added to age of process 48, now: 30
+Proccess 102 added to Queue 3: FCFS
+
+New arrival: adding process 136 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 136 ran for 4 in queue 0, time_remaining: 68, time_waiting: 10
+clock: 9688
+
+Added to age of process 48, now: 34
+Added to age of process 102, now: 26
+Proccess 136 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 136 ran for 8 in queue 1, time_remaining: 60, time_waiting: 10
+clock: 9696
+
+Added to age of process 48, now: 42
+Added to age of process 102, now: 34
+Proccess 136 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 48 ran for 16 in queue 2, time_remaining: 16, time_waiting: 54
+clock: 9712
+
+Added to age of process 136, now: 16
+Added to age of process 102, now: 50
+Proccess 48 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 136 ran for 16 in queue 2, time_remaining: 44, time_waiting: 26
+clock: 9728
+
+Added to age of process 102, now: 66
+Added to age of process 48, now: 58
+Proccess 136 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 48, now: 99
+Added to age of process 136, now: 57
+****FCFS****
+Process 102 ran for 41 in queue 3 and terminated.
+clock: 9769
+
+newProcessesAdded: 0
+Added to age of process 136, now: 73
+****FCFS****
+Process 48 ran for 16 in queue 3 and terminated.
+clock: 9785
+
+New arrival: adding process 70 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 70 ran for 4 in queue 0, time_remaining: 35, time_waiting: 7
+clock: 9789
+
+Added to age of process 136, now: 77
+Proccess 70 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 70 ran for 8 in queue 1, time_remaining: 27, time_waiting: 7
+clock: 9797
+
+Added to age of process 136, now: 85
+Proccess 70 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 70 ran for 16 in queue 2, time_remaining: 11, time_waiting: 7
+clock: 9813
+
+Added to age of process 136, now: 101
+PROCESS 136 AGED TO QUEUE 2: Time Quantum = 16
+Proccess 70 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 136 ran for 16 in queue 2, time_remaining: 28, time_waiting: 111
+clock: 9829
+
+Added to age of process 70, now: 16
+Proccess 136 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 136, now: 11
+****FCFS****
+Process 70 ran for 11 in queue 3 and terminated.
+clock: 9840
+
+newProcessesAdded: 0
+****FCFS****
+Process 136 ran for 28 in queue 3 and terminated.
+clock: 9868
+
+New arrival: adding process 59 to first queue
+New arrival: adding process 123 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Process 59 ran for 3 in queue 0 and terminated.
+clock: 9871
+
+newProcessesAdded: 0
+Proccess 123 ran for 4 in queue 0, time_remaining: 14, time_waiting: 8
+clock: 9875
+
+Proccess 123 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 123 ran for 8 in queue 1, time_remaining: 6, time_waiting: 8
+clock: 9883
+
+Proccess 123 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 36 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 36 ran for 4 in queue 0, time_remaining: 74, time_waiting: 2
+clock: 9887
+
+Added to age of process 123, now: 4
+Proccess 36 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 36 ran for 8 in queue 1, time_remaining: 66, time_waiting: 2
+clock: 9895
+
+Added to age of process 123, now: 12
+Proccess 36 added to Queue 2: Time Quantum = 16
+
+New arrival: adding process 12 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 12 ran for 4 in queue 0, time_remaining: 39, time_waiting: 7
+clock: 9899
+
+Added to age of process 123, now: 16
+Added to age of process 36, now: 4
+Proccess 12 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 12 ran for 8 in queue 1, time_remaining: 31, time_waiting: 7
+clock: 9907
+
+Added to age of process 123, now: 24
+Added to age of process 36, now: 12
+Proccess 12 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 123 ran for 6 in queue 2 and terminated.
+clock: 9913
+
+Added to age of process 36, now: 18
+Added to age of process 12, now: 6
+newProcessesAdded: 0
+Proccess 36 ran for 16 in queue 2, time_remaining: 50, time_waiting: 20
+clock: 9929
+
+Added to age of process 12, now: 22
+Proccess 36 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+Proccess 12 ran for 16 in queue 2, time_remaining: 15, time_waiting: 29
+clock: 9945
+
+Added to age of process 36, now: 34
+Proccess 12 added to Queue 3: FCFS
+
+New arrival: adding process 18 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 18 ran for 4 in queue 0, time_remaining: 45, time_waiting: 11
+clock: 9949
+
+Added to age of process 36, now: 38
+Added to age of process 12, now: 26
+Proccess 18 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 18 ran for 8 in queue 1, time_remaining: 37, time_waiting: 11
+clock: 9957
+
+Added to age of process 36, now: 46
+Added to age of process 12, now: 34
+Proccess 18 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Proccess 18 ran for 16 in queue 2, time_remaining: 21, time_waiting: 11
+clock: 9973
+
+Added to age of process 36, now: 62
+Added to age of process 12, now: 50
+Proccess 18 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 12, now: 100
+Added to age of process 18, now: 50
+****FCFS****
+Process 36 ran for 50 in queue 3 and terminated.
+clock: 10023
+
+New arrival: adding process 85 to first queue
+newProcessesAdded: 1
+New process added. Moving to Queue 0.
+**
+Currently running in queue 0: Time Quantum = 4
+**
+
+Proccess 85 ran for 4 in queue 0, time_remaining: 96, time_waiting: 25
+clock: 10027
+
+Added to age of process 12, now: 104
+PROCESS 12 AGED TO QUEUE 2: Time Quantum = 16
+Added to age of process 18, now: 54
+Proccess 85 added to Queue 1: Time Quantum = 8
+
+newProcessesAdded: 0
+**
+Currently running in queue 1: Time Quantum = 8
+**
+
+Proccess 85 ran for 8 in queue 1, time_remaining: 88, time_waiting: 25
+clock: 10035
+
+Added to age of process 12, now: 8
+Added to age of process 18, now: 62
+Proccess 85 added to Queue 2: Time Quantum = 16
+
+newProcessesAdded: 0
+**
+Currently running in queue 2: Time Quantum = 16
+**
+
+Process 12 ran for 15 in queue 2 and terminated.
+clock: 10050
+
+Added to age of process 85, now: 15
+Added to age of process 18, now: 77
+newProcessesAdded: 0
+Proccess 85 ran for 16 in queue 2, time_remaining: 72, time_waiting: 40
+clock: 10066
+
+Added to age of process 18, now: 93
+Proccess 85 added to Queue 3: FCFS
+
+newProcessesAdded: 0
+**
+Currently running in queue 3: FCFS
+**
+
+Added to age of process 85, now: 36
+****FCFS****
+Process 18 ran for 21 in queue 3 and terminated.
+clock: 10087
+
+newProcessesAdded: 0
+****FCFS****
+Process 85 ran for 72 in queue 3 and terminated.
+clock: 10159
+
+newProcessesAdded: 0
+Average wait time: 65.9595
+
+Average turnaround time: 115.007
+

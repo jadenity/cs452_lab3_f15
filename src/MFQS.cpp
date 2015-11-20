@@ -67,7 +67,7 @@ void MFQS::run() {
 
                     // The difference between this clock tick and the end of
                     // its last run session is its added to its wait time.
-                    p->addTimeWaiting(clock - p->getexitCPUTick());
+                    p->addTimeWaiting(clock - p->getExitCPUTick());
 
                     clock += timeRan;
 
@@ -83,7 +83,7 @@ void MFQS::run() {
 
 #ifdef DEBUG
                     cout << "****FCFS****" << endl;
-                    cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
+                    cout << "Process " << p->getPID() << " ran for " << timeRan << " in queue " << i << " and terminated." << endl;
                     cout << "clock: " << clock << endl << endl;
 #endif
                 } else { // All queues before last are TQ
@@ -91,11 +91,11 @@ void MFQS::run() {
 
                     if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
                         timeRan = p->getTimeRemaining();
-                        p->addTimeWaiting(clock - p->getexitCPUTick());
+                        p->addTimeWaiting(clock - p->getExitCPUTick());
                         clock += timeRan;
 
 #ifdef DEBUG
-                        cout << "Process " << p->getPID() << " ran for " << timeRan << " and terminated." << endl;
+                        cout << "Process " << p->getPID() << " ran for " << timeRan << " in queue " << i << " and terminated." << endl;
                         cout << "clock: " << clock << endl << endl;
 #endif
                         // !!TEMP!!
@@ -110,12 +110,12 @@ void MFQS::run() {
 
                     } else { // Process will not finish in this TQ
                         timeRan = queue->getQuantum();
-                        p->addTimeWaiting(clock - p->getexitCPUTick());
+                        p->addTimeWaiting(clock - p->getExitCPUTick());
                         clock += timeRan;
                         p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
 #ifdef DEBUG
-                        cout << "Proccess " << p->getPID() << " ran for " << timeRan 
+                        cout << "Proccess " << p->getPID() << " ran for " << timeRan << " in queue " << i
                             << ", time_remaining: " << p->getTimeRemaining()
                             << ", time_waiting: " << p->getTimeWaiting() << endl;
                         cout << "clock: " << clock << endl << endl;
@@ -128,7 +128,7 @@ void MFQS::run() {
 
                         // Set the stop clock tick to be the current clock. Next time the process runs,
                         // the difference between the current clock tick and then will be added to its wait time.
-                        p->setexitCPUTick(clock);
+                        p->setExitCPUTick(clock);
                         p->setState(Process::READY_TO_RUN);
 
                         // Demote the process
@@ -154,8 +154,6 @@ void MFQS::run() {
                 i = 0;
             } else if (queueIsEmpty) { // only check if the queue is empty if there were no new processes
                 i++;
-            } else if (jobAged > -1) {
-                i = jobAged;
             }
 
         } // end while(i <= lastQueue)
@@ -182,11 +180,11 @@ bool MFQS::receiveNewJobs(int clock) {
                         (p->getArrivalTime() <= clock)) {
                 // The process has been waiting since its arrival
                 // (exitCPUTick is set to arrival_time upon creation)
-                p->addTimeWaiting(clock - p->getexitCPUTick());
+                p->addTimeWaiting(clock - p->getExitCPUTick());
 
                 // Reset the exitCPUTick to the current clock,
                 // otherwise the time since its arrival will be counted twice.
-                p->setexitCPUTick(clock);
+                p->setExitCPUTick(clock);
                 p->setState(Process::READY_TO_RUN);
                 // Add the process to the first queue
                 this->queues.at(0)->push(p);

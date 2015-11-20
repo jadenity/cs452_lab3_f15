@@ -78,22 +78,34 @@ bool Process::comparePID(Process* p1, Process* p2) {
 int Process::compare_priority_tree(void* leftp, void* rightp) {
     Process* left = (Process*)leftp;
     Process* right = (Process*)rightp;
-    if (left->getPriority() < right->getPriority()) { // Higher priority = higher in tree
+    if (left->getPriority() < right->getPriority()) { // Higher priority = HIGHER in tree
         return -1;
     } else if (left->getPriority() > right->getPriority()) {
         return 1;
     } else {
-        // If priorities are the same, the smaller PID is higher
-        if (left->getPID() < right->getPID()) {
+      // If priorities are the same, the smaller exit CPU time is higher
+      // This ensures processes are scheduled round robin when they have the
+      // same priority.
+      if (left->getExitCPUTick() > right->getExitCPUTick()) { // Higher tick = LOWER in tree
           return -1;
-        } else if (left->getPID() > right->getPID()) {
+      } else if (left->getExitCPUTick() < right->getExitCPUTick()) {
+          return 1;
+      } else {
+
+        // If priorities and exit CPU times are the same, the smaller PID is higher
+        if (left->getPID() > right->getPID()) { // Higher PID = LOWER in tree
+          return -1;
+        } else if (left->getPID() < right->getPID()) {
           return 1;
         } else {
           return 0;
         }
 
-        // Since PIDs are unique, this will never happen.
+        // Since PIDs are unique, this will never happen.        
         return 0;
+      }
+      // Since PIDs are unique, this will never happen.
+      return 0;
     }
 }
 
@@ -137,11 +149,11 @@ int Process::getIO() const {
     return this->io;
 }
 
-int Process::getexitCPUTick() const {
+int Process::getExitCPUTick() const {
     return this->exitCPUTick;
 }
 
-void Process::setexitCPUTick(int clock) {
+void Process::setExitCPUTick(int clock) {
     this->exitCPUTick = clock;
 }
 

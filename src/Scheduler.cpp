@@ -4,7 +4,7 @@
 #include "Time_Queue.hpp"
 #include <iostream>
 
-#define DEBUG
+//#define DEBUG
 
 Scheduler::Scheduler(vector<Process *> &processes) 
     : processes(processes){
