@@ -18,7 +18,9 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           time_waiting(0),
           age(0),
           // Set the stop tick to the arrival time for future calculation of wait time
-          exitCPUTick(arrival_time){
+          exitCPUTick(arrival_time),
+          // Set original priority to be what it is read in as
+          originalPriority(priority) {
 }
 
 // Copy Constructor
@@ -176,3 +178,8 @@ void Process::addAge(int age) {
 void Process::setAge(int age) {
     this->age = age;
 }
+
+int Process::getOriginalPriority() const {
+  return this->originalPriority;
+}
+

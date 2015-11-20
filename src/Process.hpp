@@ -42,6 +42,7 @@ public:
     static bool compareDeadline(Process *p1, Process *p2);
     static bool comparePID(Process* p1, Process* p2);
     static int compare_priority_tree(void* p1, void* p2);
+    int getOriginalPriority() const;
 
 private:
     int pid;
@@ -56,6 +57,7 @@ private:
     int age;
     int exitCPUTick;
     int finishTime;
+    int originalPriority;
 };
 
 #endif

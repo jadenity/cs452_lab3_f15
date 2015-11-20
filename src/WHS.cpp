@@ -1,4 +1,5 @@
 #include <iostream>
+#include <stdlib.h>
 #include "Process.hpp"
 #include "WHS.hpp"
 #include "RBTree.hpp"
