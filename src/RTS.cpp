@@ -4,7 +4,6 @@
 #include "RTS.hpp"
 #include "Time_Queue.hpp"
 #include "Scheduler.hpp"
-#include <unistd.h>
 
 using namespace std;
 
@@ -69,7 +68,7 @@ void RTS::run() {
   while(this->hasUnfinishedJobs()){
 
     //check if we have processes that can't finish by the deadline
-    while(p->getTimeRemaining() + clock > p->getDeadline()){
+    while(p->getTimeRemaining() + clock > p->getDeadline() /*|| p->getTimeRemaining() == 0*/){ //shouldn't need 2nd argument
       p->setState(Process::TERMINATED); //since p is a pointer, it is set as terminated in the scheduler's list as well
       jobsEnded++;
 cout << jobsEnded << " processes ended!" << endl;
@@ -80,6 +79,9 @@ cout << jobsEnded << " processes ended!" << endl;
 		rtsQueue.pop_front();
       } else {
 	    p = NULL;
+      }
+	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of laoded processes
+        cout << rtsQueue.at(i)->getPID() << endl;
       }
     }
 
@@ -97,26 +99,30 @@ cout << jobsEnded << " processes ended!" << endl;
 
       p->setState(Process::TERMINATED);
       jobsEnded++;
-cout << jobsEnded << " processes ended." << endl;
+cout << p->getPID() << " ended." << endl;
 
       //pop next process from rtsQueue, if there is one
       if(rtsQueue.size() > 0){
-	    cout << p->getPID() << " " << rtsQueue.front() << endl;
         p = rtsQueue.front();
-		cout << p->getPID() << " " << rtsQueue.front() << endl;
 		rtsQueue.pop_front();
-		cout << p->getPID() << " " << rtsQueue.front() << endl;
       } else {
 
 	    p = NULL;
+      }
+	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
+        cout << rtsQueue.at(i)->getPID() << endl;
       }
     }
 
     //check if a process has "arrived" (unless we loaded them all)
     if(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
-      //push the current active process back into rtsQueue
-      rtsQueue.push_front(p);
+      //push the current active process back into rtsQueue perhaps this was wrong? this was causing multiples of a single process being in rtsQueue
+      //rtsQueue.push_front(p);
+	  
+	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
+        cout << rtsQueue.at(i)->getPID() << endl;
+      }
 
       while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 

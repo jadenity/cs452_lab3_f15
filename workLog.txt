@@ -464,5 +464,5 @@ I'm now terminating the active process rather than the process in the scheduler'
 I figured out that the real issue of my looping situation is that p isn't properly referencing the next process in the queue. I wonder why...
 	Maybe it's because I should use "pop" with the deque rather than erasing things after loading them into p, because the deque isn't changing either.
 
-
+Here's the REAL issue: I somehow load in a single process multiple times. I need to find out where I'm doing this and stop this from happening.
 
