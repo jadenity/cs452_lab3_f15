@@ -23,7 +23,7 @@ private:
     RBTree rbt;
     rbtree tree;
     deque<Process*> waitQueue;
-    // vector<list<Process*>* > listVector;
+    vector<list<Process*>* > listVector;
 
 
 };

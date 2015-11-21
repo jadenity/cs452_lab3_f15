@@ -10,8 +10,7 @@
 
 using namespace std;
 
-// Make a vector to hold all the lists (even if empty)
-vector<list<Process*>* > listVector(100, new list<Process*>());
+
 
 WHS::WHS(vector<Process *> &processes, int quantum, int ageLimit) 
 			: Scheduler(processes),
@@ -22,10 +21,10 @@ WHS::WHS(vector<Process *> &processes, int quantum, int ageLimit)
     // Make a tree to hold lists of processes at every priority
     tree = rbt.rbtree_create();
 
-    // listVector.resize(100);
-    // for (int i = 0; i <= 99; i++) {
-    //     listVector.push_back(new list<Process*>);
-    // }
+    // Make a vector to hold all the lists (even if empty)
+    vector<list<Process*>* > tempVector(100, new list<Process*>());
+
+    listVector = tempVector;
 
     // Add jobs with arrival 0 to first queue
     receiveNewJobs(0);

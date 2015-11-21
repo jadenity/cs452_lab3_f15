@@ -102,7 +102,7 @@ cout << jobsEnded << " processes ended." << endl;
       //pop next process from rtsQueue, if there is one
       if(rtsQueue.size() > 0){
 	    cout << p->getPID() << " " << rtsQueue.front() << endl;
-        &p = rtsQueue.front();
+        p = rtsQueue.front();
 		cout << p->getPID() << " " << rtsQueue.front() << endl;
 		rtsQueue.pop_front();
 		cout << p->getPID() << " " << rtsQueue.front() << endl;
