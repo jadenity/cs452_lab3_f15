@@ -378,12 +378,12 @@ void RBTree::insert_case5(rbtree t, node n)
 /*
  * Delete Node from RBTree
  */
-void RBTree::rbtree_delete(rbtree t, void* key, compare_func compare)
+int RBTree::rbtree_delete(rbtree t, void* key, compare_func compare)
 {
     node child;
     node n = lookup_node(t, key, compare);
     if (n == NULL)
-        return;
+        return -1; // not found = -1
     if (n->left != NULL && n->right != NULL)
     {
         node pred = maximum_node(n->left);
@@ -401,6 +401,7 @@ void RBTree::rbtree_delete(rbtree t, void* key, compare_func compare)
     replace_node(t, n, child);
     free(n);
     verify_properties(t);
+    return 0;
 }
  
 /*

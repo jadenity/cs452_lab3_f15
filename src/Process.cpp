@@ -237,3 +237,15 @@ int Process::decrementPriority(int amt) {
 
   return retVal;
 }
+
+int Process::getIOTimer() const {
+  return ioTimer;
+}
+
+void Process::decrementIOTimer() {
+  this->ioTimer--;
+}
+
+void Process::decrementTimeRemaining() {
+  this->time_remaining--;
+}

@@ -167,6 +167,12 @@ void MFQS::run() {
         clock++;
 
     } // end while(hasUnfinishedJobs()) 
+
+
+    for (int i = 0; i < numberOfQueues; i++) {
+        delete this->queues.at(i);
+    }
+
 }
 
 // receiveNewJobs changes the state of all processes that

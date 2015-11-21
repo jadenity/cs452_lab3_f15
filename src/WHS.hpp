@@ -11,10 +11,11 @@ public:
 	WHS(vector<Process *> &processes, int quantum, int ageLimit);
 	virtual ~WHS();
     void run();
+    list<Process*>* getMaxPriorityList();
     void insertIntoTree(int priority, list<Process*> *list);
-    void deleteFromTree(int priority);
+    int deleteFromTree(int priority);
     void addProcessToPriorityList(Process* p);
-    void removeProcessFromPriorityList(Process* p);
+    void removeProcessFromPriorityList(Process* p, int priority);
     bool receiveNewJobs(int clock);
     void printTree();
 private:

@@ -168,12 +168,19 @@ int main(int argc, char** argv) {
     
     // Using polymorphism to call functions after "new"ing schedulers.
     sched->run();
-    
+
     double avgWaitTime = sched->calcAvgWaitTime();
     cout << "Average wait time: " << avgWaitTime << endl << endl;
 
     double avgTurnaroundTime = sched->calcAvgTurnaroundTime();
+    delete sched;
+    
+    BOOST_FOREACH(Process *p, processes) {
+        delete p;
+    }
     cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
+
+    cout << "Total processes scheduled: " << processes.size() << endl;
 
     return 0;
 }

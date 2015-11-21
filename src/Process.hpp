@@ -46,6 +46,9 @@ public:
     int incrementPriority(int amt);
     int decrementPriority(int amt);
     bool isHighBand() const;
+    int getIOTimer() const;
+    void decrementIOTimer();
+    void decrementTimeRemaining();
 
 private:
     int pid;
@@ -62,6 +65,7 @@ private:
     int finishTime;
     int originalPriority;
     bool highBand;
+    int ioTimer;
 };
 
 #endif

@@ -25,7 +25,7 @@ class RBTree
         rbtree rbtree_create();
         void* rbtree_lookup(rbtree t, void* , compare_func compare);
         void rbtree_insert(rbtree t, void* , void* , compare_func compare);
-        void rbtree_delete(rbtree t, void* , compare_func compare);
+        int rbtree_delete(rbtree t, void* , compare_func compare);
         node grandparent(node n);
         node sibling(node n);
         node uncle(node n);
