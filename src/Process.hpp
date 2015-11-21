@@ -43,6 +43,9 @@ public:
     static bool comparePID(Process* p1, Process* p2);
     static int compare_priority_tree(void* p1, void* p2);
     int getOriginalPriority() const;
+    int incrementPriority(int amt);
+    int decrementPriority(int amt);
+    bool isHighBand() const;
 
 private:
     int pid;
@@ -58,6 +61,7 @@ private:
     int exitCPUTick;
     int finishTime;
     int originalPriority;
+    bool highBand;
 };
 
 #endif

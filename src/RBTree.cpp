@@ -9,7 +9,7 @@
 #include <vector>
 #include <cstdlib>
 #include <cassert>
-//#include <cstdint>
+#include <cstdint>
 #include "RBTree.hpp"
 #include "Process.hpp"
 #define INDENT_STEP  4
@@ -540,11 +540,10 @@ void RBTree::print_tree_helper(node n, int indent)
     }
     for(i = 0; i < indent; i++)
         fputs(" ", stdout);
-    Process* p = (Process*)(n->key);
     if (n->color == BLACK)
-        cout<<p->getPriority()<<"("<<p->getPID()<<")"<<endl;
+        cout<<(intptr_t)n->key<<endl;
     else
-        cout<<"<"<<p->getPriority()<<"("<<p->getPID()<<")"<<">"<<endl;
+        cout<<"<"<<(intptr_t)n->key<<">"<<endl;
     if (n->left != NULL)
     {
         print_tree_helper(n->left, indent + INDENT_STEP);
@@ -552,23 +551,23 @@ void RBTree::print_tree_helper(node n, int indent)
 }
 
  
-// /*
-//  * Compare two nodes
-//  */
-// int compare_int(void* leftp, void* rightp)
-// {
-//     int left = (intptr_t)leftp;
-//     int right = (intptr_t)rightp;
-//     if (left < right)
-//         return -1;
-//     else if (left > right)
-//         return 1;
-//     else
-//     {
-//         assert (left == right);
-//         return 0;
-//     }
-// }
+/*
+ * Compare two nodes
+ */
+int RBTree::compare_int(void* leftp, void* rightp)
+{
+    int left = (intptr_t)leftp;
+    int right = (intptr_t)rightp;
+    if (left < right)
+        return -1;
+    else if (left > right)
+        return 1;
+    else
+    {
+        assert (left == right);
+        return 0;
+    }
+}
 
 
  

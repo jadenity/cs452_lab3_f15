@@ -199,7 +199,6 @@ bool MFQS::receiveNewJobs(int clock) {
 }
 
 int MFQS::age(int curQ, Process* p, int timeRan) {
-    //bool jobAged = false;
     int jobAged = -1;
     int startQ;
     // Only add age to queues >= 2 (3rd or lower queues)
@@ -218,14 +217,13 @@ int MFQS::age(int curQ, Process* p, int timeRan) {
         deque<Process *> deq = q->getQueue();
         std::deque<Process *>::iterator it = deq.begin();
         Process* p;
-        while (/*!jobAged &&*/ (it != deq.end())) {
+        while (it != deq.end()) {
             p = *it;
             p->addAge(timeRan);
 #ifdef DEBUG
             cout << "Added to age of process " << p->getPID() << ", now: " << p->getAge() << endl;
 #endif
             if (p->getAge() > ageLimit) {
-                //jobAged = true;
                 if (jobAged == -1) {
                     jobAged = i-1;
                 }

@@ -21,6 +21,13 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           exitCPUTick(arrival_time),
           // Set original priority to be what it is read in as
           originalPriority(priority) {
+
+  // Set isHighBand based on original priority
+  if (priority >= 50) {
+    highBand = true;
+  } else {
+    highBand = false;
+  }
 }
 
 // Copy Constructor
@@ -183,3 +190,50 @@ int Process::getOriginalPriority() const {
   return this->originalPriority;
 }
 
+bool Process::isHighBand() const {
+  return this->highBand;
+}
+
+// For debugging:
+// Returns 0 on successful full increment
+// Returns 1 if max priority reached
+int Process::incrementPriority(int amt) {
+  int retVal;
+  if (this->highBand) { // high band 50-99
+    if ((this->priority + amt) > 99) {
+      this->priority = 99;
+      retVal = 1;
+    } else {
+      this->priority += amt;
+      retVal = 0;
+    }
+  } else { // low band 0-49
+    if ((this->priority + amt) > 49) {
+      this->priority = 49;
+      retVal = 1;
+    } else {
+      this->priority += amt;
+      retVal = 0;
+    }
+  }
+
+  return retVal;
+}
+
+// For debugging:
+// Returns 0 on successful full decrement
+// Returns 1 if min priority reached
+int Process::decrementPriority(int amt) {
+  int retVal;
+  // Priority can never go lower than the original priority
+  // Don't need to check isHighBand because it will never change bands
+  if ((this->priority - amt) < this->originalPriority) {
+    this->priority = this->originalPriority;
+    retVal = 1;
+  } else {
+    this->priority -= amt;
+    retVal = 0;
+  }
+
+  return retVal;
+}

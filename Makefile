@@ -1,5 +1,5 @@
 CC = g++
-CPPFLAGS = -Wall -g
+CPPFLAGS = -Wall -g -std=c++0x
 SOURCES = src/Process.cpp src/main.cpp src/Time_Queue.cpp src/Scheduler.cpp src/MFQS.cpp src/RTS.cpp src/WHS.cpp src/RBTree.cpp
 OBJECTS = $(SOURCES:.cpp=.o)
 LFLAGS = 

@@ -55,6 +55,7 @@ class RBTree
         void delete_case6(rbtree t, node n);
         void print_tree(rbtree t);
         void print_tree_helper(node n, int indent);
+        static int compare_int(void*, void*);
 };
 
 #endif  /* RBTree_HPP */

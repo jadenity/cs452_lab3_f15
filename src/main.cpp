@@ -168,6 +168,7 @@ int main(int argc, char** argv) {
     
     // Using polymorphism to call functions after "new"ing schedulers.
     sched->run();
+    
     double avgWaitTime = sched->calcAvgWaitTime();
     cout << "Average wait time: " << avgWaitTime << endl << endl;
 

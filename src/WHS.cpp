@@ -1,5 +1,7 @@
 #include <iostream>
 #include <stdlib.h>
+#include <list>
+#include <algorithm>
 #include "Process.hpp"
 #include "WHS.hpp"
 #include "RBTree.hpp"
@@ -8,62 +10,137 @@
 
 using namespace std;
 
+// Make a vector to hold all the lists (even if empty)
+vector<list<Process*>* > listVector(100, new list<Process*>());
+
 WHS::WHS(vector<Process *> &processes, int quantum, int ageLimit) 
 			: Scheduler(processes),
             quantum(quantum),
-            ageLimit(ageLimit) {
+            ageLimit(ageLimit)
+             {
+
+    // Make a tree to hold lists of processes at every priority
+    tree = rbt.rbtree_create();
+
+    // listVector.resize(100);
+    // for (int i = 0; i <= 99; i++) {
+    //     listVector.push_back(new list<Process*>);
+    // }
+
+    // Add jobs with arrival 0 to first queue
+    receiveNewJobs(0);
+
 }
 
 WHS::~WHS(){
 }
 
 void WHS::run() {
+
+    int clock = 0;
+    // while (this->hasUnfinishedJobs()) {
+    cout << "processes.at(0): " << processes.at(0)->toString() << endl;
+    // removeProcessFromPriorityList(processes.at(0));
+    // list<Process*> list = listVector.at(2);
+    // if (list.empty()) {
+    //     cout << "empty from out here" << endl;
+    // }
+    //     clock++;
+    // }
+
+
+}
+
+void WHS::insertIntoTree(int priority, list<Process*> *list) {
+    rbt.rbtree_insert(tree, (void*)priority, (void*)&list, RBTree::compare_int);
+}
+
+void WHS::deleteFromTree(int priority) {
+    rbt.rbtree_delete(tree, (void*)priority, RBTree::compare_int);
+}
+
+void WHS::addProcessToPriorityList(Process* p) {
+    int priority = p->getPriority();
+    list<Process*> *priorityList = listVector.at(priority);
+
+    // If the list is empty, add the list to the tree
+    if (priorityList->empty()) {
+        insertIntoTree(priority, priorityList);
+#ifdef DEBUG
+        cout << "List " << priority << " was empty. Added to tree:" << endl;
+        printTree();
+#endif
+    }
+
+    priorityList->push_back(p);
+}
+
+void WHS::removeProcessFromPriorityList(Process* p) {
+    int priority = p->getPriority();
+    list<Process*> *priorityList = listVector.at(priority);
+
+    if (!priorityList->empty()) {
+        cout << "not empty" << endl;
+        bool procFound = false;
+        Process* curP;
+        list<Process*>::iterator it = priorityList->begin();
+
+        // If the begin and end iterators are the same,
+        // there is only one process in the list.
+        if (priorityList->begin() == priorityList->end()) {
+            deleteFromTree(priority);
+#ifdef DEBUG
+            cout << "List " << priority << " now empty. Deleted from tree: " << endl;
+            printTree();
+#endif 
+        } else { // Otherwise, there is more than one process in the list.
+            while (!procFound && (it != priorityList->end())) {
+                curP = *it;
+                if (curP->getPID() == p->getPID()) { // Found process
+                    procFound = true;
+                    priorityList->erase(it);
+                }
+                ++it;
+            }
+        }
+    } else {
+        cout << "list " << priority << " empty" << endl;
+    }
+
+}
+
+bool WHS::receiveNewJobs(int clock) {
+    bool foundNewProcess = false;
+    int i = 0;
+    bool foundLaterProcess = false;
     Process* p;
-    RBTree rbt;
-    rbtree t = rbt.rbtree_create();
+    // Since processes are in order of their arrival, stop loop
+    // when a later process is found.
+    while (i < (int)processes.size() && !foundLaterProcess) {
+        p = processes.at(i);
+        if ((p->getState() == Process::NEW) && (p->getArrivalTime() <= clock)) { // new, earlier process
+            // For debugging, lets us see the time waiting earlier
+            p->addTimeWaiting(clock - p->getExitCPUTick());
+            
+            // Reset the exitCPUTick to the current clock,
+            // otherwise the time since its arrival will be counted twice.
+            p->setExitCPUTick(clock);
 
-    rbt.print_tree(t);
-
-    p = new Process(0, 25, 0, 55, 50, 3, Process::NEW);
-    cout << "Inserting process " << p->getPID() <<" with priority " << p->getPriority() << " -> "<< p->toString() << endl << endl;
-    rbt.rbtree_insert(t, (void*)p, (void*)p, Process::compare_priority_tree);
-
-    rbt.print_tree(t);
-
-    for (int i = 0; i < 10; i++) {
-        int randPriority = rand() % 99;
-        p = new Process(i+1, 25, 0, randPriority, 50, 3, Process::NEW);
-    	cout << "Inserting process " << p->getPID() <<" with priority " << p->getPriority() << " -> "<< p->toString() << endl << endl;
-    	rbt.rbtree_insert(t, (void*)p, (void*)p, Process::compare_priority_tree);
-
-        rbt.print_tree(t);
-	}
-
-    p = new Process(11, 25, 0, 55, 50, 3, Process::NEW);
-    cout << "Inserting process " << p->getPID() <<" with priority " << p->getPriority() << " -> "<< p->toString() << endl << endl;
-    rbt.rbtree_insert(t, (void*)p, (void*)p, Process::compare_priority_tree);
-    p->setTimeRemaining(4);
-
-    rbt.print_tree(t);
-
-    Process* lookup = new Process(11,0,0,55,0,0,Process::NEW);
-    
-    Process* q;
-    if ( (q = (Process*)(rbt.rbtree_lookup(t, (void*)lookup, Process::compare_priority_tree))) == NULL) {
-        cout << "No process with priority " << lookup->getPriority() << " and PID " << lookup->getPID() << " found." << endl;
-    } else {
-        cout << "found: " << q->toString() << endl;
+            p->setState(Process::READY_TO_RUN);
+            // Add the process to its appropriate priority list
+            addProcessToPriorityList(p);
+            foundNewProcess = true;
+#ifdef DEBUG
+            cout << "New arrival: added process " << p->getPID() << " to list " << p->getPriority() << endl;
+#endif
+        } else if (p->getArrivalTime() > clock) { // later process
+            foundLaterProcess = true;
+        }
+        i++;
     }
-    delete lookup;
+    return foundNewProcess;
+}
 
-    Process* lookup2 = new Process(11,0,0,55,0,0,Process::NEW);
-    
-    Process* q2;
-    if ( (q2 = (Process*)(rbt.rbtree_lookup(t, (void*)lookup2, Process::compare_priority_tree))) == NULL) {
-        cout << "No process with priority " << lookup2->getPriority() << " and PID " << lookup2->getPID() << " found." << endl;
-    } else {
-        cout << "found: " << q2->toString() << endl;
-    }
-    delete q2;
-
+void WHS::printTree() {
+    rbt.print_tree(tree);
 }
