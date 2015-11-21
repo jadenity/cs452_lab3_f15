@@ -4,6 +4,7 @@
 #include "RTS.hpp"
 #include "Time_Queue.hpp"
 #include "Scheduler.hpp"
+#include <unistd.h>
 
 using namespace std;
 
@@ -39,9 +40,9 @@ void RTS::run() {
         this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
         jobsLoaded++;
       } else { //process won' be able to finish, so terminate it
-	this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
-	jobsLoaded++;
-	jobsEnded++;
+	    this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
+	    jobsLoaded++;
+	    jobsEnded++;
       }
     }
 
@@ -63,24 +64,22 @@ void RTS::run() {
   //But how should we do this? also sorting by burst may be tricky, and also slow...
   //I think I'll ignore this "slack" thing for now
   Process *p = rtsQueue.front();
-  rtsQueue.erase(rtsQueue.begin());
-
+  rtsQueue.pop_front();
   //We're done when all processes are terminated either from having too short a deadline or finishing its burst
   while(this->hasUnfinishedJobs()){
 
     //check if we have processes that can't finish by the deadline
     while(p->getTimeRemaining() + clock > p->getDeadline()){
-      this->processes.at(p->getArrivalTime() - 1)->setState(Process::TERMINATED);
+      p->setState(Process::TERMINATED); //since p is a pointer, it is set as terminated in the scheduler's list as well
       jobsEnded++;
-cout << jobsEnded << " processes ended" << endl;
+cout << jobsEnded << " processes ended!" << endl;
 
       //load the next process, if there is one in rtsQueue
       if(rtsQueue.size() > 0){
         p = rtsQueue.front();
-        rtsQueue.erase(rtsQueue.begin());
-
+		rtsQueue.pop_front();
       } else {
-	p = NULL;
+	    p = NULL;
       }
     }
 
@@ -96,17 +95,20 @@ cout << jobsEnded << " processes ended" << endl;
     //check if the current process is done (if one is active)--------------
     if(p != NULL && p->getTimeRemaining() == 0){
 
-      this->processes.at(p->getArrivalTime() - 1)->setState(Process::TERMINATED);
+      p->setState(Process::TERMINATED);
       jobsEnded++;
-cout << jobsEnded << " processes ended" << endl;
+cout << jobsEnded << " processes ended." << endl;
 
-      //pop next process from rtsQueue, if there is one (REMINDER: change how this is done)
+      //pop next process from rtsQueue, if there is one
       if(rtsQueue.size() > 0){
-       p = rtsQueue.front();
-        rtsQueue.erase(rtsQueue.begin());
+	    cout << p->getPID() << " " << rtsQueue.front() << endl;
+        &p = rtsQueue.front();
+		cout << p->getPID() << " " << rtsQueue.front() << endl;
+		rtsQueue.pop_front();
+		cout << p->getPID() << " " << rtsQueue.front() << endl;
       } else {
 
-	p = NULL;
+	    p = NULL;
       }
     }
 
@@ -126,7 +128,7 @@ cout << jobsEnded << " processes ended" << endl;
 	  cout << "JOBS:" << jobsLoaded << endl;
 
         } else {
-          this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
+          this->processes.at(jobsLoaded)->setState(Process::TERMINATED); //this "at jobsLoaded" here should be fine
           jobsLoaded++;
 	  cout << "JOBS:" << jobsLoaded << endl;
         }

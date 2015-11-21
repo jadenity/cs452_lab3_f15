@@ -445,11 +445,24 @@ I'll need to look at all RTS has carefully.
 --MEETING ENDED--
 
 
+11/19:
+
+--MEETING START--
+
+Made sure both me and my partner had everything up to date in terms of git (was having git merge issues last time).
+
+--MEETING ENDED-- (partner left for class, and I'll be off campus soon to nap to recover focus/shake off tiredness)
+
+I noticed using "processes.at(p->getArrivalTime() - 1)" is a bad idea since there can easily be multiple processes with equal arrivals.
 
 
+11/20: Communicating with partner through Skype from home today.
 
+I'm now terminating the active process rather than the process in the scheduler's process list. This should be more appropriate.
+	Unfortunately, I still have some infinite looping.
 
-
+I figured out that the real issue of my looping situation is that p isn't properly referencing the next process in the queue. I wonder why...
+	Maybe it's because I should use "pop" with the deque rather than erasing things after loading them into p, because the deque isn't changing either.
 
 
 
