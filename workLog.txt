@@ -436,7 +436,7 @@ Switched RTS to change states in the main processes list rather than load them a
 Partner talked about slack and loading shortest burst processes first. I'm not even sure RTS should be able to do that...
 	Assuming it shouldn't and not programming slack for now.
 
-Switched from a vector to a deque (double ended queue) so I have pop/push_front. I'll need to change a fwe things.
+Switched from a vector to a deque (double ended queue) so I have pop/push_front. I'll need to change a few things.
 
 I think I have in RTS what I think belongs in RTS, but I'm getting looping problems (out of bounds of infinite loop)...
 
@@ -465,4 +465,29 @@ I figured out that the real issue of my looping situation is that p isn't proper
 	Maybe it's because I should use "pop" with the deque rather than erasing things after loading them into p, because the deque isn't changing either.
 
 Here's the REAL issue: I somehow load in a single process multiple times. I need to find out where I'm doing this and stop this from happening.
+
+
+11/21:
+
+Although RTS seems to be working, I still have to do the following (~ instead of - means it may already be done):
+	RTS:
+	~make a hard real time mode (stop when a process gets kicked out)
+		This may need to include processes currently kicked out by the main.
+	~report processes that can't be scheduled (but not for hard real time) - at least partially already done in main
+	-"The time spent in the CPU of the failed process should be included in the calculation of the average turnaround time and 
+	  waiting time for the scheduler." I wonder how this should work...
+	All:
+	-Gantt chart info (such as start/end time in CPU) - will involve PID
+	-wait/turnaround times 													<-- Need to focus on this
+	~total processes scheduled
+	-#ifdef DEBUG around test outputs (may want to take out irrelevant ones)
+
+
+
+
+
+
+
+
+
 

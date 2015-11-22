@@ -14,19 +14,25 @@ RTS::RTS(vector<Process *> &processes)
 RTS::~RTS() {
 }
 
-//Note: the 100k processes test file doesn't seem to have any processes with a deadline of 10000 or more
+//Note: This was first edited in VIM, then edited in Notepad++ later
 
 void RTS::run() {
   int clock = 0;
   int jobsLoaded = 0; //keeps track of how many processes have entered the process ecosystem. points at which process should be loaded next
-  int jobsEnded = 0; //counts how many processes got terminated. mostly for testing
+  bool hardRealTimeStop = false; //true if process didn't finish using hard real time mode
+  char softOrHard; //
   
-  //need to create some data structure to hold processes loaded in (priority queue proved too complex)
-  //a C++ deque should do. It's like a vectr, but can push_front as well as push_back
+  //need to create some data structure to hold processes loaded in (making priority queue compatible proved too complex)
+  //a C++ deque should do.
   deque<Process*> rtsQueue; //contains processes that have "arrived" sorted by deadline
 
   //if there's nothing, don't bother trying to populate the deque
   if(this->hasUnfinishedJobs()){
+  
+    //prompt user to choose soft or hard real time
+    cout << "Chose soft or hard real time mode (s/h): ";
+    cin >> softOrHard;
+	cout << endl;
     
     //"while there is a process to load and arrival time is equal to clock,
     //"load them into the rtsQueue and set their state to READY"
@@ -38,10 +44,11 @@ void RTS::run() {
         rtsQueue.push_back(this->processes.at(jobsLoaded)); //process is added to rtsQueue, making it READY
         this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
         jobsLoaded++;
-      } else { //process won' be able to finish, so terminate it
+		
+      /* This is currently redundant since the main function handles processes with negative or very low deadlines
+	    } else { //process won't be able to finish, so terminate it
 	    this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
-	    jobsLoaded++;
-	    jobsEnded++;
+	    jobsLoaded++;*/
       }
     }
 
@@ -65,82 +72,101 @@ void RTS::run() {
   Process *p = rtsQueue.front();
   rtsQueue.pop_front();
   //We're done when all processes are terminated either from having too short a deadline or finishing its burst
-  while(this->hasUnfinishedJobs()){
+  while(this->hasUnfinishedJobs() && !hardRealTimeStop){
 
     //check if we have processes that can't finish by the deadline
-    while(p->getTimeRemaining() + clock > p->getDeadline() /*|| p->getTimeRemaining() == 0*/){ //shouldn't need 2nd argument
-      p->setState(Process::TERMINATED); //since p is a pointer, it is set as terminated in the scheduler's list as well
-      jobsEnded++;
-cout << jobsEnded << " processes ended!" << endl;
+	if(softOrHard == 'h'){ //hard real time mode is active. stop scheduler loop now
+	  hardRealTimeStop = true;
+	  cout << "Process " << p->getPID() << " cancelled. Scheduler halted (hard real time mode). Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() 
+				<< " Deadline: " << p->getDeadline() << endl; //output info of cancelled process
+	} else {
+		while(p->getTimeRemaining() + clock > p->getDeadline()){
+		  p->setState(Process::TERMINATED); //terminates current active process. since p is a pointer, it is set as terminated in the scheduler's list as well
+		  
+		  cout << "Process " << p->getPID() << " cancelled. Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() 
+				<< " Deadline: " << p->getDeadline() << endl; //output info of cancelled process
+		  
+		  //load the next process, if there is one in rtsQueue
+		  if(rtsQueue.size() > 0){
+			p = rtsQueue.front();
+			rtsQueue.pop_front();
+		  } else {
+			p = NULL;
+		  }
+		  
+		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of loaded processes (add ifdef)
+			cout << rtsQueue.at(i)->getPID() << endl;
+		  }
+		  
+		}
+	
 
-      //load the next process, if there is one in rtsQueue
-      if(rtsQueue.size() > 0){
-        p = rtsQueue.front();
-		rtsQueue.pop_front();
-      } else {
-	    p = NULL;
-      }
-	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of laoded processes
-        cout << rtsQueue.at(i)->getPID() << endl;
-      }
-    }
+		//CLOCK TICK, reduce time remaining on active process
+		if(p != NULL){
+		  p->setTimeRemaining(p->getTimeRemaining() - 1);
+		}
+		
+		//increment wait times of all processes loaded in thus far
+		for(int i = 0; i < (int)rtsQueue.size(); i++){
+		  Process* p2 = rtsQueue.at(i);
+		  p2->addTimeWaiting(1);
+		}
 
-    //CLOCK TICK, reduce time remaining on active process
-    if(p != NULL){
-      p->setTimeRemaining(p->getTimeRemaining() - 1);
-    }
+		//advance the clock, last part of CLICK TICK (occurs with or without an active process)
+		clock++;
 
-    //advance the clock, last part of CLICK TICK (occurs with or without an active process)
-    //clock tick related output also belongs here
-    clock++;
+		//check if the current process is done (if one is active)
+		if(p != NULL && p->getTimeRemaining() == 0){
 
-    //check if the current process is done (if one is active)--------------
-    if(p != NULL && p->getTimeRemaining() == 0){
+		  p->setFinishTime(clock);
+		  p->setState(Process::TERMINATED);
+		  
+		  //cout << p->getPID() << " ended." << endl; //TESTING: output PID of process that just ended (add ifdef)
 
-      p->setState(Process::TERMINATED);
-      jobsEnded++;
-cout << p->getPID() << " ended." << endl;
+		  //pop next process from rtsQueue, if there is one
+		  if(rtsQueue.size() > 0){
+			p = rtsQueue.front();
+			rtsQueue.pop_front();
+		  } else {
 
-      //pop next process from rtsQueue, if there is one
-      if(rtsQueue.size() > 0){
-        p = rtsQueue.front();
-		rtsQueue.pop_front();
-      } else {
+			p = NULL;
+		  }
+		  
+		  
+		  /*for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue (add ifdef)
+			cout << rtsQueue.at(i)->getPID() << endl;
+		  }*/
+		  
+		  
+		}
 
-	    p = NULL;
-      }
-	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
-        cout << rtsQueue.at(i)->getPID() << endl;
-      }
-    }
+	  //check if a process has "arrived" (unless we loaded them all)
+	  if(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
-    //check if a process has "arrived" (unless we loaded them all)
-    if(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
+		  //push the current active process back into rtsQueue. 
+		  //this was wrong somehow, as this was causing multiples of a single process to be in rtsQueue
+		  //rtsQueue.push_front(p);
+		  
+		  /*for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue (add ifdef)
+			cout << rtsQueue.at(i)->getPID() << endl;
+		  }*/
 
-      //push the current active process back into rtsQueue perhaps this was wrong? this was causing multiples of a single process being in rtsQueue
-      //rtsQueue.push_front(p);
-	  
-	  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
-        cout << rtsQueue.at(i)->getPID() << endl;
-      }
+		while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
-      while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
+			if(this->processes.at(jobsLoaded)->getDeadline() > this->processes.at(jobsLoaded)->getBurst() + clock){
 
-	if(this->processes.at(jobsLoaded)->getDeadline() > this->processes.at(jobsLoaded)->getBurst() + clock){
+			  rtsQueue.push_back(this->processes.at(jobsLoaded));
+			  this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
+			  jobsLoaded++;
 
-          rtsQueue.push_back(this->processes.at(jobsLoaded));
-          this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
-          jobsLoaded++;
-	  cout << "JOBS:" << jobsLoaded << endl;
+			} else {
+			  this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
+			  jobsLoaded++;
+			}
 
-        } else {
-          this->processes.at(jobsLoaded)->setState(Process::TERMINATED); //this "at jobsLoaded" here should be fine
-          jobsLoaded++;
-	  cout << "JOBS:" << jobsLoaded << endl;
-        }
-
-      //Order processes by deadline again
-      sort(rtsQueue.begin(), rtsQueue.end(), Process::compareDeadline);
+		  //Order processes by deadline again
+		  sort(rtsQueue.begin(), rtsQueue.end(), Process::compareDeadline);
+	    }
       }
     }
   }
