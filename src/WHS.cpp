@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <list>
 #include <algorithm>
+#include <boost/foreach.hpp>
 #include "Process.hpp"
 #include "WHS.hpp"
 #include "RBTree.hpp"
@@ -12,25 +13,35 @@ using namespace std;
 
 
 
-WHS::WHS(vector<Process *> &processes, int quantum, int ageLimit) 
+WHS::WHS(vector<Process *> &processes, vector<Process *> &processesByPID, int quantum, int ageLimit) 
 			: Scheduler(processes),
             quantum(quantum),
-            ageLimit(ageLimit)
+            ageLimit(ageLimit),
+            processesByPID(processesByPID)
              {
 
     // Make a tree to hold lists of processes at every priority
     tree = rbt.rbtree_create();
 
-    // Make a vector to hold all the lists (even if empty)
-    // vector<list<Process*>* > tempVector(100, new list<Process*>());
+    // Make a temp vector to hold all the lists
     vector<list<Process*>* > tempVector;
 
+    // Populate the vector with new lists (deleted later)
     for (int i = 0; i <= 99; i++) {
         tempVector.push_back(new list<Process*>());
     }
 
     // Assign it to the member variable
     listVector = tempVector;
+
+    // Populate the terminated processes vector
+    // Note: the index will be 1 less than the PID
+    for (int i = 0; i < (int)processes.size(); i++) {
+        terminatedProcesses.push_back(false);
+    }
+
+    // Resets all bits to 0
+    listsInTree.reset();
 
     // Add jobs with arrival 0 to first queue
     receiveNewJobs(0);
@@ -52,6 +63,12 @@ void WHS::run() {
         // Run the first process in the list and pop it off the list.
         Process* p = maxList->front();
         maxList->pop_front();
+
+        // Remove the list from the tree if it's now empty.
+        if (maxList->empty()) {
+            int priority = p->getPriority();
+            deleteFromTree(priority);
+        }
 
         int runTimer;
         int io = p->getIO();
@@ -79,28 +96,45 @@ void WHS::run() {
                 p->decrementTimeRemaining();
 
                 // Age processes
+                ageAllProcessesInTree();
 
-                // Check I/O wait queue
-
+                // Adjust I/O wait queue
+                adjustIOQueue();
 
                 runTimer--;
                 clock++;
             }
 
-            if (killAfterTQ) {
+            if (killAfterTQ) { // Process finished
                 p->setFinishTime(clock);
                 p->setState(Process::TERMINATED);
-            } else {
+                // terminatedProcesses starts at 0 to line up with processesByPID
+                terminatedProcesses.at(p->getPID() - 1) = true;
+            } else { // Process did not finish; demote process
+#ifdef DEBUG
+                cout << "Process " << p->getPID() << " did not finish (remaining burst: " << p->getTimeRemaining() << "). Demoting." << endl;
+#endif
                 int priorityBefore = p->getPriority();
 
                 // Decrement priority by amount of clock ticks spent in CPU
-                p->decrementPriority(timeInCPU);
-
-                // Move the process to the new priority queue if it changed
-                if (p->getPriority() < priorityBefore) {
-                    removeProcessFromPriorityList(p, priorityBefore);
-                    addProcessToPriorityList(p);
+                bool fullDecrement = p->decrementPriority(timeInCPU);
+#ifdef DEBUG
+                if (fullDecrement) {
+                    cout << "Process " << p->getPID() << " priority changed from " << priorityBefore << " to " << p->getPriority() << endl;
+                } else if (priorityBefore != p->getPriority()) {
+                    cout << "Process " << p->getPID() << " priority changed from " << priorityBefore << " to " << p->getPriority() << " (reached minimum)" << endl;
+                } else {
+                    cout << "Process " << p->getPID() << " priority not changed (still " << p->getPriority() << ", reached minimum)" << endl;                    
                 }
+#endif
+
+                // Move the process to its appropriate priority queue
+                // Since the priority is already changed, the process will
+                // be added to the end of the correct queue.
+                addProcessToPriorityList(p);
+
+                // Every process that is demoted resets its age timer
+                p->setAge(0);
 
                 // For wait time calculation, set exit CPU clock tick
                 p->setExitCPUTick(clock);
@@ -119,14 +153,6 @@ void WHS::run() {
 
 
 
-
-    // node max = rbt.maximum_node(tree->root);
-    // while (max != NULL) {
-    //     rbt.rbtree_delete(tree, (void*)max->key, RBTree::compare_int);
-    //     max = rbt.maximum_node(tree->root);
-    //     cout << "ok" << endl;
-    // }
-
     // Delete all the priority lists
     for (int i = 0; i < (int)listVector.size(); i++) {
         delete listVector[i];
@@ -135,16 +161,86 @@ void WHS::run() {
     delete tree;
 }
 
+void WHS::ageAllProcessesInTree() {
+    cout << "Aging all processes." << endl;
+    for (int i = 0; i <= 99; i++) {
+        if (listsInTree.test(i)) { // if true, list is in tree
+            list<Process*> *curList = listVector.at(i);
+            cout << "List " << i << ":" << endl;
+            for (list<Process*>::iterator it = curList->begin(); it != curList->end(); ++it) {
+                cout << "   " << (*it)->toString() << endl;
+            }
+            for (list<Process*>::iterator it = curList->begin(); it != curList->end(); ++it) {
+                Process* p = *it;
+                // Add 1 to each process's age
+                p->addAge(1);
+                // Promote the process (by 10 priority) if its aging timer expires
+                if (p->getAge() > ageLimit) {
+                    int priorityBefore = p->getPriority();
+                    p->incrementPriority(10);
+                    // If it changed, move it
+                    if (priorityBefore > p->getPriority()) {
+                        removeProcessFromPriorityList(it, priorityBefore);
+                        addProcessToPriorityList(p);
+                    }
+                }
+            }
+        }
+    }
+}
+
+bool WHS::hasNonTerminatedJobs() {
+    bool found = false;
+    int i = 0;
+    while (!found && (i < (int)terminatedProcesses.size())) {
+        if (!terminatedProcesses.at(i)) {
+            found = true;
+        }
+        i++;
+    }
+    return found;
+}
+
+void WHS::adjustIOQueue() {
+    // Subtract one from each process's I/O timer
+    BOOST_FOREACH(Process *p, waitQueue) {
+        p->decrementIOTimer();
+    }
+
+    bool stillZero = true;
+    deque<Process*>::iterator it = waitQueue.begin();
+    Process* p;
+    while (stillZero && (it != waitQueue.end())) {
+        if (p->getIOTimer() == 0) {
+            // Boost priority based on I/O, add to appropriate priority list, and remove process from wait queue.
+            p = *it;
+
+            p->incrementPriority(p->getIO());
+
+            addProcessToPriorityList(p);
+
+            // deque::erase returns the iterator following the last removed element,
+            // so no need to increment the iterator.
+            it = waitQueue.erase(it);
+        } else {
+            stillZero = false;
+        }
+    }
+}
+
 list<Process*>* WHS::getMaxPriorityList() {
     return (list<Process*>*)rbt.maximum_node(tree->root)->value;
 }
 
 void WHS::insertIntoTree(int priority, list<Process*> *list) {
     rbt.rbtree_insert(tree, (void*)priority, (void*)list, RBTree::compare_int);
+    listsInTree.set(priority); // Set bit to 1
 }
 
 int WHS::deleteFromTree(int priority) {
-    return rbt.rbtree_delete(tree, (void*)priority, RBTree::compare_int);
+    int retVal = rbt.rbtree_delete(tree, (void*)priority, RBTree::compare_int);
+    listsInTree.reset(priority); // Reset bit to 0
+    return retVal;
 }
 
 void WHS::addProcessToPriorityList(Process* p) {
@@ -178,19 +274,19 @@ void WHS::addProcessToPriorityList(Process* p) {
 #endif
 }
 
-void WHS::removeProcessFromPriorityList(Process* p, int priority) {
+void WHS::removeProcessFromPriorityList(list<Process*>::iterator it, int priority) {
     list<Process*> *priorityList = listVector.at(priority);
 
-    if (!priorityList->empty()) {
-        bool procFound = false;
+    // if (!priorityList->empty()) {
+    //     bool procFound = false;
         Process* curP;
-        list<Process*>::iterator it = priorityList->begin();
+    //     list<Process*>::iterator it = priorityList->begin();
 
 
-        while (!procFound && (it != priorityList->end())) {
+    //     while (!procFound && (it != priorityList->end())) {
             curP = *it;
-            if (curP->getPID() == p->getPID()) { // Found process
-                procFound = true;
+    //         if (curP->getPID() == p->getPID()) { // Found process
+    //             procFound = true;
                 priorityList->erase(it);
 #ifdef DEBUG
                 cout << "Process " << curP->getPID() << " removed from list " << curP->getPriority() << endl;
@@ -202,12 +298,12 @@ void WHS::removeProcessFromPriorityList(Process* p, int priority) {
                     printTree();
 #endif
                 }
-            }
-            ++it;
-        }
-    } else {
-        cout << "list " << priority << " empty" << endl;
-    }
+    //         }
+    //         ++it;
+    //     }
+    // } else {
+    //     cout << "list " << priority << " empty" << endl;
+    // }
 
 }
 
@@ -229,12 +325,12 @@ bool WHS::receiveNewJobs(int clock) {
             p->setExitCPUTick(clock);
 
             p->setState(Process::READY_TO_RUN);
+#ifdef DEBUG
+            cout << "New arrival at clock " << clock << ": adding process " << p->getPID() << " to list " << p->getPriority() << endl;
+#endif
             // Add the process to its appropriate priority list
             addProcessToPriorityList(p);
             foundNewProcess = true;
-#ifdef DEBUG
-            cout << "New arrival at clock " << clock << ": added process " << p->getPID() << " to list " << p->getPriority() << endl;
-#endif
         } else if (p->getArrivalTime() > clock) { // later process
             foundLaterProcess = true;
         }

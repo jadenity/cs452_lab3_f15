@@ -153,6 +153,9 @@ int main(int argc, char** argv) {
     }
     file.close();
 
+    // Make a vector before sorting to hold processes in order of their PID
+    vector<Process*> processesByPID(processes);
+
     // sorts the processes by arrival time
     sort(processes.begin(), processes.end(), Process::compare);
     
@@ -163,7 +166,7 @@ int main(int argc, char** argv) {
     } else if (algorithm == "rts") {
         sched = new RTS(processes);
     } else if (algorithm == "whs") {
-        sched = new WHS(processes, quantum, ageLimit);
+        sched = new WHS(processes, processesByPID, quantum, ageLimit);
     }
     
     // Using polymorphism to call functions after "new"ing schedulers.

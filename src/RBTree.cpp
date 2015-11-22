@@ -571,7 +571,7 @@ int RBTree::compare_int(void* leftp, void* rightp)
 }
 
 
- 
+// ** EXAMPLE CODE **
 /*
  * Main Contains Menu
  */

@@ -197,45 +197,45 @@ bool Process::isHighBand() const {
 // For debugging:
 // Returns 0 on successful full increment
 // Returns 1 if max priority reached
-int Process::incrementPriority(int amt) {
-  int retVal;
+bool Process::incrementPriority(int amt) {
+  bool fullIncrement;
   if (this->highBand) { // high band 50-99
     if ((this->priority + amt) > 99) {
       this->priority = 99;
-      retVal = 1;
+      fullIncrement = false;
     } else {
       this->priority += amt;
-      retVal = 0;
+      fullIncrement = true;
     }
   } else { // low band 0-49
     if ((this->priority + amt) > 49) {
       this->priority = 49;
-      retVal = 1;
+      fullIncrement = false;
     } else {
       this->priority += amt;
-      retVal = 0;
+      fullIncrement = true;
     }
   }
 
-  return retVal;
+  return fullIncrement;
 }
 
 // For debugging:
-// Returns 0 on successful full decrement
-// Returns 1 if min priority reached
-int Process::decrementPriority(int amt) {
-  int retVal;
+// Returns true on successful full decrement
+// Returns false if min priority reached
+bool Process::decrementPriority(int amt) {
+  bool fullDecrement;
   // Priority can never go lower than the original priority
   // Don't need to check isHighBand because it will never change bands
   if ((this->priority - amt) < this->originalPriority) {
     this->priority = this->originalPriority;
-    retVal = 1;
+    fullDecrement = false;
   } else {
     this->priority -= amt;
-    retVal = 0;
+    fullDecrement = true;
   }
 
-  return retVal;
+  return fullDecrement;
 }
 
 int Process::getIOTimer() const {
