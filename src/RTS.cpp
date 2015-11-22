@@ -94,9 +94,11 @@ void RTS::run() {
 			p = NULL;
 		  }
 		  
-		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of loaded processes (add ifdef)
+#ifdef DEBUG
+		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
 			cout << rtsQueue.at(i)->getPID() << endl;
 		  }
+#endif
 		  
 		}
 	
@@ -120,9 +122,9 @@ void RTS::run() {
 
 		  p->setFinishTime(clock);
 		  p->setState(Process::TERMINATED);
-		  
-		  //cout << p->getPID() << " ended." << endl; //TESTING: output PID of process that just ended (add ifdef)
-
+#ifdef DEBUG		  
+		  //cout << p->getPID() << " ended." << endl; //TESTING: output PID of process that just ended
+#endif
 		  //pop next process from rtsQueue, if there is one
 		  if(rtsQueue.size() > 0){
 			p = rtsQueue.front();
@@ -133,9 +135,11 @@ void RTS::run() {
 		  }
 		  
 		  
-		  /*for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue (add ifdef)
+#ifdef DEBUG
+		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
 			cout << rtsQueue.at(i)->getPID() << endl;
-		  }*/
+		  }
+#endif
 		  
 		  
 		}
@@ -146,20 +150,23 @@ void RTS::run() {
 		  //push the current active process back into rtsQueue. 
 		  //this was wrong somehow, as this was causing multiples of a single process to be in rtsQueue
 		  //rtsQueue.push_front(p);
-		  
-		  /*for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue (add ifdef)
+#ifdef DEBUG
+		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
 			cout << rtsQueue.at(i)->getPID() << endl;
-		  }*/
-
+		  }
+#endif
 		while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
-			if(this->processes.at(jobsLoaded)->getDeadline() > this->processes.at(jobsLoaded)->getBurst() + clock){
+			if(this->processes.at(jobsLoaded)->getDeadline() > this->processes.at(jobsLoaded)->getBurst() + clock){ //process can finish by deadline
 
 			  rtsQueue.push_back(this->processes.at(jobsLoaded));
 			  this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
 			  jobsLoaded++;
 
-			} else {
+			} else { //process can't finish by deadline
+		      cout << "Process " << p->getPID() << " cancelled. Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() 
+				<< " Deadline: " << p->getDeadline() << endl; //output info of cancelled process
+				
 			  this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
 			  jobsLoaded++;
 			}

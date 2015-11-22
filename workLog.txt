@@ -469,20 +469,22 @@ Here's the REAL issue: I somehow load in a single process multiple times. I need
 
 11/21:
 
-Although RTS seems to be working, I still have to do the following (~ instead of - means it may already be done):
+Although RTS seems to be working, I still have to do the following ("~" = it may be done, "-" = I should look at it, an added ">" = look at this closely):
 	RTS:
-	~make a hard real time mode (stop when a process gets kicked out)
-		This may need to include processes currently kicked out by the main.
+	~>make a hard real time mode (stop when a process gets kicked out). What are the details of this mode I wonder.
 	~report processes that can't be scheduled (but not for hard real time) - at least partially already done in main
-	-"The time spent in the CPU of the failed process should be included in the calculation of the average turnaround time and 
-	  waiting time for the scheduler." I wonder how this should work...
+	->"The time spent in the CPU of the failed process should be included in the calculation of the average turnaround time and 
+	  waiting time for the scheduler." I think I have this already, but worth making sure.
+	-Look more into this "slack" thing that my partner was talking about once.
 	All:
 	-Gantt chart info (such as start/end time in CPU) - will involve PID
-	-wait/turnaround times 													<-- Need to focus on this
+	~>wait/turnaround times (worth making sure I have correct values)
 	~total processes scheduled
-	-#ifdef DEBUG around test outputs (may want to take out irrelevant ones)
+	~#ifdef DEBUG around test outputs
 
-
+About the third point for the RTS specific item in the list above:
+	I'm pretty sure wait time should go up as it is: incrementing by 1 when a process active at one time may be kicked out later,
+	but what about turnaround time and number of processes scheduled? Turnaround time may be especially interesting...
 
 
 
