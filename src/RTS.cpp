@@ -5,6 +5,8 @@
 #include "Time_Queue.hpp"
 #include "Scheduler.hpp"
 
+#define DEBUG
+
 using namespace std;
 
 RTS::RTS(vector<Process *> &processes)
@@ -65,8 +67,7 @@ void RTS::run() {
     //TESTING: pop and output some info about processes loaded
 #ifdef DEBUG
     for(int i = 0; i < jobsLoaded; i++){
-      Process *p = rtsQueue.front();
-      rtsQueue.erase(rtsQueue.begin());
+      Process *p = rtsQueue.at(i);
       cout << "PID:" << p->getPID() << " Arrival:" << p->getArrivalTime() << " Burst:" << p->getBurst() << " Deadline:" << p->getDeadline() << endl;
     }
 #endif
@@ -87,7 +88,8 @@ void RTS::run() {
 	  cout << "Process details are, Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() << " Deadline: " << p->getDeadline() << endl;
 #endif
 	} else {
-		while(p->getTimeRemaining() + clock > p->getDeadline()){
+cout << "a" << endl;
+		while(p->getTimeRemaining() + clock > p->getDeadline()){ //remove any and all processes that can't finish by deadline -------------------------------------Probable error here
 		  p->setState(Process::TERMINATED); //terminates current active process. since p is a pointer, it is set as terminated in the scheduler's list as well
 		  
 		  cout << "Process " << p->getPID() << " cancelled. Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() 
@@ -108,28 +110,29 @@ void RTS::run() {
 #endif
 		  
 		}
-	
+cout << "b" << endl;	
 
 		//CLOCK TICK, reduce time remaining on active process
 		if(p != NULL){
 		  p->setTimeRemaining(p->getTimeRemaining() - 1);
 		}
-		
+cout << "c" << endl;		
 		//increment wait times of all processes loaded in thus far
 		for(int i = 0; i < (int)rtsQueue.size(); i++){
 		  Process* p2 = rtsQueue.at(i);
 		  p2->addTimeWaiting(1);
 		}
-
+cout << "d" << endl;
 		//advance the clock, last part of CLICK TICK (occurs with or without an active process)
 		clock++;
+#ifdef DEBUG
 		if(clock == 100000){
 			for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
 			cout << rtsQueue.at(i)->getPID() << endl;
 		  }
 		  cout << "Possibly stuck. Current process PID: " << p->getPID() << endl;
 		}
-
+#endif
 		//check if the current process is done (if one is active)
 		if(p != NULL && p->getTimeRemaining() == 0){
 
@@ -154,17 +157,23 @@ void RTS::run() {
 		  }
 #endif
 		  
-		  
+		//if there is no active process, we can advance the clock immediately to the arrival time of the next process to be loaded in (if there's one to load)
+		} else if(p == NULL && jobsLoaded < (int)this->processes.size()){ 
+		  clock = this->processes.at(jobsLoaded)->getArrivalTime(); 
 		}
+cout << "e" << endl;
 
 	  //check if a process has "arrived" (unless we loaded them all)
 	  if(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
+	  cout << "Process " << this->processes.at(jobsLoaded)->getPID() << " has arrived. Deadlines: " << p->getDeadline() << " " << this->processes.at(jobsLoaded)->getDeadline() << endl;
 	  
-	    //replace the following with a method call if possible
+	  //put currently active process back in the queue in case it needs to be replaced with a process with a shorter deadline. We'll end up pulling it back out if it doesn't
+	  rtsQueue.push_back(p);
+	  
 #ifdef DEBUG
-		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
-			cout << rtsQueue.at(i)->getPID() << endl;
-		  }
+		for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
+		  cout << rtsQueue.at(i)->getPID() << endl;
+		}
 #endif
 		while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
 
@@ -195,78 +204,13 @@ void RTS::run() {
 
 		  
 	    }
-		//Order processes by deadline again
+		//Order processes by deadline again and make the lowest deadline process active (unless hard real time is stopping RTS)
 		if(!hardRealTimeStop){
 		  sort(rtsQueue.begin(), rtsQueue.end(), Process::compareDeadline);
-		  
-		  //also need to decide if a different process needs to become active
-		  Process *p2 = rtsQueue.front();
-		  
-		  if(p == NULL){ //a process needs to become active
-            p = rtsQueue.front();
-            rtsQueue.pop_front();
-          } else if(p->getDeadline() > p2->getDeadline()){ //a process with shorter deadline arrived, switch it with currently active process
-		  
-		    //first, the current process needs to get back into the queue in an appropriate location
-			Process *p3;
-			deque<Process*>::iterator it = rtsQueue.begin(); //iterator used with deque insert
-			for(int i = 0; i < (int)rtsQueue.size() && p->getPID() != p2->getPID(); i++){
-			  p3 = rtsQueue.at(i);
-			  
-			  if(p->getDeadline() < p3->getDeadline()){ //here, we found the place to put the current process, so we can switch it out now
-		        rtsQueue.insert(it, p);
-				p = p2;
-				rtsQueue.pop_front();
-			  } else { //otherwise, increment the iterator and keep looking for a place to put it
-			    ++it;
-			  }
-			}
-		  }
+		  p = rtsQueue.front();
+		  rtsQueue.pop_front();
 		}
-		////
       }
     }
   }
 }
-
-//method version of the last step in the RTS loop. Was unsuccessful in making it useful in a short amount of time.
-/*void RTS::loadArrivals(int clock, int jobsLoaded, deque<Process*> rtsQueue, char softOrHard, bool hardRealTimeStop){
-#ifdef DEBUG
-		  for (int i = 0; i < (int)rtsQueue.size(); i++) { //TESTING: display PIDs of processes loaded into rtsQueue
-			cout << rtsQueue.at(i)->getPID() << endl;
-		  }
-#endif
-		while(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
-
-			if(this->processes.at(jobsLoaded)->getDeadline() >= this->processes.at(jobsLoaded)->getBurst() + clock){ //process can finish by deadline
-
-			  rtsQueue.push_back(this->processes.at(jobsLoaded));
-			  this->processes.at(jobsLoaded)->setState(Process::READY_TO_RUN);
-			  jobsLoaded++;
-
-			} else { //process can't finish by deadline
-			
-			  if(softOrHard == 'h'){ //hard real time mode: stop everything
-			    hardRealTimeStop = true;
-	            cout << "Process " << this->processes.at(jobsLoaded)->getPID() << " cancelled. Shutting down." << endl;
-				clock = -1; //forces while loop to end
-#ifdef DEBUG	  
-	            //output more info of cancelled process
-	            cout << "Process details are, Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() << " Deadline: " << p->getDeadline() << endl;
-#endif
-			  } else { //soft real time mode: report this process and load the next one
-		        cout << "Process " << this->processes.at(jobsLoaded)->getPID() << " not scheduled. Clock: " << clock << " Time Remaining: " << this->processes.at(jobsLoaded)->getTimeRemaining() 
-				  << " Deadline: " << this->processes.at(jobsLoaded)->getDeadline() << endl; //output info of cancelled process
-				
-			    this->processes.at(jobsLoaded)->setState(Process::TERMINATED);
-			    jobsLoaded++;
-			  }
-			}
-
-		  
-	    }
-		//Order processes by deadline again (unless hard real time mode is shutting down)
-		if(!hardRealTimeStop){
-		  sort(rtsQueue.begin(), rtsQueue.end(), Process::compareDeadline);
-		}
-}*/
