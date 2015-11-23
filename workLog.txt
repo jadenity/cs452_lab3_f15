@@ -512,5 +512,41 @@ So, the only REAL things to do are:
 	-Get wait/turnaround times to account for when RTS kicks our processes (thought started at line 485).
 
 
+11/23 (last day):
+
+There's problems other than seg faults. I have a test file where a process arrives shortly after the first process, but it doesn't switch places with the active one with a later deadline...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
