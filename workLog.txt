@@ -471,14 +471,14 @@ Here's the REAL issue: I somehow load in a single process multiple times. I need
 
 Although RTS seems to be working, I still have to do the following ("~" = it may be done, "-" = I should look at it, an added ">" = look at this closely):
 	RTS:
-	~make a hard real time mode (stop when a process gets kicked out).
+	~make a hard real time mode (stop when a process gets kicked out). - Made slightly more proper, but requires testing.
 	~report processes that can't be scheduled (but not for hard real time) - at least partially already done in main
 	->"The time spent in the CPU of the failed process should be included in the calculation of the average turnaround time and 
 	  waiting time for the scheduler."
-	-Look more into this "slack" thing that my partner was talking about once.
+	~[Optional?] Look more into this "slack" thing that my partner was talking about once. - He says I'm already doing this and "slack" is a different way to say it
 	All:
 	-Gantt chart info (such as start/end time in CPU) - will involve PID
-	~>wait/turnaround times (worth making sure I have correct values) - using a calculator to confirm accuracy should suffice
+	~wait/turnaround times (worth making sure I have correct values) - using a calculator to confirm accuracy should suffice
 	~total processes scheduled
 	~#ifdef DEBUG around test outputs
 
@@ -493,8 +493,23 @@ About the third point for the RTS specific item in the list above:
 About hard real time:
 	What should trigger hard real time to stop? Negative numbers? Arrival higher than deadline? Only processes that arrive before deadline that don't finish?
 	Probably not the first one, but I'm wondering about the second one. Still, the last one is most likely.
+	Although, I hope processes that never get into rtsQueue aren't counted as processes that were scheduled, because they aren't really in RTS before then.
+		Apparently, they are... This needs to be fixed.
 
+Looks like I didn't test something I should have: what happens when processes get kicked out during the while loop.
+	It may somehow be deleting data I shouldn't be...
+	*No, wait, I'm starting with a null process! I just need to handle p being null better, and I may be 100% good to go.
+		Unfortunately, this is proving to be difficult...
+		Advancing the clock to when the earliest process arrives helps (should do this every place applicable), but now I've got a seg fault problem going on.
 
+Shifting gears to making sure average wait/turnaround time is calculated right first.
+	I ran the numbers on my calculator, and it looks like they're fine for a dataset that involves no process getting kicked out while RTS is running.
+
+So, the only REAL things to do are:
+	-Handle moments when p is null properly. (in progress. seems good so far though)
+	-Find out what's causing my seg faults. Probably involves when processes loaded in are cancelled.
+	-Get some Gantt chart things going.
+	-Get wait/turnaround times to account for when RTS kicks our processes (thought started at line 485).
 
 
 

@@ -9,6 +9,7 @@ public:
     RTS(vector<Process *> &processes);
     void run();
     virtual ~RTS();
+	//void loadArrivals(int clock, int jobsLoaded, deque<Process*> rtsQueue, char softOrHard, bool hardRealTimeStop);
 private:
 
 };
