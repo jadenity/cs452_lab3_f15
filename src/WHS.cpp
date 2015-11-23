@@ -7,7 +7,7 @@
 #include "WHS.hpp"
 #include "RBTree.hpp"
 
-//#define DEBUG
+#define DEBUG
 
 using namespace std;
 

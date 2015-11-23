@@ -12,29 +12,23 @@
 #include "RTS.hpp"
 #include "WHS.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 using namespace boost;
 
 int main(int argc, char** argv) {
     
-    string algorithm = "";
-    
+    string fileName = "";
     // makes sure the user entered just one argument
-//    if (argc == 2) {
-//        algorithm = string(argv[1]);
-//        
-//        // check if the value entered was 'mfqs', 'rts', or 'hs'
-//        if (algorithm != "mfqs" && algorithm != "rts" && algorithm != "hs") {
-//            cout << "Enter 'mfqs', 'rts' or 'hs'" << endl;
-//            exit(1);
-//        }
-//    } else {
-//        cout << "Enter an algorithm to use. (mfqs, rts, hs)" << endl;
-//        exit(1);
-//    }
+   if (argc == 2) {
+       fileName = string(argv[1]);
+   } else {
+       cout << "Enter the file name of processes to use as an argument. (e.g. './main 100k_processes')" << endl;
+       exit(1);
+   }
     
+    string algorithm = "";
     cout << "Which algorithm would you like to use? (mfqs/rts/whs): ";
     cin >> algorithm;
     while (algorithm != "mfqs" && algorithm != "rts" && algorithm != "whs") {
@@ -72,8 +66,8 @@ int main(int argc, char** argv) {
     //file.open("test.txt");
     //file.open("1k_proc.txt");
     //file.open("10k_proc.txt");
-    file.open("10proc.txt");
-    //file.open("150proc.txt");
+    //file.open("10proc.txt");
+    file.open(fileName);
     string line;
     vector<string> fields;
     vector<Process*> processes;
