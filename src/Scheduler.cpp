@@ -55,7 +55,7 @@ double Scheduler::calcAvgWaitTime() {
 #ifdef DEBUG
     cout << "Number of processes: " << processes.size() << endl << endl;
 #endif
-    double avg = totalWait / (double)processes.size();
+    double avg = totalWait / totalProcessesRan;
     return avg;
 }
     
