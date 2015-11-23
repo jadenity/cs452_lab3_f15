@@ -471,22 +471,28 @@ Here's the REAL issue: I somehow load in a single process multiple times. I need
 
 Although RTS seems to be working, I still have to do the following ("~" = it may be done, "-" = I should look at it, an added ">" = look at this closely):
 	RTS:
-	~>make a hard real time mode (stop when a process gets kicked out). What are the details of this mode I wonder.
+	~make a hard real time mode (stop when a process gets kicked out).
 	~report processes that can't be scheduled (but not for hard real time) - at least partially already done in main
 	->"The time spent in the CPU of the failed process should be included in the calculation of the average turnaround time and 
-	  waiting time for the scheduler." I think I have this already, but worth making sure.
+	  waiting time for the scheduler."
 	-Look more into this "slack" thing that my partner was talking about once.
 	All:
 	-Gantt chart info (such as start/end time in CPU) - will involve PID
-	~>wait/turnaround times (worth making sure I have correct values)
+	~>wait/turnaround times (worth making sure I have correct values) - using a calculator to confirm accuracy should suffice
 	~total processes scheduled
 	~#ifdef DEBUG around test outputs
 
 About the third point for the RTS specific item in the list above:
 	I'm pretty sure wait time should go up as it is: incrementing by 1 when a process active at one time may be kicked out later,
 	but what about turnaround time and number of processes scheduled? Turnaround time may be especially interesting...
+		I think I'm supposed to include processes that get kicked out after being loaded into the scheduler as part of the number of processes.
+			I'm probably already doing this.
 
+11/22: continuing tasks in to do list made yesterday.
 
+About hard real time:
+	What should trigger hard real time to stop? Negative numbers? Arrival higher than deadline? Only processes that arrive before deadline that don't finish?
+	Probably not the first one, but I'm wondering about the second one. Still, the last one is most likely.
 
 
 

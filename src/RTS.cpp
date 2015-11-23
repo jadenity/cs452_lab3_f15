@@ -66,9 +66,8 @@ void RTS::run() {
   //in preparation to run RTS, pop the first process off of rtsQueue (earliest PID with shortest deadline).
   //
   //there's also "slack" to keep in mind, the amount of time a process could wait before it must run.
-  //In other words, we should probably load the lowest burst processes, even though we shouldn't know burst in a real program.
-  //But how should we do this? also sorting by burst may be tricky, and also slow...
-  //I think I'll ignore this "slack" thing for now
+  //In other words, we should perhaps try loading the lowest burst processes, even though we shouldn't know burst in a real program.
+  //But how should we do this? sorting by burst AND deadline may be tricky, and also slow...
   Process *p = rtsQueue.front();
   rtsQueue.pop_front();
   //We're done when all processes are terminated either from having too short a deadline or finishing its burst
@@ -77,8 +76,11 @@ void RTS::run() {
     //check if we have processes that can't finish by the deadline
 	if(softOrHard == 'h'){ //hard real time mode is active. stop scheduler loop now
 	  hardRealTimeStop = true;
-	  cout << "Process " << p->getPID() << " cancelled. Scheduler halted (hard real time mode). Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() 
-				<< " Deadline: " << p->getDeadline() << endl; //output info of cancelled process
+	  cout << "Process " << p->getPID() << " cancelled. Shutting down." << endl;
+#ifdef DEBUG	  
+	  //output more info of cancelled process
+	  cout << "Process details are, Clock: " << clock << " Time Remaining: " << p->getTimeRemaining() << " Deadline: " << p->getDeadline() << endl;
+#endif
 	} else {
 		while(p->getTimeRemaining() + clock > p->getDeadline()){
 		  p->setState(Process::TERMINATED); //terminates current active process. since p is a pointer, it is set as terminated in the scheduler's list as well
@@ -123,7 +125,7 @@ void RTS::run() {
 		  p->setFinishTime(clock);
 		  p->setState(Process::TERMINATED);
 #ifdef DEBUG		  
-		  //cout << p->getPID() << " ended." << endl; //TESTING: output PID of process that just ended
+		  cout << p->getPID() << " ended." << endl; //TESTING: output PID of process that just ended
 #endif
 		  //pop next process from rtsQueue, if there is one
 		  if(rtsQueue.size() > 0){

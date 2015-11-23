@@ -67,11 +67,11 @@ int main(int argc, char** argv) {
 
     // Read in the test file
     ifstream file;
-    //file.open("100k_processes");
+    file.open("100k_processes");
     //file.open("test2.txt");
     //file.open("1k_proc.txt");
     //file.open("10k_proc.txt");
-    file.open("10proc.txt");
+    //file.open("10proc.txt");
     //file.open("150proc.txt");
     string line;
     vector<string> fields;
