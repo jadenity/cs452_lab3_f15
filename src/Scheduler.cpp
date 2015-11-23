@@ -72,7 +72,7 @@ double Scheduler::calcAvgTurnaroundTime() {
 #ifdef DEBUG
     cout << "Number of processes: " << processes.size() << endl << endl;
 #endif
-    double avg = totalTurnaround / (double)processes.size();
+    double avg = totalTurnaround / totalProcessesRan;
     return avg;
 }
 
