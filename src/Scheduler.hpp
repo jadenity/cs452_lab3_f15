@@ -17,10 +17,12 @@ public:
     virtual void run();
     double calcAvgWaitTime();
     double calcAvgTurnaroundTime();
+    int getTotalProcessesRan();
     virtual ~Scheduler();
 protected:
     vector<Time_Queue *> queues;
     vector<Process *> processes;
+    int totalProcessesRan;
 };
 
 #endif

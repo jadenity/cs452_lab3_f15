@@ -50,7 +50,7 @@ void MFQS::run() {
 #ifdef DEBUG
             if (!queueIsEmpty) {
                 cout << "**" << endl;
-                cout << "Currently running in queue " << i << ": " << queue->toString();
+                cout << "Clock " << clock << ": Currently running in queue " << i << ": " << queue->toString();
                 cout << "**" << endl << endl;
             }
 #endif
@@ -69,6 +69,10 @@ void MFQS::run() {
                     // its last run session is its added to its wait time.
                     p->addTimeWaiting(clock - p->getExitCPUTick());
 
+#ifdef DEBUG
+                    cout << "clock before: " << clock << endl;
+#endif
+
                     clock += timeRan;
 
                     // !!TEMP!!
@@ -84,7 +88,7 @@ void MFQS::run() {
 #ifdef DEBUG
                     cout << "****FCFS****" << endl;
                     cout << "Process " << p->getPID() << " ran for " << timeRan << " in queue " << i << " and terminated." << endl;
-                    cout << "clock: " << clock << endl << endl;
+                    cout << "clock after: " << clock << endl << endl;
 #endif
                 } else { // All queues before last are TQ
                     p->setState(Process::RUNNING);
@@ -92,11 +96,15 @@ void MFQS::run() {
                     if (p->getTimeRemaining() <= queue->getQuantum()) { // Process will finish in this TQ
                         timeRan = p->getTimeRemaining();
                         p->addTimeWaiting(clock - p->getExitCPUTick());
+#ifdef DEBUG
+                        cout << "clock before: " << clock << endl;
+#endif
+
                         clock += timeRan;
 
 #ifdef DEBUG
                         cout << "Process " << p->getPID() << " ran for " << timeRan << " in queue " << i << " and terminated." << endl;
-                        cout << "clock: " << clock << endl << endl;
+                        cout << "clock after: " << clock << endl << endl;
 #endif
                         // !!TEMP!!
                         iteration++;
@@ -111,6 +119,9 @@ void MFQS::run() {
                     } else { // Process will not finish in this TQ
                         timeRan = queue->getQuantum();
                         p->addTimeWaiting(clock - p->getExitCPUTick());
+#ifdef DEBUG
+                        cout << "clock before: " << clock << endl;
+#endif
                         clock += timeRan;
                         p->setTimeRemaining(p->getTimeRemaining() - timeRan);
 
@@ -173,6 +184,8 @@ void MFQS::run() {
         delete this->queues.at(i);
     }
 
+    // In MFQS, all processes are scheduled.
+    this->totalProcessesRan = processes.size();
 }
 
 // receiveNewJobs changes the state of all processes that
@@ -246,18 +259,3 @@ int MFQS::age(int curQ, Process* p, int timeRan) {
 
     return jobAged;
 }
-
-
-// p = process that just finished in CPU
-// After a process (p) runs for its time quantum, do this:
-// If p finished,
-//  Add time remaining to age of all procceses in current queue (q) and all queues beneath q.
-//  Set p's time remaining to 0
-//  Terminate p.
-//  Promote all processes in q and all queues beneath q whose age exceeded the age limit.
-//      Only promote processes not in the top two queues.
-// else
-//  Add time quantum of q to all processes in q and all queues beneath q.
-//  Promote all processes in q and all queues beneath q whose age exceeded the age limit.
-//      Only promote processes not in the top two queues.
-//  Demote p.

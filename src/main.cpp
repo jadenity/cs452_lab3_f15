@@ -12,29 +12,23 @@
 #include "RTS.hpp"
 #include "WHS.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 using namespace boost;
 
 int main(int argc, char** argv) {
     
-    string algorithm = "";
-    
+    string fileName = "";
     // makes sure the user entered just one argument
-//    if (argc == 2) {
-//        algorithm = string(argv[1]);
-//        
-//        // check if the value entered was 'mfqs', 'rts', or 'hs'
-//        if (algorithm != "mfqs" && algorithm != "rts" && algorithm != "hs") {
-//            cout << "Enter 'mfqs', 'rts' or 'hs'" << endl;
-//            exit(1);
-//        }
-//    } else {
-//        cout << "Enter an algorithm to use. (mfqs, rts, hs)" << endl;
-//        exit(1);
-//    }
+   if (argc == 2) {
+       fileName = string(argv[1]);
+   } else {
+       cout << "Enter the file name of processes to use as an argument. (e.g. './main 100k_processes')" << endl;
+       exit(1);
+   }
     
+    string algorithm = "";
     cout << "Which algorithm would you like to use? (mfqs/rts/whs): ";
     cin >> algorithm;
     while (algorithm != "mfqs" && algorithm != "rts" && algorithm != "whs") {
@@ -67,12 +61,15 @@ int main(int argc, char** argv) {
 
     // Read in the test file
     ifstream file;
-    file.open("100k_processes");
+
+    //file.open("100k_processes");
+    //file.open("test2.txt");
+
     //file.open("test.txt");
     //file.open("1k_proc.txt");
     //file.open("10k_proc.txt");
     //file.open("10proc.txt");
-    //file.open("150proc.txt");
+    file.open(fileName);
     string line;
     vector<string> fields;
     vector<Process*> processes;
@@ -112,10 +109,10 @@ int main(int argc, char** argv) {
         }
 
         // Ignore negative or early deadline only for RTS
-        if ((algorithm == "rts") && ((deadline < 0) || (deadline < arrival))) {
+        if ((algorithm == "rts") && ((deadline < 0) || (deadline < arrival) || (burst > deadline))) {
             ignore = true;
 #ifdef DEBUG
-            cout << "Ignoring PID " << pid << ": using RTS and either deadline < 0 or deadline < arrival." << endl;
+            cout << "Ignoring PID " << pid << ": using RTS and either (deadline < 0 or deadline < arrival or burst > deadline)." << endl;
 #endif
         }
 
@@ -176,14 +173,16 @@ int main(int argc, char** argv) {
     cout << endl << "Average wait time: " << avgWaitTime << endl << endl;
 
     double avgTurnaroundTime = sched->calcAvgTurnaroundTime();
+
+    cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
+
+    cout << "Total processes scheduled: " << sched->getTotalProcessesRan() << endl;
+
     delete sched;
     
     BOOST_FOREACH(Process *p, processes) {
         delete p;
     }
-    cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
-
-    cout << "Total processes scheduled: " << processes.size() << endl;
 
     return 0;
 }
