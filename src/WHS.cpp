@@ -7,7 +7,7 @@
 #include "WHS.hpp"
 #include "RBTree.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 
@@ -42,10 +42,6 @@ WHS::WHS(vector<Process *> &processes, vector<Process *> &processesByPID, int qu
 
     // Resets all bits to 0
     listsInTree.reset();
-
-    // Add jobs with arrival 0 to first queue
-    receiveNewJobs(0);
-
 }
 
 WHS::~WHS(){
@@ -54,45 +50,85 @@ WHS::~WHS(){
 void WHS::run() {
 
     int clock = 0;
-    // while (this->hasUnfinishedJobs()) {
-
-
-        // Choose the highest priority process that is ready to run.
-        list<Process*> *maxList = getMaxPriorityList();
-
-        // Run the first process in the list and pop it off the list.
-        Process* p = maxList->front();
-        maxList->pop_front();
-
-        // Remove the list from the tree if it's now empty.
-        if (maxList->empty()) {
-            int priority = p->getPriority();
-            deleteFromTree(priority);
-        }
-
-        int runTimer;
-        int io = p->getIO();
-        int burst = p->getBurst();
-        bool killAfterTQ = false;
-        if (io == 0) { // CPU bound (no I/O): run for full TQ
-            if (burst < quantum) { // Process terminates
-                runTimer = burst;
-                killAfterTQ = true;
-            } else {
-                runTimer = quantum;
-            }
+    while (this->hasNonTerminatedJobs() /*&& clock < 250*/) {
+        
 #ifdef DEBUG
-            cout << "Process " << p->getPID() << " is CPU bound (no I/O). Running for " << runTimer << endl;
+        cout << endl << "*****Beginning of clock tick: " << clock << "******" << endl;
 #endif
+
+        receiveNewJobs(clock);
+
+        // IF TREE IS EMPTY, JUST ADVANCE CLOCK TICK
+        if (tree->root != NULL) {
+
+#ifdef DEBUG
+            cout << "Tree of Priority Lists: " << endl;
+            printTree();
+#endif
+
+            // Choose the highest priority process that is ready to run.
+            list<Process*> *maxList = getMaxPriorityList();
+
+
+            // Run the first process in the list and pop it off the list.
+            Process* p = maxList->front();
+            
+#ifdef DEBUG
+            cout << "Highest priority list (" << p->getPriority() << "):" << endl;
+            // for (list<Process*>::iterator it = maxList->begin(); it != maxList->end(); ++it) {
+            //     cout << "   " << (*it)->toString() << endl;
+            // }
+#endif
+
+            maxList->pop_front();
+
+#ifdef DEBUG
+            cout << "**Loaded into CPU: process: " << p->toString() << endl;
+#endif
+
+            // Remove the list from the tree if it's now empty.
+            if (maxList->empty()) {
+                int priority = p->getPriority();
+                deleteFromTree(priority);
+            }
+
+            int runTimer;
+            int io = p->getIO();
+            int timeRemaining = p->getTimeRemaining();
+            bool killAfterTQ = false;
+            bool doesIO = false;
+            if (timeRemaining <= quantum) { // Process terminates
+                runTimer = timeRemaining;
+                killAfterTQ = true;
+#ifdef DEBUG
+            cout << "Process " << p->getPID() << " will finish before the time quantum is up. Running for remaining burst:  " << runTimer << " clock ticks." << endl;
+#endif
+            } else if (io > 0) { // Process does I/O at 2nd-to-last clock tick of TQ
+                runTimer = quantum - 1;
+                p->resetIOTimer();
+                doesIO = true;
+#ifdef DEBUG
+            cout << "Process " << p->getPID() << " will do I/O. Running for (time quantum - 1):  " << runTimer << " clock ticks." << endl;
+#endif
+            } else { // Process does not do I/O and does not finish
+                runTimer = quantum;
+#ifdef DEBUG
+            cout << "Process " << p->getPID() << " is CPU bound (no I/O). Running for full time quantum of " << runTimer << " clock ticks." << endl;
+#endif
+            }
 
             // Save total time in CPU
             int timeInCPU = runTimer;
 
             // The difference between this clock tick and the end of
             // its last run session is its added to its wait time.
-            p->addTimeWaiting(clock - p->getExitCPUTick());
+            // p->addTimeWaiting(clock - p->getExitCPUTick());
 
             while (runTimer > 0) {
+#ifdef DEBUG
+                cout << "Process in CPU: " << p->toString() << endl;
+                cout << "Remaining time in CPU: " << runTimer << endl;
+#endif
                 p->decrementTimeRemaining();
 
                 // Age processes
@@ -103,14 +139,29 @@ void WHS::run() {
 
                 runTimer--;
                 clock++;
+                if (runTimer > 0) {
+#ifdef DEBUG
+                    cout << endl << "**Beginning of clock tick: " << clock << endl;
+#endif
+                    receiveNewJobs(clock);
+                }
             }
 
-            if (killAfterTQ) { // Process finished
+            if (killAfterTQ) { // Process finishes
                 p->setFinishTime(clock);
                 p->setState(Process::TERMINATED);
-                // terminatedProcesses starts at 0 to line up with processesByPID
-                terminatedProcesses.at(p->getPID() - 1) = true;
-            } else { // Process did not finish; demote process
+
+                int index = find(processes.begin(), processes.end(), p) - processes.begin();
+                terminatedProcesses.at(index) = true;
+#ifdef DEBUG
+                cout << "Process " << p->getPID() << " completed. Terminated. " << endl;
+#endif
+            } else if (doesIO) { // Process does I/O; send to wait queue
+                waitQueue.push_back(p);
+#ifdef DEBUG
+                cout << "Process " << p->getPID() << " doing I/O. Sent to wait queue for " << p->getIO() << " ticks. " << endl;
+#endif
+            } else { // Process did not finish and does not do I/O; demote process
 #ifdef DEBUG
                 cout << "Process " << p->getPID() << " did not finish (remaining burst: " << p->getTimeRemaining() << "). Demoting." << endl;
 #endif
@@ -136,14 +187,24 @@ void WHS::run() {
                 // Every process that is demoted resets its age timer
                 p->setAge(0);
 
-                // For wait time calculation, set exit CPU clock tick
-                p->setExitCPUTick(clock);
             }
-        } else { // Process does I/O (at second-to-last tick of TQ)
 
+            // For wait time calculation, set exit CPU clock-1
+            // because clock was advanced once at end of loop
+#ifdef DEBUG
+            cout << "Setting exitCPUTick to " << clock-1 << endl;
+#endif
+            // p->setExitCPUTick(clock-1);
+        } else {
+#ifdef DEBUG
+            cout << "Priority list tree is empty." << endl;
+#endif
+            // Adjust I/O wait queue
+            adjustIOQueue();
+            clock++;
         }
-
-    // }
+        // Advance clock tick when no jobs are in the tree.
+    } // end while (this->hasNonTerminatedJobs())
 
 
 
@@ -161,28 +222,47 @@ void WHS::run() {
     delete tree;
 }
 
+// Ages every process in every list in the tree of priority lists.
+// Also adds 1 to wait time of each process.
 void WHS::ageAllProcessesInTree() {
-    cout << "Aging all processes." << endl;
     for (int i = 0; i <= 99; i++) {
         if (listsInTree.test(i)) { // if true, list is in tree
             list<Process*> *curList = listVector.at(i);
-            cout << "List " << i << ":" << endl;
-            for (list<Process*>::iterator it = curList->begin(); it != curList->end(); ++it) {
-                cout << "   " << (*it)->toString() << endl;
-            }
+#ifdef DEBUG
+            // cout << "Aging all in list " << i << ":" << endl;
+            // for (list<Process*>::iterator it = curList->begin(); it != curList->end(); ++it) {
+            //     cout << "   " << (*it)->toString() << endl;
+            // }
+#endif
             for (list<Process*>::iterator it = curList->begin(); it != curList->end(); ++it) {
                 Process* p = *it;
                 // Add 1 to each process's age
                 p->addAge(1);
+                // Add 1 to wait time
+                p->addTimeWaiting(1);
                 // Promote the process (by 10 priority) if its aging timer expires
                 if (p->getAge() > ageLimit) {
+#ifdef DEBUG
+                    cout << "Process " << p->getPID() << " aging timer expired." << endl;
+#endif
                     int priorityBefore = p->getPriority();
                     p->incrementPriority(10);
                     // If it changed, move it
-                    if (priorityBefore > p->getPriority()) {
-                        removeProcessFromPriorityList(it, priorityBefore);
+                    if (priorityBefore < p->getPriority()) {
+                        // Probably not the best way to do this...
+                        list<Process*>::iterator temp = it;
+                        ++it;
+                        removeProcessFromPriorityList(temp, priorityBefore);
                         addProcessToPriorityList(p);
+                    } else {
+#ifdef DEBUG
+                        cout << "Priority not changed due to aging, reached maximum. (still" << p->getPriority() << ")." << endl;
+#endif
                     }
+                    p->setAge(0);
+#ifdef DEBUG
+                    cout << "   Reset age of process " << p->getPID() << " to 0." << endl;
+#endif
                 }
             }
         }
@@ -203,18 +283,26 @@ bool WHS::hasNonTerminatedJobs() {
 
 void WHS::adjustIOQueue() {
     // Subtract one from each process's I/O timer
+#ifdef DEBUG
+    cout << "Checking I/O List:" << endl;
+#endif
     BOOST_FOREACH(Process *p, waitQueue) {
         p->decrementIOTimer();
+#ifdef DEBUG
+        cout << "   Process " << p->getPID() << " IOTimer: " << p->getIOTimer() << endl;
+#endif
     }
 
     bool stillZero = true;
     deque<Process*>::iterator it = waitQueue.begin();
     Process* p;
     while (stillZero && (it != waitQueue.end())) {
+        p = *it;
         if (p->getIOTimer() == 0) {
             // Boost priority based on I/O, add to appropriate priority list, and remove process from wait queue.
-            p = *it;
-
+#ifdef DEBUG
+            cout << "IOTimer expired for process " << p->getPID() << ". Adding " << p->getIO() << " to priority." << endl;
+#endif
             p->incrementPriority(p->getIO());
 
             addProcessToPriorityList(p);
@@ -246,7 +334,6 @@ int WHS::deleteFromTree(int priority) {
 void WHS::addProcessToPriorityList(Process* p) {
     int priority = p->getPriority();
     list<Process*> *priorityList = listVector.at(priority);
-
     // If the list is empty, add the list to the tree
     if (priorityList->empty()) {
         insertIntoTree(priority, priorityList);
@@ -262,48 +349,32 @@ void WHS::addProcessToPriorityList(Process* p) {
 
     }
 
-
     priorityList->push_back(p);
 #ifdef DEBUG
     cout << "Added " << p->getPID() << " to list " << priority << endl;
-    cout << "List " << priority << ": " << endl;
+    // cout << "List " << priority << ": " << endl;
 
-    for (list<Process*>::iterator it = priorityList->begin(); it != priorityList->end(); ++it) {
-        cout << "   " << (*it)->toString() << endl;
-    }
+    // for (list<Process*>::iterator it = priorityList->begin(); it != priorityList->end(); ++it) {
+    //     cout << "   " << (*it)->toString() << endl;
+    // }
 #endif
 }
 
 void WHS::removeProcessFromPriorityList(list<Process*>::iterator it, int priority) {
     list<Process*> *priorityList = listVector.at(priority);
-
-    // if (!priorityList->empty()) {
-    //     bool procFound = false;
-        Process* curP;
-    //     list<Process*>::iterator it = priorityList->begin();
-
-
-    //     while (!procFound && (it != priorityList->end())) {
-            curP = *it;
-    //         if (curP->getPID() == p->getPID()) { // Found process
-    //             procFound = true;
-                priorityList->erase(it);
+    Process* curP;
+    curP = *it;
+    priorityList->erase(it);
 #ifdef DEBUG
-                cout << "Process " << curP->getPID() << " removed from list " << curP->getPriority() << endl;
+    cout << "Process " << curP->getPID() << " removed from list " << priority << endl;
 #endif
-                if (priorityList->empty()) {
-                    deleteFromTree(priority);
+    if (priorityList->empty()) {
+        deleteFromTree(priority);
 #ifdef DEBUG
-                    cout << "List " << priority << " now empty. Deleted from tree: " << endl;
-                    printTree();
+        cout << "List " << priority << " now empty. Deleted from tree: " << endl;
+        printTree();
 #endif
-                }
-    //         }
-    //         ++it;
-    //     }
-    // } else {
-    //     cout << "list " << priority << " empty" << endl;
-    // }
+    }
 
 }
 

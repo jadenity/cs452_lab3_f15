@@ -20,7 +20,9 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           // Set the stop tick to the arrival time for future calculation of wait time
           exitCPUTick(arrival_time),
           // Set original priority to be what it is read in as
-          originalPriority(priority) {
+          originalPriority(priority),
+          ioTimer(io)
+           {
 
   // Set isHighBand based on original priority
   if (priority >= 50) {
@@ -46,9 +48,23 @@ Process::Process(const Process &p) {
 Process::~Process() {
 }
 
+bool operator==(const Process& p1, const Process& p2)
+{
+    // 2 processes are equal if they have the same PID
+    return p1.getPID() == p2.getPID();
+} 
+
 string Process::toString() const {
     stringstream s;
-    s << "pid: " << this->pid << ", burst: " << this->burst << ", arrival_time: " << this->arrival_time << ", priority: " << this->priority << ", deadline: " << this->deadline << ", io: " << this->io << ", time_remaining: " << this->time_remaining << ", time_waiting: " << this->time_waiting;
+    s << "pid: " << this->pid << 
+    ", burst: " << this->burst << 
+    ", arrival_time: " << this->arrival_time << 
+    ", priority: " << this->priority << 
+    ", deadline: " << this->deadline << 
+    ", io: " << this->io << 
+    ", time_remaining: " << this->time_remaining << 
+    ", time_waiting: " << this->time_waiting <<
+    ", age: " << this->age;
     return s.str();
 }
 
@@ -240,6 +256,10 @@ bool Process::decrementPriority(int amt) {
 
 int Process::getIOTimer() const {
   return ioTimer;
+}
+
+void Process::resetIOTimer() {
+  this->ioTimer = this->io;
 }
 
 void Process::decrementIOTimer() {

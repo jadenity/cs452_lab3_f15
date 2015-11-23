@@ -233,6 +233,10 @@ void RBTree::replace_node(rbtree t, node oldn, node newn)
     if (oldn->parent == NULL)
     {
         t->root = newn;
+        // BUG FIXED
+        if (newn != NULL) {
+            newn->color = BLACK;
+        }
     }
     else
     {

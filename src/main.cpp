@@ -70,8 +70,8 @@ int main(int argc, char** argv) {
     //file.open("100k_processes");
     //file.open("test2.txt");
     //file.open("1k_proc.txt");
-    //file.open("10k_proc.txt");
-    file.open("10proc.txt");
+    file.open("10k_proc.txt");
+    //file.open("10proc.txt");
     //file.open("150proc.txt");
     string line;
     vector<string> fields;
@@ -173,7 +173,7 @@ int main(int argc, char** argv) {
     sched->run();
 
     double avgWaitTime = sched->calcAvgWaitTime();
-    cout << "Average wait time: " << avgWaitTime << endl << endl;
+    cout << endl << "Average wait time: " << avgWaitTime << endl << endl;
 
     double avgTurnaroundTime = sched->calcAvgTurnaroundTime();
     delete sched;

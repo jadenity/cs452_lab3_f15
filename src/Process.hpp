@@ -47,6 +47,7 @@ public:
     bool decrementPriority(int amt);
     bool isHighBand() const;
     int getIOTimer() const;
+    void resetIOTimer();
     void decrementIOTimer();
     void decrementTimeRemaining();
 
