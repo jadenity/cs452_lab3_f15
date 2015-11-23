@@ -50,7 +50,7 @@ WHS::~WHS(){
 void WHS::run() {
 
     int clock = 0;
-    while (this->hasNonTerminatedJobs() /*&& clock < 250*/) {
+    while (this->hasNonTerminatedJobs()) {
         
 #ifdef DEBUG
         cout << endl << "*****Beginning of clock tick: " << clock << "******" << endl;
