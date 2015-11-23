@@ -21,7 +21,8 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           exitCPUTick(arrival_time),
           // Set original priority to be what it is read in as
           originalPriority(priority),
-          ioTimer(io)
+          ioTimer(io),
+          finishTime(0)
            {
 
   // Set isHighBand based on original priority
