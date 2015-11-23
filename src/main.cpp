@@ -69,10 +69,10 @@ int main(int argc, char** argv) {
     ifstream file;
     //file.open("100k_processes");
     //file.open("test2.txt");
-    file.open("test.txt");
+    //file.open("test.txt");
     //file.open("1k_proc.txt");
     //file.open("10k_proc.txt");
-    //file.open("10proc.txt");
+    file.open("10proc.txt");
     //file.open("150proc.txt");
     string line;
     vector<string> fields;
@@ -113,10 +113,10 @@ int main(int argc, char** argv) {
         }
 
         // Ignore negative or early deadline only for RTS
-        if ((algorithm == "rts") && ((deadline < 0) || (deadline < arrival))) {
+        if ((algorithm == "rts") && ((deadline < 0) || (deadline < arrival) || (burst > deadline))) {
             ignore = true;
 #ifdef DEBUG
-            cout << "Ignoring PID " << pid << ": using RTS and either deadline < 0 or deadline < arrival." << endl;
+            cout << "Ignoring PID " << pid << ": using RTS and either (deadline < 0 or deadline < arrival or burst > deadline)." << endl;
 #endif
         }
 
@@ -177,14 +177,16 @@ int main(int argc, char** argv) {
     cout << endl << "Average wait time: " << avgWaitTime << endl << endl;
 
     double avgTurnaroundTime = sched->calcAvgTurnaroundTime();
+
+    cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
+
+    cout << "Total processes scheduled: " << sched->getTotalProcessesRan() << endl;
+
     delete sched;
     
     BOOST_FOREACH(Process *p, processes) {
         delete p;
     }
-    cout << "Average turnaround time: " << avgTurnaroundTime << endl << endl;
-
-    cout << "Total processes scheduled: " << processes.size() << endl;
 
     return 0;
 }

@@ -76,3 +76,6 @@ double Scheduler::calcAvgTurnaroundTime() {
     return avg;
 }
 
+int Scheduler::getTotalProcessesRan() {
+    return totalProcessesRan;
+}

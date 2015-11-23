@@ -220,6 +220,9 @@ void WHS::run() {
     }
 
     delete tree;
+
+    // In WHS, all processes are scheduled.
+    this->totalProcessesRan = processes.size();
 }
 
 // Ages every process in every list in the tree of priority lists.
