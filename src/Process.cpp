@@ -22,7 +22,7 @@ Process::Process(int pid, int burst, int arrival_time, int priority, int deadlin
           // Set original priority to be what it is read in as
           originalPriority(priority),
           ioTimer(io),
-          finishTime(0)
+          finishTime(arrival_time)
            {
 
   // Set isHighBand based on original priority
