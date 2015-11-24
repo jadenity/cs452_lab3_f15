@@ -485,7 +485,7 @@ Although RTS seems to be working, I still have to do the following ("~" = it may
 About the third point for the RTS specific item in the list above:
 	I'm pretty sure wait time should go up as it is: incrementing by 1 when a process active at one time may be kicked out later,
 	but what about turnaround time and number of processes scheduled? Turnaround time may be especially interesting...
-		I think I'm supposed to include processes that get kicked out after being loaded into the scheduler as part of the number of processes.
+		I think I'm supposed to include processes that get kicked out after being loaded into the scheduler as part of the number of processes (maybe not).
 			I'm probably already doing this.
 
 11/22: continuing tasks in to do list made yesterday.
@@ -514,13 +514,27 @@ So, the only REAL things to do are:
 
 11/23 (last day):
 
+--MEETING START--
+
 There's problems other than seg faults. I have a test file where a process arrives shortly after the first process, but it doesn't switch places with the active one with a later deadline...
+	I just made pushing the current process back into the queue, sorting after loading in all currently arrived processes, and pulling the right process out work properly.
+		So a deadline 8 process that arrives at 2 replaces a deadline 10 process that arrives at 0.
 
+Testing larger datasets now.
+	Runing 150 processes file gets a different seg fault...
 
+Partner mentioned what should be part of debugging outputs. Updated those.
 
+Partner also mentioned wait/turnaround time calculations. He added a method to the Scheduler interface to help with handling that, but i'll have to do a successful pull first.
+	Skipping trying to pull until partner gets back.
 
+Back to the seg fault with 150 processes.
+	I'm noticing my current code properly ended a process, but then soon after canceling it.
+	Looks like the only issue was trying to reference p when it was null. Now I can run 100k processes within 3 minutes on RTS! (although, calculations are still off)
 
-
+With RTS apparently working, there's only a few things left to do:
+	->write the papaer
+	~make sure calculations are correct (getting bad values)
 
 
 
