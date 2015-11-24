@@ -172,6 +172,7 @@ void RTS::run() {
 
 	  //check if a process has "arrived" (unless we loaded them all)
 	  if(jobsLoaded < (int)this->processes.size() && this->processes.at(jobsLoaded)->getArrivalTime() == clock){
+	  //This was omitted: causes errors when p is null
 	  //cout << "Process " << this->processes.at(jobsLoaded)->getPID() << " has arrived. Deadlines: " << p->getDeadline() << " " << this->processes.at(jobsLoaded)->getDeadline() << endl;
 
 	  //put currently active process (if we have one) back in the queue in case it needs to be replaced with a process with a shorter deadline. We'll end up pulling it back out if it doesn't
