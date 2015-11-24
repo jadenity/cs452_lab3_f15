@@ -534,33 +534,4 @@ Back to the seg fault with 150 processes.
 
 With RTS apparently working, there's only a few things left to do:
 	->write the papaer
-	~make sure calculations are correct
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	~make sure calculations are correct (getting bad values)

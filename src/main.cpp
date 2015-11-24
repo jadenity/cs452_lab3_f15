@@ -45,9 +45,7 @@ int main(int argc, char** argv) {
         // get the number of queues from the user 
         cout << "Enter how many queues: ";
         cin >> numberOfQueues;
-    }
 
-    if (algorithm == "mfqs" || algorithm == "whs") {
         // get the aging wait time
         cout << "Enter wait time for aging: ";
         cin >> ageLimit;
@@ -56,6 +54,21 @@ int main(int argc, char** argv) {
         quantum = 0;
         cout << "Enter the time quantum for the ready-to-run queue: ";
         cin >> quantum;
+    }
+
+    if (algorithm == "whs") {
+        // get the aging wait time
+        cout << "Enter wait time for aging: ";
+        cin >> ageLimit;
+
+        // get time quantum from the user
+        quantum = 0;
+        cout << "Enter the time quantum: ";
+        cin >> quantum;
+        if (quantum < 2) {
+            cout << "Time quantum must be at least 2, or processes would not be able to do I/O." << endl;
+            exit(1);
+        }
     }
 
 

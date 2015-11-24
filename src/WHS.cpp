@@ -7,7 +7,7 @@
 #include "WHS.hpp"
 #include "RBTree.hpp"
 
-#define DEBUG
+//#define DEBUG
 
 using namespace std;
 
@@ -50,11 +50,15 @@ WHS::~WHS(){
 void WHS::run() {
 
     int clock = 0;
-    while (this->hasNonTerminatedJobs()) {
+    while (this->hasNonTerminatedJobs()/* && clock < 3900*/) {
         
 #ifdef DEBUG
         cout << endl << "*****Beginning of clock tick: " << clock << "******" << endl;
 #endif
+        // For stress testing
+        if (clock % 10000 == 0) {
+            cout << "clock: " << clock << endl;
+        }
 
         receiveNewJobs(clock);
 
@@ -142,7 +146,12 @@ void WHS::run() {
                 if (runTimer > 0) {
 #ifdef DEBUG
                     cout << endl << "**Beginning of clock tick: " << clock << endl;
-#endif
+#endif        
+                    // For stress testing
+                    if (clock % 10000 == 0) {
+                        cout << "2clock: " << clock << endl;
+                    }
+
                     receiveNewJobs(clock);
                 }
             }
@@ -299,7 +308,7 @@ void WHS::adjustIOQueue() {
     bool stillZero = true;
     deque<Process*>::iterator it = waitQueue.begin();
     Process* p;
-    while (stillZero && (it != waitQueue.end())) {
+    while (/*stillZero && */(it != waitQueue.end())) {
         p = *it;
         if (p->getIOTimer() == 0) {
             // Boost priority based on I/O, add to appropriate priority list, and remove process from wait queue.
@@ -314,6 +323,7 @@ void WHS::adjustIOQueue() {
             // so no need to increment the iterator.
             it = waitQueue.erase(it);
         } else {
+            ++it;
             stillZero = false;
         }
     }
